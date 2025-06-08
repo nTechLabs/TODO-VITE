@@ -7,8 +7,8 @@ function Launchpad() {
   const navigate = useNavigate();
 
   const icons = [
-    { name: "Home", path: "/" },
-    { name: "Counter", path: "/counter" },
+    { name: "Vite", path: "/Vite" },
+    { name: "Counter", path: "/Counter" },
     { name: "Function1", path: "/main?component=function1" },
     { name: "Function2", path: "/main?component=function2" },
     { name: "Function3", path: "/main?component=function3" },

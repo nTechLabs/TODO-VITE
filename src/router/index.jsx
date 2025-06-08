@@ -9,6 +9,7 @@ import Function5 from "../pages/function5";
 import Function6 from "../pages/function6";
 import Main from "../pages/main";
 import Counter from "../components/Counter"; // Import Counter component
+import Vite from "../pages/Vite/index"; // Import Vite component
 
 function AppRouter() {
   return (
@@ -25,6 +26,7 @@ function AppRouter() {
         <Route path="/launchpad" element={<Launchpad />} />
         <Route path="/counter" element={<Counter />} />{" "}
         {/* Add route for Counter */}
+        <Route path="/vite" element={<Vite />} /> {/* Add route for Vite */}
       </Routes>
     </Router>
   );
