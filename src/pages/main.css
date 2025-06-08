@@ -1,0 +1,29 @@
+.main-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.main-container > * {
+  box-sizing: border-box;
+}
+
+.main-container .top {
+  flex: 0 0 10%;
+  background-color: #de7d16; /* Light yellow */
+}
+
+.main-container .main-search {
+  flex: 0 0 30%;
+  background-color: #61dafb; /* Light blue */
+}
+
+.main-container .search-button {
+  flex: 0 0 10%;
+  background-color: #c6ed18; /* Light blue */
+}
+
+.main-container .search-result {
+  flex: 0 0 50%;
+  background-color: #ffcdd2; /* Light red */
+}
