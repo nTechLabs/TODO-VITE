@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import "./Launchpad.css";
+import Counter from "../components/Counter"; // Import Counter component
 
 function Launchpad() {
   const navigate = useNavigate();
