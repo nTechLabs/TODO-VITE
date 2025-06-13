@@ -11,7 +11,7 @@ body {
   width: 320px;
   height: 70px;
   border-radius: 5px 5px 0px 0px;
-  background-color: rgb(105, 105, 105);
+  background-color: rgb(22, 101, 132);
   color: #fff;
 }
 
@@ -27,7 +27,7 @@ body {
   padding: 20px 7px 0px 20px;
   font-size: 30px;
   text-align: end;
-  background-color: rgb(105, 105, 105);
+  background-color: rgb(199, 23, 23);
   color: #fff;
   border: 0px;
   outline-style: none;
@@ -36,7 +36,7 @@ body {
 .number-btn {
   width: 80px;
   height: 50px;
-  border: 0.5px solid gray;
+  border: 0.5px solid rgb(249, 246, 246);
   background-color: rgb(139, 139, 139);
   color: #fff;
   font-size: 20px;
@@ -66,16 +66,16 @@ body {
   width: 80px;
   height: 50px;
   border: 0.5px solid rgb(217, 179, 42);
-  background-color: rgb(253, 193, 81);
+  background-color: rgb(114, 5, 247);
   color: #fff;
   font-size: 20px;
 }
 
 .number-btn-orange:hover {
-  background-color: rgb(252, 198, 96);
+  background-color: rgb(11, 244, 50);
   opacity: 0.7;
 }
 
 .orange-color {
-  color: rgb(250, 196, 95);
+  color: rgb(246, 5, 5);
 }
