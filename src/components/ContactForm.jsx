@@ -43,7 +43,7 @@ const ContactForm = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
-  const [formData, setFormData] = useState({
+  const [contactFormData, setContactFormData] = useState({
     fullName: "",
     email: "",
     phone: "",
@@ -71,8 +71,8 @@ const ContactForm = () => {
   // ];
 
   const handleInputChange = (field) => (event) => {
-    setFormData({
-      ...formData,
+    setContactFormData({
+      ...contactFormData,
       [field]: event.target.value,
     });
     // Clear error when user starts typing
@@ -85,19 +85,19 @@ const ContactForm = () => {
   };
 
   const handleInterestChange = (interest) => {
-    const updatedInterests = formData.interests.includes(interest)
-      ? formData.interests.filter((item) => item !== interest)
-      : [...formData.interests, interest];
+    const updatedInterests = contactFormData.interests.includes(interest)
+      ? contactFormData.interests.filter((item) => item !== interest)
+      : [...contactFormData.interests, interest];
 
-    setFormData({
-      ...formData,
+    setContactFormData({
+      ...contactFormData,
       interests: updatedInterests,
     });
   };
 
   const handleDateChange = (date) => {
-    setFormData({
-      ...formData,
+    setContactFormData({
+      ...contactFormData,
       dateOfBirth: date,
     });
   };
@@ -105,20 +105,24 @@ const ContactForm = () => {
   const validateForm = () => {
     const newErrors = {};
 
-    if (!formData.fullName.trim()) newErrors.fullName = "Full name is required";
-    if (!formData.email.trim()) {
+    if (!contactFormData.fullName.trim())
+      newErrors.fullName = "Full name is required";
+    if (!contactFormData.email.trim()) {
       newErrors.email = "Email is required";
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+    } else if (!/\S+@\S+\.\S+/.test(contactFormData.email)) {
       newErrors.email = "Email is invalid";
     }
-    if (!formData.phone.trim()) newErrors.phone = "Phone number is required";
-    if (!formData.address.trim()) newErrors.address = "Address is required";
-    if (!formData.dateOfBirth)
+    if (!contactFormData.phone.trim())
+      newErrors.phone = "Phone number is required";
+    if (!contactFormData.address.trim())
+      newErrors.address = "Address is required";
+    if (!contactFormData.dateOfBirth)
       newErrors.dateOfBirth = "Date of birth is required";
-    if (!formData.gender) newErrors.gender = "Gender is required";
-    if (formData.interests.length === 0)
+    if (!contactFormData.gender) newErrors.gender = "Gender is required";
+    if (contactFormData.interests.length === 0)
       newErrors.interests = "Please select at least one interest";
-    if (!formData.message.trim()) newErrors.message = "Message is required";
+    if (!contactFormData.message.trim())
+      newErrors.message = "Message is required";
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -127,10 +131,10 @@ const ContactForm = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (validateForm()) {
-      console.log("Form submitted:", formData);
+      console.log("Form submitted:", contactFormData);
       setShowSuccess(true);
       // Reset form
-      setFormData({
+      setContactFormData({
         fullName: "",
         email: "",
         phone: "",
@@ -196,7 +200,7 @@ const ContactForm = () => {
                     <TextField
                       fullWidth
                       label="Full Name"
-                      value={formData.fullName}
+                      value={contactFormData.fullName}
                       onChange={handleInputChange("fullName")}
                       error={!!errors.fullName}
                       helperText={errors.fullName}
@@ -216,7 +220,7 @@ const ContactForm = () => {
                       fullWidth
                       label="Email Address"
                       type="email"
-                      value={formData.email}
+                      value={contactFormData.email}
                       onChange={handleInputChange("email")}
                       error={!!errors.email}
                       helperText={errors.email}
@@ -235,7 +239,7 @@ const ContactForm = () => {
                     <TextField
                       fullWidth
                       label="Phone Number"
-                      value={formData.phone}
+                      value={contactFormData.phone}
                       onChange={handleInputChange("phone")}
                       error={!!errors.phone}
                       helperText={errors.phone}
@@ -253,7 +257,7 @@ const ContactForm = () => {
                   <Grid item xs={12} md={6}>
                     <DatePicker
                       label="Date of Birth"
-                      value={formData.dateOfBirth}
+                      value={contactFormData.dateOfBirth}
                       onChange={handleDateChange}
                       renderInput={(params) => (
                         <TextField
@@ -281,7 +285,7 @@ const ContactForm = () => {
                       label="Address"
                       multiline
                       rows={2}
-                      value={formData.address}
+                      value={contactFormData.address}
                       onChange={handleInputChange("address")}
                       error={!!errors.address}
                       helperText={errors.address}
@@ -309,7 +313,7 @@ const ContactForm = () => {
                       </FormLabel>
                       <RadioGroup
                         row
-                        value={formData.gender}
+                        value={contactFormData.gender}
                         onChange={handleInputChange("gender")}
                       >
                         <FormControlLabel
@@ -356,23 +360,22 @@ const ContactForm = () => {
                             label={interest}
                             clickable
                             color={
-                              formData.interests.includes(interest)
+                              contactFormData.interests.includes(interest)
                                 ? "primary"
                                 : "default"
                             }
                             variant={
-                              formData.interests.includes(interest)
+                              contactFormData.interests.includes(interest)
                                 ? "filled"
                                 : "outlined"
                             }
                             onClick={() => handleInterestChange(interest)}
                             sx={{
                               "&:hover": {
-                                backgroundColor: formData.interests.includes(
-                                  interest
-                                )
-                                  ? theme.palette.primary.dark
-                                  : theme.palette.action.hover,
+                                backgroundColor:
+                                  contactFormData.interests.includes(interest)
+                                    ? theme.palette.primary.dark
+                                    : theme.palette.action.hover,
                               },
                             }}
                           />
@@ -397,7 +400,7 @@ const ContactForm = () => {
                       label="Message"
                       multiline
                       rows={4}
-                      value={formData.message}
+                      value={contactFormData.message}
                       onChange={handleInputChange("message")}
                       error={!!errors.message}
                       helperText={errors.message}
