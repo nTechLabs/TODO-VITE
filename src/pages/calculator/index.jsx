@@ -59,21 +59,46 @@ function Calculator() {
   };
 
   const handleOperator = () => {
-    let firstNumber = new Decimal(firstCalcNumber);
-    let secondNumber = new Decimal(secondCalcNumber || 0); // Ensure secondCalcNumber is properly converted
-    let calculatedResult;
-    if (operator === "+") {
-      calculatedResult = firstNumber.plus(secondNumber);
-    } else if (operator === "-") {
-      calculatedResult = firstNumber.minus(secondNumber);
-    } else if (operator === "X") {
-      calculatedResult = firstNumber.times(secondNumber);
-    } else if (operator === "/") {
-      calculatedResult = firstNumber.div(secondNumber);
+    if (!operator) {
+      alert("연산기호를 입력해 주세요");
+      return;
     }
-    dispatch(calculatorActions.setResult(calculatedResult));
-    dispatch(calculatorActions.setOperator(""));
-    dispatch(calculatorActions.setSecondCalcNumber(""));
+
+    try {
+      const firstNumber = new Decimal(firstCalcNumber || 0);
+      const secondNumber = new Decimal(secondCalcNumber || 0);
+      let calculatedResult;
+
+      switch (operator) {
+        case "+":
+          calculatedResult = firstNumber.plus(secondNumber);
+          break;
+        case "-":
+          calculatedResult = firstNumber.minus(secondNumber);
+          break;
+        case "X":
+          calculatedResult = firstNumber.times(secondNumber);
+          break;
+        case "/":
+          if (secondNumber.isZero()) {
+            alert("0으로 나눌 수 없습니다");
+            onClickClear();
+            return;
+          }
+          calculatedResult = firstNumber.div(secondNumber);
+          break;
+        default:
+          alert("유효하지 않은 연산기호입니다");
+          return;
+      }
+
+      dispatch(calculatorActions.setResult(calculatedResult.toString()));
+      dispatch(calculatorActions.setOperator(""));
+      dispatch(calculatorActions.setSecondCalcNumber(""));
+    } catch {
+      alert("계산 중 오류가 발생했습니다");
+      onClickClear();
+    }
   };
 
   useEffect(() => {
