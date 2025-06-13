@@ -10,59 +10,38 @@ function Calculator() {
     (state) => state.calculator
   );
 
+  const updateNumber = (number, isSecondNumber) => {
+    const action = isSecondNumber
+      ? calculatorActions.setSecondCalcNumber
+      : calculatorActions.setFirstCalcNumber;
+    const currentNumber = isSecondNumber ? secondCalcNumber : firstCalcNumber;
+    dispatch(action([...currentNumber, number].join("")));
+  };
+
   const onClickNumber = (number) => {
-    if (!operator) {
-      dispatch(
-        calculatorActions.setFirstCalcNumber(
-          [...firstCalcNumber, number].join("")
-        )
-      );
-    } else {
-      dispatch(
-        calculatorActions.setSecondCalcNumber(
-          [...secondCalcNumber, number].join("")
-        )
-      );
-    }
+    updateNumber(number, Boolean(operator));
   };
 
   const onClickClear = useCallback(() => {
     dispatch(calculatorActions.clearCalculator());
-  }, [dispatch]); // Wrap in useCallback to stabilize reference
-
-  const checkOperator = () => {
-    if (!operator) {
-      alert("연산기호를 입력해 주세요");
-    }
-  };
+  }, [dispatch]);
 
   const checkDot = () => {
-    if (!operator && !firstCalcNumber.includes(".") && firstCalcNumber !== "") {
-      onClickNumber(".");
-    }
-    if (
-      operator &&
-      !secondCalcNumber.includes(".") &&
-      secondCalcNumber !== ""
-    ) {
+    const currentNumber = operator ? secondCalcNumber : firstCalcNumber;
+    if (!currentNumber.includes(".") && currentNumber !== "") {
       onClickNumber(".");
     }
   };
 
   const checkNumberZero = () => {
-    if (!operator && firstCalcNumber !== "0") {
-      onClickNumber("0");
-    }
-    if (operator && secondCalcNumber !== "0") {
+    const currentNumber = operator ? secondCalcNumber : firstCalcNumber;
+    if (currentNumber !== "0") {
       onClickNumber("0");
     }
   };
 
   const handleOperator = () => {
-    // if (!operator) {
-    //   alert("연산기호를 입력해 주세요11");
-    //   return;
-    // }
+    if (!operator) return;
 
     try {
       const firstNumber = new Decimal(firstCalcNumber || 0);
@@ -88,7 +67,6 @@ function Calculator() {
           calculatedResult = firstNumber.div(secondNumber);
           break;
         default:
-          // alert("유효하지 않은 연산기호입니다");
           return;
       }
 
@@ -105,14 +83,12 @@ function Calculator() {
     if (result === 0) {
       alert("결과가 0 입니다");
       onClickClear();
-    }
-    if (result === Infinity) {
-      alert("숫자값이 아닙니다1");
+    } else if (result === Infinity) {
+      alert("숫자값이 아닙니다");
       onClickClear();
-    }
-    if (isNaN(result) === true) {
+    } else if (isNaN(result)) {
+      alert("숫자값이 아닙니다");
       onClickClear();
-      alert("숫자값이 아닙니다11");
     }
   }, [result, onClickClear]);
 
@@ -131,35 +107,20 @@ function Calculator() {
               className="view-number-title"
               readOnly
               type="text"
-              value={secondCalcNumber ? secondCalcNumber : firstCalcNumber}
+              value={secondCalcNumber || firstCalcNumber}
             />
           </div>
         </div>
         <div className="numbers">
-          <button
-            className="number-btn"
-            onClick={() => {
-              onClickNumber("7");
-            }}
-          >
-            7
-          </button>
-          <button
-            className="number-btn"
-            onClick={() => {
-              onClickNumber("8");
-            }}
-          >
-            8
-          </button>
-          <button
-            className="number-btn"
-            onClick={() => {
-              onClickNumber("9");
-            }}
-          >
-            9
-          </button>
+          {["7", "8", "9"].map((num) => (
+            <button
+              key={num}
+              className="number-btn"
+              onClick={() => onClickNumber(num)}
+            >
+              {num}
+            </button>
+          ))}
           <button
             className="number-btn-orange"
             onClick={() => {
@@ -171,30 +132,15 @@ function Calculator() {
           </button>
         </div>
         <div className="numbers">
-          <button
-            className="number-btn"
-            onClick={() => {
-              onClickNumber("4");
-            }}
-          >
-            4
-          </button>
-          <button
-            className="number-btn"
-            onClick={() => {
-              onClickNumber("5");
-            }}
-          >
-            5
-          </button>
-          <button
-            className="number-btn"
-            onClick={() => {
-              onClickNumber("6");
-            }}
-          >
-            6
-          </button>
+          {["4", "5", "6"].map((num) => (
+            <button
+              key={num}
+              className="number-btn"
+              onClick={() => onClickNumber(num)}
+            >
+              {num}
+            </button>
+          ))}
           <button
             className="number-btn-orange"
             onClick={() => {
@@ -206,30 +152,15 @@ function Calculator() {
           </button>
         </div>
         <div className="numbers">
-          <button
-            className="number-btn"
-            onClick={() => {
-              onClickNumber("1");
-            }}
-          >
-            1
-          </button>
-          <button
-            className="number-btn"
-            onClick={() => {
-              onClickNumber("2");
-            }}
-          >
-            2
-          </button>
-          <button
-            className="number-btn"
-            onClick={() => {
-              onClickNumber("3");
-            }}
-          >
-            3
-          </button>
+          {["1", "2", "3"].map((num) => (
+            <button
+              key={num}
+              className="number-btn"
+              onClick={() => onClickNumber(num)}
+            >
+              {num}
+            </button>
+          ))}
           <button
             className="number-btn-orange"
             onClick={() => {
@@ -251,7 +182,6 @@ function Calculator() {
             className="number-btn orange-color"
             onClick={() => {
               handleOperator();
-              checkOperator();
             }}
           >
             =
