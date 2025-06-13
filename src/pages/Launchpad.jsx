@@ -14,7 +14,7 @@ function Launchpad() {
     { name: "Function3", path: "/main?component=function3" },
     { name: "Function4", path: "/main?component=function4" },
     { name: "Function5", path: "/main?component=function5" },
-    { name: "Function6", path: "/main?component=function6" },
+    { name: "Calculator", path: "/main?component=calculator" }, // Rename Function6 to Calculator
   ];
 
   return (

@@ -7,6 +7,9 @@ const counterSlice = createSlice({
     up: (state, action) => {
       state.count += action.payload; // action.step 대신 action.payload를 사용하여 더 직관적으로 변경합니다.
     },
+    down: (state, action) => {
+      state.count -= action.payload; // action.step 대신 action.payload를 사용하여 더 직관적으로 변경합니다.
+    },
   },
 });
 

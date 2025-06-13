@@ -8,8 +8,11 @@ function Counter() {
 
   return (
     <div>
-      <button onClick={() => dispatch(counterSliceActions.up(2))}>+</button>{" "}
+      <button onClick={() => dispatch(counterSliceActions.down(1))}>-</button>
       {count}
+      <button onClick={() => dispatch(counterSliceActions.up(1))}>
+        +
+      </button>{" "}
     </div>
   );
 }
