@@ -1,27 +1,34 @@
 import "./calculator.css";
-import { useEffect, useState } from "react";
+import { useEffect, useCallback } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { calculatorActions } from "../../store/calculatorSlice";
 import Decimal from "decimal.js";
 
 function Calculator() {
-  const [firstCalcNumber, setFirstCalcNumber] = useState("");
-  const [secondCalcNumber, setSecondCalcNumber] = useState("");
-  const [operator, setOperator] = useState("");
-  const [result, setResult] = useState("");
+  const dispatch = useDispatch();
+  const { firstCalcNumber, secondCalcNumber, operator, result } = useSelector(
+    (state) => state.calculator
+  );
 
   const onClickNumber = (number) => {
     if (!operator) {
-      setFirstCalcNumber([...firstCalcNumber, number].join(""));
+      dispatch(
+        calculatorActions.setFirstCalcNumber(
+          [...firstCalcNumber, number].join("")
+        )
+      );
     } else {
-      setSecondCalcNumber([...secondCalcNumber, number].join(""));
+      dispatch(
+        calculatorActions.setSecondCalcNumber(
+          [...secondCalcNumber, number].join("")
+        )
+      );
     }
   };
 
-  const onClickClear = () => {
-    setOperator("");
-    setFirstCalcNumber("");
-    setSecondCalcNumber("");
-    setResult("");
-  };
+  const onClickClear = useCallback(() => {
+    dispatch(calculatorActions.clearCalculator());
+  }, [dispatch]); // Wrap in useCallback to stabilize reference
 
   const checkOperator = () => {
     if (!operator) {
@@ -53,37 +60,20 @@ function Calculator() {
 
   const handleOperator = () => {
     let firstNumber = new Decimal(firstCalcNumber);
+    let secondNumber = new Decimal(secondCalcNumber || 0); // Ensure secondCalcNumber is properly converted
+    let calculatedResult;
     if (operator === "+") {
-      setResult(firstNumber.plus(secondCalcNumber));
+      calculatedResult = firstNumber.plus(secondNumber);
     } else if (operator === "-") {
-      setResult(firstNumber.minus(secondCalcNumber));
+      calculatedResult = firstNumber.minus(secondNumber);
     } else if (operator === "X") {
-      setResult(firstNumber.times(secondCalcNumber));
+      calculatedResult = firstNumber.times(secondNumber);
     } else if (operator === "/") {
-      setResult(firstNumber.div(secondCalcNumber));
+      calculatedResult = firstNumber.div(secondNumber);
     }
-    setOperator("");
-    setSecondCalcNumber("");
-  };
-
-  const handleKeyboardOperator = (e) => {
-    if (isFinite(e.key)) {
-      onClickNumber(e.key);
-    } else if (e.key === "+") {
-      setOperator("+");
-    } else if (e.key === "-") {
-      setOperator("-");
-    } else if (e.key === "*") {
-      setOperator("X");
-    } else if (e.key === "/") {
-      setOperator("/");
-    } else if (e.key === "Enter") {
-      handleOperator();
-    } else if (e.key === "Escape") {
-      onClickClear();
-    } else if (e.key === ".") {
-      checkDot(e.key);
-    }
+    dispatch(calculatorActions.setResult(calculatedResult));
+    dispatch(calculatorActions.setOperator(""));
+    dispatch(calculatorActions.setSecondCalcNumber(""));
   };
 
   useEffect(() => {
@@ -92,29 +82,29 @@ function Calculator() {
       onClickClear();
     }
     if (result === Infinity) {
-      alert("숫자값이 아닙니다");
+      alert("숫자값이 아닙니다1");
       onClickClear();
     }
     if (isNaN(result) === true) {
       onClickClear();
-      alert("숫자값이 아닙니다");
+      alert("숫자값이 아닙니다11");
     }
-  }, [result]);
+  }, [result, onClickClear]);
 
   useEffect(() => {
     if (result) {
-      setFirstCalcNumber(result);
+      dispatch(calculatorActions.setFirstCalcNumber(result));
     }
-  }, [result]);
+  }, [result, dispatch]);
 
   return (
     <>
-      <div className="wrap" onKeyDown={handleKeyboardOperator}>
+      <div className="wrap">
         <div className="number-view">
           <div className="view-number">
             <input
               className="view-number-title"
-              readOnly="this.blur()"
+              readOnly
               type="text"
               value={secondCalcNumber ? secondCalcNumber : firstCalcNumber}
             />
@@ -149,7 +139,7 @@ function Calculator() {
             className="number-btn-orange"
             onClick={() => {
               handleOperator();
-              setOperator("X");
+              dispatch(calculatorActions.setOperator("X"));
             }}
           >
             X
@@ -184,7 +174,7 @@ function Calculator() {
             className="number-btn-orange"
             onClick={() => {
               handleOperator();
-              setOperator("-");
+              dispatch(calculatorActions.setOperator("-"));
             }}
           >
             -
@@ -219,7 +209,7 @@ function Calculator() {
             className="number-btn-orange"
             onClick={() => {
               handleOperator();
-              setOperator("+");
+              dispatch(calculatorActions.setOperator("+"));
             }}
           >
             +
@@ -245,7 +235,7 @@ function Calculator() {
             className="number-btn-orange"
             onClick={() => {
               handleOperator();
-              setOperator("/");
+              dispatch(calculatorActions.setOperator("/"));
             }}
           >
             /
