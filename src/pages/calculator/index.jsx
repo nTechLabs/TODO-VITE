@@ -59,10 +59,10 @@ function Calculator() {
   };
 
   const handleOperator = () => {
-    if (!operator) {
-      alert("연산기호를 입력해 주세요");
-      return;
-    }
+    // if (!operator) {
+    //   alert("연산기호를 입력해 주세요11");
+    //   return;
+    // }
 
     try {
       const firstNumber = new Decimal(firstCalcNumber || 0);
@@ -88,7 +88,7 @@ function Calculator() {
           calculatedResult = firstNumber.div(secondNumber);
           break;
         default:
-          alert("유효하지 않은 연산기호입니다");
+          // alert("유효하지 않은 연산기호입니다");
           return;
       }
 
