@@ -1,7 +1,12 @@
 import React from "react";
+import FormLayout from "../../components/FormLayout"; // Import the FormLayout component
 
 function Alarm() {
-  return <h1>Alarm Page</h1>;
+  return (
+    <div className="App">
+      <FormLayout />
+    </div>
+  );
 }
 
 export default Alarm;
