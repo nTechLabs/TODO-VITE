@@ -9,12 +9,13 @@ function Launchpad() {
   const icons = [
     { name: "Vite", path: "/Vite" },
     { name: "Counter", path: "/Counter" },
+    { name: "FormGuide", path: "/formGuide" },
     { name: "Function1", path: "/main?component=function1" },
-    { name: "Function2", path: "/main?component=function2" },
     { name: "Function3", path: "/main?component=function3" },
     { name: "Function4", path: "/main?component=function4" },
     { name: "Function5", path: "/main?component=function5" },
-    { name: "Calculator", path: "/main?component=calculator" }, // Rename Function6 to Calculator
+    { name: "Calculator", path: "/main?component=calculator" },
+    { name: "Alarm", path: "/Alarm" }, // Rename Function6 to Calculator
   ];
 
   return (

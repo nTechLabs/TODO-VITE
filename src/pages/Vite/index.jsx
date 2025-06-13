@@ -1,7 +1,7 @@
 import { useState } from "react";
 import reactLogo from "../../assets/react.svg"; // Correct path to react.svg
 import viteLogo from "../../assets/vite.svg"; // Correct path to vite.svg
-import "./App.css";
+import "./vite.css";
 
 function App() {
   const [count, setCount] = useState(0);

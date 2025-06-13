@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 import "./main.css";
 import Top from "../components/Top";
 import Function1 from "./function1";
-import Function2 from "./function2";
+import FormGuide from "./formGuide";
 import Function3 from "./function3";
 import Function4 from "./function4";
 import Function5 from "./function5";
@@ -24,7 +24,7 @@ function Main() {
       </div>
       <div className="main-search">
         {component === "function1" && <Function1 />}
-        {component === "function2" && <Function2 />}
+        {component === "formGuide" && <FormGuide />}
         {component === "function3" && <Function3 />}
         {component === "function4" && <Function4 />}
         {component === "function5" && <Function5 />}
