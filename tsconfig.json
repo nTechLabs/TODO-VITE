@@ -9,6 +9,6 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true
   },
-  "include": ["src"], // src 폴더를 포함
+  "include": ["./src/**/*"], // src 폴더의 모든 파일 포함
   "exclude": ["node_modules"] // node_modules 폴더 제외
 }
