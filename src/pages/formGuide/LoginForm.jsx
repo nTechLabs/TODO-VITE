@@ -2,12 +2,15 @@ import React from "react";
 import "./form-guide.css";
 import { useSelector, useDispatch } from "react-redux";
 import { loginActions } from "../../store/loginSlice";
-import TextField from "@mui/material/TextField";
+import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
+import Avatar from "@mui/material/Avatar";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import Typography from "@mui/material/Typography";
+import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import { Checkbox, FormControlLabel } from "@mui/material";
 import Link from "@mui/material/Link";
-import Grid from "@mui/material/Grid";
 
 function LoginForm() {
   const dispatch = useDispatch();
@@ -64,10 +67,18 @@ function LoginForm() {
         sx={{
           display: "flex",
           flexDirection: "column",
-          alignItems: "center",
+          // alignItems: "center",
           minWidth: 350,
         }}
       >
+        <Grid container direction="column" alignItems="center" sx={{ mb: 2 }}>
+          <Avatar sx={{ m: 1, bgcolor: "#9c27b0" }}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Sign in
+          </Typography>
+        </Grid>
         <TextField
           label="이메일"
           variant="outlined"
@@ -108,7 +119,7 @@ function LoginForm() {
           <Grid item sx={{ mt: 1 }} xs>
             <Link>Forget password?</Link>
           </Grid>
-          <Grid item sx={{ mt: 1 }}>
+          <Grid item sx={{ mt: 1 }} xs>
             <Link>Sing up</Link>
           </Grid>
         </Grid>
