@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const calculatorSlice = createSlice({
-  name: "calculator",
+  name: "calculatorSlice",
   initialState: {
     firstCalcNumber: "",
     secondCalcNumber: "",
