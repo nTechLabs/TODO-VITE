@@ -1,9 +1,7 @@
 import React from "react";
 import LoginForm from "./LoginForm";
 import ComboBox from "../../components/ComboBox";
-import comboBoxOptions, {
-  nationCbOptions,
-} from "../../components/comboBoxOptions"; // Import the comboBoxOptions and nationCbOptions
+import comboBoxOptions, { nationCbOptions } from "../../values/comboBoxOptions"; // Import the comboBoxOptions and nationCbOptions
 
 // Import the CSS file for styling
 

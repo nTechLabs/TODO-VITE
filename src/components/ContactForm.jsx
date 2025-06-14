@@ -37,7 +37,7 @@ import {
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
-import interestOptions from "./interestOptions";
+import interestOptions from "../values/interestOptions";
 
 const ContactForm = () => {
   const theme = useTheme();
