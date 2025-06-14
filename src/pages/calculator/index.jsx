@@ -1,7 +1,7 @@
 import "./calculator.css";
 import { useEffect, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { calculatorActions } from "../../store/calculatorSlice";
+import { calculatorActs } from "../../store/calculatorSlice";
 import Decimal from "decimal.js";
 
 function Calculator() {
@@ -12,8 +12,8 @@ function Calculator() {
 
   const updateNumber = (number, isSecondNumber) => {
     const action = isSecondNumber
-      ? calculatorActions.setSecondCalcNumber
-      : calculatorActions.setFirstCalcNumber;
+      ? calculatorActs.setSecondCalcNumber
+      : calculatorActs.setFirstCalcNumber;
     const currentNumber = isSecondNumber ? secondCalcNumber : firstCalcNumber;
     dispatch(action([...currentNumber, number].join("")));
   };
@@ -23,7 +23,7 @@ function Calculator() {
   };
 
   const onClickClear = useCallback(() => {
-    dispatch(calculatorActions.clearCalculator());
+    dispatch(calculatorActs.clearCalculator());
   }, [dispatch]);
 
   const checkDot = () => {
@@ -70,9 +70,9 @@ function Calculator() {
           return;
       }
 
-      dispatch(calculatorActions.setResult(calculatedResult.toString()));
-      dispatch(calculatorActions.setOperator(""));
-      dispatch(calculatorActions.setSecondCalcNumber(""));
+      dispatch(calculatorActs.setResult(calculatedResult.toString()));
+      dispatch(calculatorActs.setOperator(""));
+      dispatch(calculatorActs.setSecondCalcNumber(""));
     } catch {
       alert("계산 중 오류가 발생했습니다");
       onClickClear();
@@ -94,7 +94,7 @@ function Calculator() {
 
   useEffect(() => {
     if (result) {
-      dispatch(calculatorActions.setFirstCalcNumber(result));
+      dispatch(calculatorActs.setFirstCalcNumber(result));
     }
   }, [result, dispatch]);
 
@@ -125,7 +125,7 @@ function Calculator() {
             className="number-btn-orange"
             onClick={() => {
               handleOperator();
-              dispatch(calculatorActions.setOperator("X"));
+              dispatch(calculatorActs.setOperator("X"));
             }}
           >
             X
@@ -145,7 +145,7 @@ function Calculator() {
             className="number-btn-orange"
             onClick={() => {
               handleOperator();
-              dispatch(calculatorActions.setOperator("-"));
+              dispatch(calculatorActs.setOperator("-"));
             }}
           >
             -
@@ -165,7 +165,7 @@ function Calculator() {
             className="number-btn-orange"
             onClick={() => {
               handleOperator();
-              dispatch(calculatorActions.setOperator("+"));
+              dispatch(calculatorActs.setOperator("+"));
             }}
           >
             +
@@ -190,7 +190,7 @@ function Calculator() {
             className="number-btn-orange"
             onClick={() => {
               handleOperator();
-              dispatch(calculatorActions.setOperator("/"));
+              dispatch(calculatorActs.setOperator("/"));
             }}
           >
             /

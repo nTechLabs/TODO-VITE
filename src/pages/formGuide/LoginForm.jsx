@@ -1,7 +1,7 @@
 import React from "react";
 import "./form-guide.css";
 import { useSelector, useDispatch } from "react-redux";
-import { loginActions } from "../../store/loginSlice";
+import { loginActs } from "../../store/loginSlice";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 import Avatar from "@mui/material/Avatar";
@@ -19,13 +19,13 @@ function LoginForm() {
   );
 
   const handleEmailChange = (e) => {
-    dispatch(loginActions.setEmail(e.target.value));
+    dispatch(loginActs.setEmail(e.target.value));
   };
   const handlePasswordChange = (e) => {
-    dispatch(loginActions.setPassword(e.target.value));
+    dispatch(loginActs.setPassword(e.target.value));
   };
   const handleRememberMeChange = (e) => {
-    dispatch(loginActions.setRememberMe(e.target.checked));
+    dispatch(loginActs.setRememberMe(e.target.checked));
   };
 
   const handleSubmit = (e) => {

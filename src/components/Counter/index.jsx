@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { counterSliceActions } from "../../store/counterSlice";
+import { counterSliceActs } from "../../store/counterSlice";
 import { Button, Box } from "@mui/material";
 
 function Counter() {
@@ -12,7 +12,7 @@ function Counter() {
       <Button
         variant="contained"
         color="primary"
-        onClick={() => dispatch(counterSliceActions.down(1))}
+        onClick={() => dispatch(counterSliceActs.down(1))}
       >
         -
       </Button>
@@ -20,7 +20,7 @@ function Counter() {
       <Button
         variant="contained"
         color="primary"
-        onClick={() => dispatch(counterSliceActions.up(1))}
+        onClick={() => dispatch(counterSliceActs.up(1))}
       >
         +
       </Button>

@@ -32,5 +32,5 @@ const loginSlice = createSlice({
   },
 });
 
-export const loginActions = loginSlice.actions;
+export const loginActs = loginSlice.actions;
 export default loginSlice;

@@ -14,4 +14,4 @@ const counterSlice = createSlice({
 });
 
 export default counterSlice;
-export const counterSliceActions = counterSlice.actions; // counterSlice.actions를 counterSliceActions로 내보냅니다.
+export const counterSliceActs = counterSlice.actions; // counterSlice.actions를 counterSliceActions로 내보냅니다.

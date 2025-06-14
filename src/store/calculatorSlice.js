@@ -31,4 +31,4 @@ const calculatorSlice = createSlice({
 });
 
 export default calculatorSlice;
-export const calculatorActions = calculatorSlice.actions;
+export const calculatorActs = calculatorSlice.actions;

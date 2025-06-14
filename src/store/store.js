@@ -5,7 +5,7 @@ import loginSlice from "./loginSlice"; // Import loginSlice
 
 const store = configureStore({
   reducer: {
-    counter: counterSlice.reducer,
+    counter: counterSlice.reducer, // Add counter slice
     calculator: calculatorSlice.reducer, // Add calculator slice
     login: loginSlice.reducer, // Add login slice
   },
