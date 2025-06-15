@@ -29,15 +29,18 @@ function Main() {
         {component === "function4" && <Function4 />}
         {component === "function5" && <Function5 />}
         {component === "calculator" && <Calculator />}
-        {component === "counter" && <Counter />}{" "}
-        {/* Render Counter component when 'Counter' button is clicked */}
+        {component === "counter" && <Counter />}
       </div>
-      <div className="search-button">
-        <SearchButton />
-      </div>
-      <div className="search-result">
-        <SearchResult />
-      </div>
+      {!["cars", "formGuide", "calculator", "counter"].includes(component) && (
+        <>
+          <div className="search-button">
+            <SearchButton />
+          </div>
+          <div className="search-result">
+            <SearchResult />
+          </div>
+        </>
+      )}
     </div>
   );
 }
