@@ -18,6 +18,14 @@ const carSlice = createSlice({
   name: "carSlice",
   initialState,
   reducers: {
+    increase: (state, { payload }) => {
+      const car = state.carData.find((car) => car.id === payload.id);
+      car.quantity++;
+    },
+    decrease: (state, { payload }) => {
+      const car = state.carData.find((car) => car.id === payload.id);
+      car.quantity--;
+    },
     // totalQuantity와 totalValue를 계산합니다.
     calculateTotals: (state) => {
       let totalQuantity = 0;
