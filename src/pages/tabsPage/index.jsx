@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useCallback, useMemo } from "react";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
@@ -6,24 +6,17 @@ import PageOne from "./pageOne";
 import PageTwo from "./pageTwo";
 import PageThree from "./pageThree";
 
+const tabComponents = [PageOne, PageTwo, PageThree];
+const tabLabels = ["Page One", "Page Two", "Page Three"];
+
 function LinkTab(props) {
-  return (
-    <Tab
-      component="a"
-      onClick={(event) => {
-        event.preventDefault();
-      }}
-      {...props}
-    />
-  );
+  return <Tab component="a" onClick={(e) => e.preventDefault()} {...props} />;
 }
 
 export default function TabsPage() {
-  const [value, setValue] = React.useState(0);
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
+  const [value, setValue] = useState(0);
+  const handleChange = useCallback((_, newValue) => setValue(newValue), []);
+  const CurrentPage = useMemo(() => tabComponents[value], [value]);
 
   return (
     <Box sx={{ width: "100%" }}>
@@ -32,15 +25,14 @@ export default function TabsPage() {
         onChange={handleChange}
         aria-label="nav tabs example"
         role="navigation"
+        centered
       >
-        <LinkTab label="Page One" href="/drafts" />
-        <LinkTab label="Page Two" href="/trash" />
-        <LinkTab label="Page Three" href="/spam" />
+        {tabLabels.map((label) => (
+          <LinkTab key={label} label={label} href="#" />
+        ))}
       </Tabs>
       <Box sx={{ mt: 3 }}>
-        {value === 0 && <PageOne />}
-        {value === 1 && <PageTwo />}
-        {value === 2 && <PageThree />}
+        <CurrentPage />
       </Box>
     </Box>
   );
