@@ -5,7 +5,7 @@ import Top from "../components/Top";
 import Function1 from "./function1";
 import FormGuide from "./formGuide";
 import Cars from "./Cars";
-import Function4 from "./function4";
+import TabsPage from "./tabsPage";
 import Function5 from "./function5";
 import Calculator from "./calculator";
 import SearchButton from "../components/SearchButton";
@@ -26,12 +26,14 @@ function Main() {
         {component === "function1" && <Function1 />}
         {component === "formGuide" && <FormGuide />}
         {component === "cars" && <Cars />}
-        {component === "function4" && <Function4 />}
+        {component === "tabsPage" && <TabsPage />}
         {component === "function5" && <Function5 />}
         {component === "calculator" && <Calculator />}
         {component === "counter" && <Counter />}
       </div>
-      {!["cars", "formGuide", "calculator", "counter"].includes(component) && (
+      {!["cars", "formGuide", "calculator", "counter", "tabsPage"].includes(
+        component
+      ) && (
         <>
           <div className="search-button">
             <SearchButton />

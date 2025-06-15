@@ -4,7 +4,7 @@ import Launchpad from "../pages/Launchpad";
 import Function1 from "../pages/function1";
 import FormGuide from "../pages/formGuide";
 import Cars from "../pages/Cars";
-import Function4 from "../pages/function4";
+import TabsPage from "../pages/tabsPage";
 import Function5 from "../pages/function5";
 import Calculator from "../pages/calculator"; // Update import to Calculator
 import Main from "../pages/main";
@@ -20,7 +20,7 @@ function AppRouter() {
         <Route path="/function1" element={<Function1 />} />
         <Route path="/formGuide" element={<FormGuide />} />
         <Route path="/Cars" element={<Cars />} />
-        <Route path="/function4" element={<Function4 />} />
+        <Route path="/tabsPage" element={<TabsPage />} />
         <Route path="/function5" element={<Function5 />} />
         <Route path="/calculator" element={<Calculator />} />{" "}
         {/* Update route to Calculator */}

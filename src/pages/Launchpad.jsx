@@ -12,7 +12,7 @@ function Launchpad() {
     { name: "FormGuide", path: "/formGuide" },
     { name: "Function1", path: "/main?component=function1" },
     { name: "Cars", path: "/main?component=cars" },
-    { name: "Function4", path: "/main?component=function4" },
+    { name: "TabsPage", path: "/main?component=tabsPage" },
     { name: "Function5", path: "/main?component=function5" },
     { name: "Calculator", path: "/main?component=calculator" },
     { name: "Alarm", path: "/Alarm" }, // Rename Function6 to Calculator
