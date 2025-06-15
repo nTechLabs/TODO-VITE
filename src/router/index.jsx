@@ -5,7 +5,7 @@ import Function1 from "../pages/function1";
 import FormGuide from "../pages/formGuide";
 import Cars from "../pages/Cars";
 import TabsPage from "../pages/tabsPage";
-import Function5 from "../pages/function5";
+import UtilsPage from "../pages/utilsPage";
 import Calculator from "../pages/calculator"; // Update import to Calculator
 import Main from "../pages/main";
 import Counter from "../components/Counter"; // Import Counter component
@@ -21,7 +21,7 @@ function AppRouter() {
         <Route path="/formGuide" element={<FormGuide />} />
         <Route path="/Cars" element={<Cars />} />
         <Route path="/tabsPage" element={<TabsPage />} />
-        <Route path="/function5" element={<Function5 />} />
+        <Route path="/utilsPage" element={<UtilsPage />} />
         <Route path="/calculator" element={<Calculator />} />{" "}
         {/* Update route to Calculator */}
         <Route path="/main" element={<Main />} />

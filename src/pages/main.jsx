@@ -6,7 +6,7 @@ import Function1 from "./function1";
 import FormGuide from "./formGuide";
 import Cars from "./Cars";
 import TabsPage from "./tabsPage";
-import Function5 from "./function5";
+import UtilsPage from "./utilsPage";
 import Calculator from "./calculator";
 import SearchButton from "../components/SearchButton";
 import SearchResult from "../components/SearchResult";
@@ -22,15 +22,20 @@ function Main() {
       <div className="top">
         <Top />
       </div>
-      {["cars", "formGuide", "calculator", "counter", "tabsPage"].includes(
-        component
-      ) ? (
+      {[
+        "cars",
+        "formGuide",
+        "calculator",
+        "counter",
+        "tabsPage",
+        "utilsPage",
+      ].includes(component) ? (
         <div className="full-area">
           {component === "function1" && <Function1 />}
           {component === "formGuide" && <FormGuide />}
           {component === "cars" && <Cars />}
           {component === "tabsPage" && <TabsPage />}
-          {component === "function5" && <Function5 />}
+          {component === "utilsPage" && <UtilsPage />}
           {component === "calculator" && <Calculator />}
           {component === "counter" && <Counter />}
         </div>
@@ -40,14 +45,18 @@ function Main() {
           {component === "formGuide" && <FormGuide />}
           {component === "cars" && <Cars />}
           {component === "tabsPage" && <TabsPage />}
-          {component === "function5" && <Function5 />}
           {component === "calculator" && <Calculator />}
           {component === "counter" && <Counter />}
         </div>
       )}
-      {!["cars", "formGuide", "calculator", "counter", "tabsPage"].includes(
-        component
-      ) && (
+      {![
+        "cars",
+        "formGuide",
+        "calculator",
+        "counter",
+        "tabsPage",
+        "utilsPage",
+      ].includes(component) && (
         <>
           <div className="search-button">
             <SearchButton />
