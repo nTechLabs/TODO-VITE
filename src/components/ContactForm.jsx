@@ -196,7 +196,7 @@ const ContactForm = () => {
               <form onSubmit={handleSubmit}>
                 <Grid container spacing={3}>
                   {/* Full Name */}
-                  <Grid item xs={12} md={6}>
+                  <Grid>
                     <TextField
                       fullWidth
                       label="Full Name"
@@ -215,7 +215,7 @@ const ContactForm = () => {
                   </Grid>
 
                   {/* Email */}
-                  <Grid item xs={12} md={6}>
+                  <Grid>
                     <TextField
                       fullWidth
                       label="Email Address"
@@ -235,7 +235,7 @@ const ContactForm = () => {
                   </Grid>
 
                   {/* Phone */}
-                  <Grid item xs={12} md={6}>
+                  <Grid>
                     <TextField
                       fullWidth
                       label="Phone Number"
@@ -254,32 +254,30 @@ const ContactForm = () => {
                   </Grid>
 
                   {/* Date of Birth */}
-                  <Grid item xs={12} md={6}>
+                  <Grid>
                     <DatePicker
                       label="Date of Birth"
                       value={contactFormData.dateOfBirth}
                       onChange={handleDateChange}
-                      renderInput={(params) => (
-                        <TextField
-                          {...params}
-                          fullWidth
-                          error={!!errors.dateOfBirth}
-                          helperText={errors.dateOfBirth}
-                          InputProps={{
-                            ...params.InputProps,
+                      slotProps={{
+                        textField: {
+                          fullWidth: true,
+                          error: !!errors.dateOfBirth,
+                          helperText: errors.dateOfBirth,
+                          InputProps: {
                             startAdornment: (
                               <InputAdornment position="start">
-                                <CalendarToday color="action" />
+                                <CalendarToday />
                               </InputAdornment>
                             ),
-                          }}
-                        />
-                      )}
+                          },
+                        },
+                      }}
                     />
                   </Grid>
 
                   {/* Address */}
-                  <Grid item xs={12}>
+                  <Grid>
                     <TextField
                       fullWidth
                       label="Address"
@@ -303,7 +301,7 @@ const ContactForm = () => {
                   </Grid>
 
                   {/* Gender */}
-                  <Grid item xs={12} md={6}>
+                  <Grid>
                     <FormControl fullWidth error={!!errors.gender}>
                       <FormLabel
                         component="legend"
@@ -345,7 +343,7 @@ const ContactForm = () => {
                   </Grid>
 
                   {/* Interests */}
-                  <Grid item xs={12}>
+                  <Grid>
                     <FormControl fullWidth error={!!errors.interests}>
                       <FormLabel
                         component="legend"
@@ -394,7 +392,7 @@ const ContactForm = () => {
                   </Grid>
 
                   {/* Message */}
-                  <Grid item xs={12}>
+                  <Grid>
                     <TextField
                       fullWidth
                       label="Message"
@@ -409,7 +407,7 @@ const ContactForm = () => {
                   </Grid>
 
                   {/* Submit Button */}
-                  <Grid item xs={12}>
+                  <Grid>
                     <Box sx={{ textAlign: "center", mt: 2 }}>
                       <Button
                         type="submit"
