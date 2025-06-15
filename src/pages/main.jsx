@@ -22,23 +22,29 @@ function Main() {
       <div className="top">
         <Top />
       </div>
-      <div
-        className={
-          ["cars", "formGuide", "calculator", "counter", "tabsPage"].includes(
-            component
-          )
-            ? "main-search full-area"
-            : "main-search"
-        }
-      >
-        {component === "function1" && <Function1 />}
-        {component === "formGuide" && <FormGuide />}
-        {component === "cars" && <Cars />}
-        {component === "tabsPage" && <TabsPage />}
-        {component === "function5" && <Function5 />}
-        {component === "calculator" && <Calculator />}
-        {component === "counter" && <Counter />}
-      </div>
+      {["cars", "formGuide", "calculator", "counter", "tabsPage"].includes(
+        component
+      ) ? (
+        <div className="full-area">
+          {component === "function1" && <Function1 />}
+          {component === "formGuide" && <FormGuide />}
+          {component === "cars" && <Cars />}
+          {component === "tabsPage" && <TabsPage />}
+          {component === "function5" && <Function5 />}
+          {component === "calculator" && <Calculator />}
+          {component === "counter" && <Counter />}
+        </div>
+      ) : (
+        <div className="main-search">
+          {component === "function1" && <Function1 />}
+          {component === "formGuide" && <FormGuide />}
+          {component === "cars" && <Cars />}
+          {component === "tabsPage" && <TabsPage />}
+          {component === "function5" && <Function5 />}
+          {component === "calculator" && <Calculator />}
+          {component === "counter" && <Counter />}
+        </div>
+      )}
       {!["cars", "formGuide", "calculator", "counter", "tabsPage"].includes(
         component
       ) && (
