@@ -57,19 +57,6 @@ const ContactForm = () => {
   const [errors, setErrors] = useState({});
   const [showSuccess, setShowSuccess] = useState(false);
 
-  // const interestOptions = [
-  //   "Technology",
-  //   "Business",
-  //   "Design",
-  //   "Marketing",
-  //   "Education",
-  //   "Healthcare",
-  //   "Finance",
-  //   "Entertainment",
-  //   "Sports",
-  //   "Travel",
-  // ];
-
   const handleInputChange = (field) => (event) => {
     setContactFormData({
       ...contactFormData,
