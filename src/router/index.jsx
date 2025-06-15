@@ -10,7 +10,7 @@ import Calculator from "../pages/calculator"; // Update import to Calculator
 import Main from "../pages/main";
 import Counter from "../components/Counter"; // Import Counter component
 import Vite from "../pages/Vite/index"; // Import Vite component
-import Contact from "../pages/contact";
+import Contact from "../pages/Contact";
 
 function AppRouter() {
   return (
