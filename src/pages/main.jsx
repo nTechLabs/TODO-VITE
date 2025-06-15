@@ -22,7 +22,15 @@ function Main() {
       <div className="top">
         <Top />
       </div>
-      <div className="main-search">
+      <div
+        className={
+          ["cars", "formGuide", "calculator", "counter", "tabsPage"].includes(
+            component
+          )
+            ? "main-search full-area"
+            : "main-search"
+        }
+      >
         {component === "function1" && <Function1 />}
         {component === "formGuide" && <FormGuide />}
         {component === "cars" && <Cars />}
