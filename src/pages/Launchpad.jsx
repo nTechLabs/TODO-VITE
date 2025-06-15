@@ -15,7 +15,7 @@ function Launchpad() {
     { name: "TabsPage", path: "/main?component=tabsPage" },
     { name: "UtilsPage", path: "/main?component=utilsPage" },
     { name: "Calculator", path: "/main?component=calculator" },
-    { name: "Alarm", path: "/Alarm" }, // Rename Function6 to Calculator
+    { name: "Contact", path: "/Contact" }, // Rename Function6 to Calculator
   ];
 
   return (

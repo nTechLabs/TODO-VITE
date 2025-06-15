@@ -10,7 +10,7 @@ import Calculator from "../pages/calculator"; // Update import to Calculator
 import Main from "../pages/main";
 import Counter from "../components/Counter"; // Import Counter component
 import Vite from "../pages/Vite/index"; // Import Vite component
-import Alarm from "../pages/alarm";
+import Contact from "../pages/contact";
 
 function AppRouter() {
   return (
@@ -29,7 +29,7 @@ function AppRouter() {
         <Route path="/counter" element={<Counter />} />{" "}
         {/* Add route for Counter */}
         <Route path="/vite" element={<Vite />} /> {/* Add route for Vite */}
-        <Route path="/alarm" element={<Alarm />} />{" "}
+        <Route path="/contact" element={<Contact />} />{" "}
       </Routes>
     </Router>
   );
