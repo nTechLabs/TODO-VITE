@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Launchpad from "../pages/Launchpad";
 import Function1 from "../pages/function1";
 import FormGuide from "../pages/formGuide";
-import Function3 from "../pages/function3";
+import Cars from "../pages/Cars";
 import Function4 from "../pages/function4";
 import Function5 from "../pages/function5";
 import Calculator from "../pages/calculator"; // Update import to Calculator
@@ -19,7 +19,7 @@ function AppRouter() {
         <Route path="/" element={<Launchpad />} />
         <Route path="/function1" element={<Function1 />} />
         <Route path="/formGuide" element={<FormGuide />} />
-        <Route path="/function3" element={<Function3 />} />
+        <Route path="/Cars" element={<Cars />} />
         <Route path="/function4" element={<Function4 />} />
         <Route path="/function5" element={<Function5 />} />
         <Route path="/calculator" element={<Calculator />} />{" "}

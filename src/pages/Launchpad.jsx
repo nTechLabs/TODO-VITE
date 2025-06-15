@@ -11,7 +11,7 @@ function Launchpad() {
     { name: "Counter", path: "/Counter" },
     { name: "FormGuide", path: "/formGuide" },
     { name: "Function1", path: "/main?component=function1" },
-    { name: "Function3", path: "/main?component=function3" },
+    { name: "Cars", path: "/main?component=cars" },
     { name: "Function4", path: "/main?component=function4" },
     { name: "Function5", path: "/main?component=function5" },
     { name: "Calculator", path: "/main?component=calculator" },

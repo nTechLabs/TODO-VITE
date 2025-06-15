@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { carSliceActs } from "../../store/carSlice";
 import CarList from "./CarList";
 
-function Function3() {
+function Cars() {
   const dispatch = useDispatch();
   const cars = useSelector((store) => store.cars);
 
@@ -46,4 +46,4 @@ function Function3() {
   );
 }
 
-export default Function3;
+export default Cars;

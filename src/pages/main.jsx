@@ -4,7 +4,7 @@ import "./main.css";
 import Top from "../components/Top";
 import Function1 from "./function1";
 import FormGuide from "./formGuide";
-import Function3 from "./function3";
+import Cars from "./Cars";
 import Function4 from "./function4";
 import Function5 from "./function5";
 import Calculator from "./calculator";
@@ -25,7 +25,7 @@ function Main() {
       <div className="main-search">
         {component === "function1" && <Function1 />}
         {component === "formGuide" && <FormGuide />}
-        {component === "function3" && <Function3 />}
+        {component === "cars" && <Cars />}
         {component === "function4" && <Function4 />}
         {component === "function5" && <Function5 />}
         {component === "calculator" && <Calculator />}
