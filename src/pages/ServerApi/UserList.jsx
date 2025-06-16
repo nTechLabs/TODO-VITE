@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchUsers, delUser } from "../../store/userSlice";
+import { getUsers, delUser } from "../../store/userSlice";
 import { useQuery } from "@tanstack/react-query";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -38,13 +38,13 @@ const UserList = () => {
     queryKey: ["users"],
     queryFn: fetchUsersApi,
     onSuccess: (data) => {
-      dispatch(fetchUsers.fulfilled(data));
+      dispatch(getUsers(data));
     },
   });
 
   useEffect(() => {
     if (status === "idle") {
-      dispatch(fetchUsers());
+      fetchUsersApi().then((data) => dispatch(getUsers(data)));
     }
   }, [dispatch, status]);
 
