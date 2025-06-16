@@ -15,9 +15,10 @@ import Checkbox from "@mui/material/Checkbox";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import axios from "axios";
+import { USERS_API_URL } from "./api";
 
 const fetchUsersApi = async () => {
-  const res = await fetch("https://jsonplaceholder.typicode.com/users");
+  const res = await fetch(USERS_API_URL);
   if (!res.ok) throw new Error("Network response was not ok");
   return res.json();
 };
@@ -58,9 +59,7 @@ const UserList = () => {
     try {
       await Promise.all(
         checked.map(async (id) => {
-          await axios.delete(
-            `https://jsonplaceholder.typicode.com/users/${id}`
-          );
+          await axios.delete(`${USERS_API_URL}/${id}`);
         })
       );
       dispatch(delUser(checked));

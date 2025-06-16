@@ -10,6 +10,7 @@ import Stack from "@mui/material/Stack";
 import Alert from "@mui/material/Alert";
 import axios from "axios";
 import { addUser, udtUser } from "../../store/userSlice";
+import { USERS_API_URL } from "./api";
 
 const UserDetail = () => {
   const { id } = useParams();
@@ -78,10 +79,7 @@ const UserDetail = () => {
     try {
       let res;
       if (isNew) {
-        res = await axios.post(
-          "https://jsonplaceholder.typicode.com/users",
-          form
-        );
+        res = await axios.post(USERS_API_URL, form);
         if (res.status === 201) {
           dispatch(addUser({ ...form, id: res.data.id || Date.now() }));
         } else {
@@ -91,10 +89,7 @@ const UserDetail = () => {
           return;
         }
       } else {
-        res = await axios.put(
-          `https://jsonplaceholder.typicode.com/users/${id}`,
-          form
-        );
+        res = await axios.put(`${USERS_API_URL}/${id}`, form);
         if (res.status === 200) {
           dispatch(udtUser({ ...form, id: user.id }));
         } else {
