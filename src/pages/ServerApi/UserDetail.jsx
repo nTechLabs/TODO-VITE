@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { useParams, useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
@@ -9,41 +9,58 @@ import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import Alert from "@mui/material/Alert";
 import axios from "axios";
+import { addUser } from "../../store/userSlice";
 
 const UserDetail = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const isNew = id === "new";
   const user = useSelector((state) =>
     state.users.users.find((u) => String(u.id) === String(id))
   );
 
-  const initialForm = {
-    name: user?.name || "",
-    username: user?.username || "",
-    email: user?.email || "",
-    phone: user?.phone || "",
-    website: user?.website || "",
-    company: user?.company?.name || "",
-    address: user?.address
-      ? `${user.address.city}, ${user.address.street}, ${user.address.suite}`
-      : "",
-  };
+  const initialForm = isNew
+    ? {
+        name: "",
+        username: "",
+        email: "",
+        phone: "",
+        website: "",
+        company: "",
+        address: "",
+      }
+    : {
+        name: user?.name || "",
+        username: user?.username || "",
+        email: user?.email || "",
+        phone: user?.phone || "",
+        website: user?.website || "",
+        company: user?.company?.name || "",
+        address: user?.address
+          ? `${user.address.city}, ${user.address.street}, ${user.address.suite}`
+          : "",
+      };
 
   const [form, setForm] = useState(initialForm);
   const [saveStatus, setSaveStatus] = useState(null); // null | 'success' | 'error'
   const [loading, setLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
 
-  if (!user) {
+  if (!user && !isNew) {
     return <Typography variant="h6">User not found</Typography>;
   }
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
     setSaveStatus(null);
+    setErrorMsg("");
   };
 
   const handleCancel = () => {
     setForm(initialForm);
     setSaveStatus(null);
+    setErrorMsg("");
   };
 
   const isChanged = Object.keys(form).some(
@@ -53,11 +70,23 @@ const UserDetail = () => {
   const handleSave = async () => {
     setLoading(true);
     setSaveStatus(null);
+    setErrorMsg("");
     try {
-      await axios.post("https://jsonplaceholder.typicode.com/users", form);
-      setSaveStatus("success");
+      const res = await axios.post(
+        "https://jsonplaceholder.typicode.com/users",
+        form
+      );
+      if (res.status === 201) {
+        dispatch(addUser({ ...form, id: res.data.id || Date.now() }));
+        setSaveStatus("success");
+        navigate("/ServerApi");
+      } else {
+        setSaveStatus("error");
+        setErrorMsg("저장에 실패했습니다. (status: " + res.status + ")");
+      }
     } catch (e) {
       setSaveStatus("error");
+      setErrorMsg(e?.message || "저장에 실패했습니다.");
     } finally {
       setLoading(false);
     }
@@ -66,7 +95,7 @@ const UserDetail = () => {
   return (
     <Paper sx={{ p: 4, maxWidth: 500, mx: "auto", mt: 4 }}>
       <Typography variant="h5" gutterBottom>
-        User Detail
+        {isNew ? "Add New User" : "User Detail"}
       </Typography>
       <Box
         component="form"
@@ -140,7 +169,7 @@ const UserDetail = () => {
           <Alert severity="success">저장되었습니다.</Alert>
         )}
         {saveStatus === "error" && (
-          <Alert severity="error">저장에 실패했습니다.</Alert>
+          <Alert severity="error">{errorMsg || "저장에 실패했습니다."}</Alert>
         )}
       </Box>
     </Paper>

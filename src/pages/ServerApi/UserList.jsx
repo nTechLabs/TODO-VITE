@@ -8,6 +8,9 @@ import ListItemText from "@mui/material/ListItemText";
 import CircularProgress from "@mui/material/CircularProgress";
 import Alert from "@mui/material/Alert";
 import { useNavigate } from "react-router-dom";
+import Fab from "@mui/material/Fab";
+import AddIcon from "@mui/icons-material/Add";
+import Box from "@mui/material/Box";
 
 const fetchUsersApi = async () => {
   const res = await fetch("https://jsonplaceholder.typicode.com/users");
@@ -43,18 +46,28 @@ const UserList = () => {
     return <Alert severity="error">{error || queryError?.message}</Alert>;
 
   return (
-    <List>
-      {users.map((user) => (
-        <ListItem
-          key={user.id}
-          divider
-          button
-          onClick={() => navigate(`/ServerApi/user/${user.id}`)}
-        >
-          <ListItemText primary={user.name} secondary={user.email} />
-        </ListItem>
-      ))}
-    </List>
+    <Box sx={{ position: "relative" }}>
+      <List>
+        {users.map((user) => (
+          <ListItem
+            key={user.id}
+            divider
+            button
+            onClick={() => navigate(`/ServerApi/user/${user.id}`)}
+          >
+            <ListItemText primary={user.name} secondary={user.email} />
+          </ListItem>
+        ))}
+      </List>
+      <Fab
+        color="primary"
+        aria-label="add"
+        sx={{ position: "fixed", bottom: 32, right: 32, zIndex: 1000 }}
+        onClick={() => navigate("/ServerApi/user/new")}
+      >
+        <AddIcon />
+      </Fab>
+    </Box>
   );
 };
 
