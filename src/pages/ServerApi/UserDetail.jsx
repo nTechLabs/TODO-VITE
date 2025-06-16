@@ -58,6 +58,10 @@ const UserDetail = () => {
   };
 
   const handleCancel = () => {
+    if (!isChanged) {
+      navigate("/ServerApi");
+      return;
+    }
     setForm(initialForm);
     setSaveStatus(null);
     setErrorMsg("");
