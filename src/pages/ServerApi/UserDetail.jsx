@@ -11,6 +11,7 @@ import Alert from "@mui/material/Alert";
 import axios from "axios";
 import { addUser, udtUser } from "../../store/userSlice";
 import { USERS_API_URL } from "./api";
+import "./userList.css";
 
 const UserDetail = () => {
   const { id } = useParams();
@@ -137,14 +138,11 @@ const UserDetail = () => {
   };
 
   return (
-    <Paper sx={{ p: 4, maxWidth: 500, mx: "auto", mt: 4 }}>
+    <Paper className="userDetailPaper">
       <Typography variant="h5" gutterBottom>
         {isNew ? "Add New User" : "User Detail"}
       </Typography>
-      <Box
-        component="form"
-        sx={{ display: "flex", flexDirection: "column", gap: 2 }}
-      >
+      <Box component="form" className="userDetailForm">
         <TextField
           label="Name"
           name="name"
@@ -193,11 +191,7 @@ const UserDetail = () => {
           value={form.address}
           onChange={handleChange}
         />
-        <Stack
-          direction="row"
-          spacing={2}
-          sx={{ mt: 3, justifyContent: "flex-end" }}
-        >
+        <Stack direction="row" className="userDetailButtonRow">
           <Button
             variant="outlined"
             color="secondary"

@@ -1,0 +1,50 @@
+.userDetailPaper {
+  padding: 32px;
+  max-width: 500px;
+  margin: 32px auto 0 auto;
+}
+
+.userDetailForm {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.userDetailButtonRow {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: 16px;
+}
+
+.userListContainer {
+  position: relative;
+  padding-bottom: 80px;
+}
+
+.fabAdd {
+  position: fixed;
+  bottom: 90px;
+  right: 32px;
+  z-index: 1000;
+}
+
+.deleteButtonRow {
+  position: fixed;
+  bottom: 24px;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  z-index: 1000;
+  gap: 16px;
+}
+
+.deleteAlert {
+  position: fixed;
+  bottom: 70px;
+  left: 0;
+  width: 100%;
+  z-index: 1200;
+}

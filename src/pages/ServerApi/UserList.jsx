@@ -16,6 +16,7 @@ import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import axios from "axios";
 import { USERS_API_URL } from "./api";
+import "./userList.css";
 
 const fetchUsersApi = async () => {
   const res = await fetch(USERS_API_URL);
@@ -74,7 +75,7 @@ const UserList = () => {
     return <Alert severity="error">{error || queryError?.message}</Alert>;
 
   return (
-    <Box sx={{ position: "relative", pb: 10 }}>
+    <Box className="userListContainer">
       <List>
         {users.map((user) => (
           <ListItem
@@ -99,23 +100,12 @@ const UserList = () => {
       <Fab
         color="primary"
         aria-label="add"
-        sx={{ position: "fixed", bottom: 90, right: 32, zIndex: 1000 }}
+        className="fabAdd"
         onClick={() => navigate("/ServerApi/user/new")}
       >
         <AddIcon />
       </Fab>
-      <Stack
-        direction="row"
-        spacing={2}
-        sx={{
-          position: "fixed",
-          bottom: 24,
-          left: 0,
-          width: "100%",
-          justifyContent: "center",
-          zIndex: 1000,
-        }}
-      >
+      <Stack direction="row" className="deleteButtonRow">
         <Button
           variant="contained"
           color="error"
@@ -126,16 +116,7 @@ const UserList = () => {
         </Button>
       </Stack>
       {deleteError && (
-        <Alert
-          severity="error"
-          sx={{
-            position: "fixed",
-            bottom: 70,
-            left: 0,
-            width: "100%",
-            zIndex: 1200,
-          }}
-        >
+        <Alert severity="error" className="deleteAlert">
           {deleteError}
         </Alert>
       )}
