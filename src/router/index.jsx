@@ -12,6 +12,7 @@ import Counter from "../components/Counter"; // Import Counter component
 import Vite from "../pages/Vite/index"; // Import Vite component
 import Contact from "../pages/Contact";
 import ServerApi from "../pages/ServerApi"; // Import ServerApi component
+import UserDetail from "../pages/ServerApi/UserDetail"; // Import UserDetail component
 
 function AppRouter() {
   return (
@@ -33,6 +34,8 @@ function AppRouter() {
         <Route path="/contact" element={<Contact />} />{" "}
         <Route path="/ServerApi" element={<ServerApi />} />{" "}
         {/* Add route for ServerApi */}
+        <Route path="/ServerApi/user/:id" element={<UserDetail />} />
+        {/* Add route for UserDetail */}
       </Routes>
     </Router>
   );
