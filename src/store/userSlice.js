@@ -19,6 +19,10 @@ const userSlice = createSlice({
     addUser: (state, action) => {
       state.users.push(action.payload);
     },
+    delUser: (state, action) => {
+      // action.payload: array of ids to delete
+      state.users = state.users.filter((u) => !action.payload.includes(u.id));
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -36,5 +40,5 @@ const userSlice = createSlice({
   },
 });
 
-export const { addUser } = userSlice.actions;
+export const { addUser, delUser } = userSlice.actions;
 export default userSlice.reducer;

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchUsers } from "../../store/userSlice";
+import { fetchUsers, delUser } from "../../store/userSlice";
 import { useQuery } from "@tanstack/react-query";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -63,10 +63,7 @@ const UserList = () => {
           );
         })
       );
-      // Remove from store (since API is fake, just filter locally)
-      dispatch(
-        fetchUsers.fulfilled(users.filter((u) => !checked.includes(u.id)))
-      );
+      dispatch(delUser(checked));
       setChecked([]);
     } catch (e) {
       setDeleteError(e?.message || "삭제에 실패했습니다.");
