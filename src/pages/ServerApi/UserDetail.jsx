@@ -5,6 +5,10 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
+import Button from "@mui/material/Button";
+import Stack from "@mui/material/Stack";
+import Alert from "@mui/material/Alert";
+import axios from "axios";
 
 const UserDetail = () => {
   const { id } = useParams();
@@ -12,7 +16,7 @@ const UserDetail = () => {
     state.users.users.find((u) => String(u.id) === String(id))
   );
 
-  const [form, setForm] = useState({
+  const initialForm = {
     name: user?.name || "",
     username: user?.username || "",
     email: user?.email || "",
@@ -22,7 +26,11 @@ const UserDetail = () => {
     address: user?.address
       ? `${user.address.city}, ${user.address.street}, ${user.address.suite}`
       : "",
-  });
+  };
+
+  const [form, setForm] = useState(initialForm);
+  const [saveStatus, setSaveStatus] = useState(null); // null | 'success' | 'error'
+  const [loading, setLoading] = useState(false);
 
   if (!user) {
     return <Typography variant="h6">User not found</Typography>;
@@ -30,6 +38,29 @@ const UserDetail = () => {
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
+    setSaveStatus(null);
+  };
+
+  const handleCancel = () => {
+    setForm(initialForm);
+    setSaveStatus(null);
+  };
+
+  const isChanged = Object.keys(form).some(
+    (key) => form[key] !== initialForm[key]
+  );
+
+  const handleSave = async () => {
+    setLoading(true);
+    setSaveStatus(null);
+    try {
+      await axios.post("https://jsonplaceholder.typicode.com/users", form);
+      setSaveStatus("success");
+    } catch (e) {
+      setSaveStatus("error");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -83,6 +114,34 @@ const UserDetail = () => {
           value={form.address}
           onChange={handleChange}
         />
+        <Stack
+          direction="row"
+          spacing={2}
+          sx={{ mt: 3, justifyContent: "flex-end" }}
+        >
+          <Button
+            variant="outlined"
+            color="secondary"
+            onClick={handleCancel}
+            disabled={loading}
+          >
+            취소
+          </Button>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleSave}
+            disabled={!isChanged || loading}
+          >
+            저장
+          </Button>
+        </Stack>
+        {saveStatus === "success" && (
+          <Alert severity="success">저장되었습니다.</Alert>
+        )}
+        {saveStatus === "error" && (
+          <Alert severity="error">저장에 실패했습니다.</Alert>
+        )}
       </Box>
     </Paper>
   );
