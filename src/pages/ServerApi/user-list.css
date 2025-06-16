@@ -30,6 +30,16 @@
   z-index: 1000;
 }
 
+.fabAddRight {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  position: fixed;
+  bottom: 90px;
+  right: 0;
+  z-index: 1000;
+}
+
 .deleteButtonRow {
   position: fixed;
   bottom: 24px;

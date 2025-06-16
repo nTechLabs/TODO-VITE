@@ -97,14 +97,15 @@ const UserList = () => {
           </ListItem>
         ))}
       </List>
-      <Fab
-        color="primary"
-        aria-label="add"
-        className="fabAdd"
-        onClick={() => navigate("/ServerApi/user/new")}
-      >
-        <AddIcon />
-      </Fab>
+      <Box className="fabAddRight">
+        <Fab
+          color="primary"
+          aria-label="add"
+          onClick={() => navigate("/ServerApi/user/new")}
+        >
+          <AddIcon />
+        </Fab>
+      </Box>
       <Stack direction="row" className="deleteButtonRow">
         <Button
           variant="contained"
