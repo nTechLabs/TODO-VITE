@@ -9,7 +9,7 @@ import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import Alert from "@mui/material/Alert";
 import axios from "axios";
-import { addUser } from "../../store/userSlice";
+import { addUser, udtUser } from "../../store/userSlice";
 
 const UserDetail = () => {
   const { id } = useParams();
@@ -76,21 +76,41 @@ const UserDetail = () => {
     setSaveStatus(null);
     setErrorMsg("");
     try {
-      const res = await axios.post(
-        "https://jsonplaceholder.typicode.com/users",
-        form
-      );
-      if (res.status === 201) {
-        dispatch(addUser({ ...form, id: res.data.id || Date.now() }));
-        setSaveStatus("success");
-        navigate("/ServerApi");
+      let res;
+      if (isNew) {
+        res = await axios.post(
+          "https://jsonplaceholder.typicode.com/users",
+          form
+        );
+        if (res.status === 201) {
+          dispatch(addUser({ ...form, id: res.data.id || Date.now() }));
+        } else {
+          setSaveStatus("error");
+          setErrorMsg("저장에 실패했습니다. (status: " + res.status + ")");
+          setLoading(false);
+          return;
+        }
       } else {
-        setSaveStatus("error");
-        setErrorMsg("저장에 실패했습니다. (status: " + res.status + ")");
+        res = await axios.put(
+          `https://jsonplaceholder.typicode.com/users/${id}`,
+          form
+        );
+        if (res.status === 200) {
+          dispatch(udtUser({ ...form, id: user.id }));
+        } else {
+          setSaveStatus("error");
+          setErrorMsg("수정에 실패했습니다. (status: " + res.status + ")");
+          setLoading(false);
+          return;
+        }
       }
+      setSaveStatus("success");
+      navigate("/ServerApi");
     } catch (e) {
       setSaveStatus("error");
-      setErrorMsg(e?.message || "저장에 실패했습니다.");
+      setErrorMsg(
+        e?.message || (isNew ? "저장에 실패했습니다." : "수정에 실패했습니다.")
+      );
     } finally {
       setLoading(false);
     }

@@ -23,6 +23,13 @@ const userSlice = createSlice({
       // action.payload: array of ids to delete
       state.users = state.users.filter((u) => !action.payload.includes(u.id));
     },
+    udtUser: (state, action) => {
+      // action.payload: user object with id
+      const idx = state.users.findIndex((u) => u.id === action.payload.id);
+      if (idx !== -1) {
+        state.users[idx] = { ...state.users[idx], ...action.payload };
+      }
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -40,5 +47,5 @@ const userSlice = createSlice({
   },
 });
 
-export const { addUser, delUser } = userSlice.actions;
+export const { addUser, delUser, udtUser } = userSlice.actions;
 export default userSlice.reducer;
