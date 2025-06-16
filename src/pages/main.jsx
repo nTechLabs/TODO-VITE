@@ -11,6 +11,7 @@ import Calculator from "./calculator";
 import SearchButton from "../components/SearchButton";
 import SearchResult from "../components/SearchResult";
 import Counter from "../components/Counter"; // Import Counter component
+import ServerApi from "./ServerApi"; // Import ServerApi component
 
 function Main() {
   const location = useLocation();
@@ -29,6 +30,7 @@ function Main() {
         "counter",
         "tabsPage",
         "utilsPage",
+        "ServerApi",
       ].includes(component) ? (
         <div className="full-area">
           {component === "function1" && <Function1 />}
@@ -38,6 +40,7 @@ function Main() {
           {component === "utilsPage" && <UtilsPage />}
           {component === "calculator" && <Calculator />}
           {component === "counter" && <Counter />}
+          {component === "ServerApi" && <ServerApi />}
         </div>
       ) : (
         <div className="main-search">

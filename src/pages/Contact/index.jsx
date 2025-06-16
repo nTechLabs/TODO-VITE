@@ -1,7 +1,7 @@
 import React from "react";
 import FormLayout from "../../components/FormLayout"; // Import the FormLayout component
 
-function Alarm() {
+function Contact() {
   return (
     <div className="App">
       <FormLayout />
@@ -9,4 +9,4 @@ function Alarm() {
   );
 }
 
-export default Alarm;
+export default Contact;

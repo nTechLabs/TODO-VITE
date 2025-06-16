@@ -11,6 +11,7 @@ import Main from "../pages/main";
 import Counter from "../components/Counter"; // Import Counter component
 import Vite from "../pages/Vite/index"; // Import Vite component
 import Contact from "../pages/Contact";
+import ServerApi from "../pages/ServerApi"; // Import ServerApi component
 
 function AppRouter() {
   return (
@@ -30,6 +31,8 @@ function AppRouter() {
         {/* Add route for Counter */}
         <Route path="/vite" element={<Vite />} /> {/* Add route for Vite */}
         <Route path="/contact" element={<Contact />} />{" "}
+        <Route path="/ServerApi" element={<ServerApi />} />{" "}
+        {/* Add route for ServerApi */}
       </Routes>
     </Router>
   );

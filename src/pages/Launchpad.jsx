@@ -16,6 +16,7 @@ function Launchpad() {
     { name: "UtilsPage", path: "/main?component=utilsPage" },
     { name: "Calculator", path: "/main?component=calculator" },
     { name: "Contact", path: "/Contact" }, // Rename Function6 to Calculator
+    { name: "ServerApi", path: "/ServerApi" },
   ];
 
   return (
