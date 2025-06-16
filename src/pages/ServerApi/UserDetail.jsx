@@ -47,15 +47,40 @@ const UserDetail = () => {
   const [saveStatus, setSaveStatus] = useState(null); // null | 'success' | 'error'
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [phoneError, setPhoneError] = useState("");
 
   if (!user && !isNew) {
     return <Typography variant="h6">User not found</Typography>;
   }
 
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setForm({ ...form, [name]: value });
     setSaveStatus(null);
     setErrorMsg("");
+    if (name === "email") {
+      if (!value) {
+        setEmailError("Email은 필수입니다.");
+      } else if (!/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(value)) {
+        setEmailError("유효한 이메일 주소를 입력하세요.");
+      } else {
+        setEmailError("");
+      }
+    }
+    if (name === "phone") {
+      if (!value) {
+        setPhoneError("Phone은 필수입니다.");
+      } else if (
+        !/^\+?\d{1,4}[-.\s]?\(?\d{1,4}\)?[-.\s]?\d{1,4}[-.\s]?\d{1,9}$/.test(
+          value
+        )
+      ) {
+        setPhoneError("유효한 전화번호를 입력하세요.");
+      } else {
+        setPhoneError("");
+      }
+    }
   };
 
   const handleCancel = () => {
@@ -137,12 +162,18 @@ const UserDetail = () => {
           name="email"
           value={form.email}
           onChange={handleChange}
+          required
+          error={!!emailError}
+          helperText={emailError}
         />
         <TextField
           label="Phone"
           name="phone"
           value={form.phone}
           onChange={handleChange}
+          required
+          error={!!phoneError}
+          helperText={phoneError}
         />
         <TextField
           label="Website"
@@ -179,7 +210,14 @@ const UserDetail = () => {
             variant="contained"
             color="primary"
             onClick={handleSave}
-            disabled={!isChanged || loading}
+            disabled={
+              !isChanged ||
+              loading ||
+              !!emailError ||
+              !form.email ||
+              !!phoneError ||
+              !form.phone
+            }
           >
             저장
           </Button>
