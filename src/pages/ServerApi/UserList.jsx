@@ -16,7 +16,7 @@ import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import axios from "axios";
 import { USERS_API_URL } from "./api";
-import "./userList.css";
+import "./user-list.css";
 
 const fetchUsersApi = async () => {
   const res = await fetch(USERS_API_URL);

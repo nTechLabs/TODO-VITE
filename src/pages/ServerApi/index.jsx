@@ -4,7 +4,7 @@ import UserList from "./UserList";
 const ServerApi = () => {
   return (
     <div>
-      <h2>Users (React Query + Redux)</h2>
+      <h2>Users (React Query + Redux Toolkit)</h2>
       <UserList />
     </div>
   );

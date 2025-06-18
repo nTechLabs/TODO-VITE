@@ -11,7 +11,7 @@ import Alert from "@mui/material/Alert";
 import axios from "axios";
 import { addUser, udtUser } from "../../store/userSlice";
 import { USERS_API_URL } from "./api";
-import "./userList.css";
+import "./user-list.css";
 
 const UserDetail = () => {
   const { id } = useParams();
