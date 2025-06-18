@@ -13,6 +13,7 @@ import Vite from "../pages/Vite/index"; // Import Vite component
 import Contact from "../pages/Contact";
 import ServerApi from "../pages/ServerApi"; // Import ServerApi component
 import UserDetail from "../pages/ServerApi/UserDetail"; // Import UserDetail component
+import Alarms from "../pages/alarms";
 
 function AppRouter() {
   return (
@@ -36,6 +37,7 @@ function AppRouter() {
         {/* Add route for ServerApi */}
         <Route path="/ServerApi/user/:id" element={<UserDetail />} />
         {/* Add route for UserDetail */}
+        <Route path="/alarms" element={<Alarms />} />
       </Routes>
     </Router>
   );

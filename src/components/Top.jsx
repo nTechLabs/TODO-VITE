@@ -23,7 +23,10 @@ function Top() {
         <IconButton aria-label="search">
           <SearchIcon sx={{ fontSize: 28 }} />
         </IconButton>
-        <IconButton aria-label="notifications" onClick={() => navigate("/alarms")}>
+        <IconButton
+          aria-label="notifications"
+          onClick={() => navigate("/alarms")}
+        >
           <NotificationsIcon sx={{ fontSize: 26 }} />
         </IconButton>
       </Box>
