@@ -16,6 +16,7 @@ function Launchpad() {
     { name: "Calculator", path: "/main?component=calculator" },
     { name: "Contact", path: "/Contact" },
     { name: "ServerApi", path: "/ServerApi" },
+    { name: "SampleComp", path: "/sample" },
   ];
 
   return (
