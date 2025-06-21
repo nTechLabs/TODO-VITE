@@ -1,22 +1,15 @@
 import React from "react";
-import { Box, CssBaseline, ThemeProvider } from "@mui/material";
+import { Layout } from "antd";
 import Navigation from "./Navigation";
 import ContactForm from "./ContactForm";
-import theme from "../styles/theme";
 
 const FormLayout = () => {
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <Box
-        sx={{
-          minHeight: "100vh",
-          backgroundColor: theme.palette.background.default,
-        }}
-      >
+    <Layout style={{ minHeight: "100vh", background: "#f8fafc" }}>
+      <div style={{ maxWidth: 480, margin: "0 auto", padding: 24 }}>
         <ContactForm />
-      </Box>
-    </ThemeProvider>
+      </div>
+    </Layout>
   );
 };
 

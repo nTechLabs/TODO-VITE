@@ -1,35 +1,18 @@
 import React from "react";
-import Autocomplete from "@mui/material/Autocomplete";
-import TextField from "@mui/material/TextField";
+import { AutoComplete, Input } from "antd";
 
-function ComboBox({ options, label, sx, onChange }) {
-  const handleChange = (event, value) => {
-    if (
-      value &&
-      typeof value === "object" &&
-      "key" in value &&
-      "value" in value
-    ) {
-      console.log("Selected key:", value.key, "Selected value:", value.value);
-    } else {
-      console.log("Selected:", value);
+const ComboBox = ({ options, label, ...props }) => (
+  <AutoComplete
+    options={options.map((o) => ({ value: o.label || o.value || o }))}
+    style={{ width: "100%" }}
+    placeholder={label}
+    filterOption={(inputValue, option) =>
+      option.value.toLowerCase().includes(inputValue.toLowerCase())
     }
-    if (onChange) onChange(event, value);
-  };
-  return (
-    <Autocomplete
-      disablePortal
-      id="combo-box-demo"
-      options={options}
-      getOptionLabel={(option) => option.value || option}
-      isOptionEqualToValue={(option, value) =>
-        (option.key || option) === (value.key || value)
-      }
-      sx={{ width: 300, ...sx }}
-      onChange={handleChange}
-      renderInput={(params) => <TextField {...params} label={label} />}
-    />
-  );
-}
+    {...props}
+  >
+    <Input />
+  </AutoComplete>
+);
 
 export default ComboBox;

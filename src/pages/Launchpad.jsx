@@ -1,6 +1,6 @@
 import React from "react";
+import { Button, Typography, Card, Row, Col } from "antd";
 import { useNavigate } from "react-router-dom";
-import { Box, Button, Grid, Paper, Typography } from "@mui/material";
 
 function Launchpad() {
   const navigate = useNavigate();
@@ -19,58 +19,48 @@ function Launchpad() {
   ];
 
   return (
-    <Box
-      sx={{
-        minHeight: "100vh",
-        bgcolor: "#f5f7fa",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
+    <Row
+      justify="center"
+      align="middle"
+      style={{ minHeight: "100vh", background: "#f5f7fa" }}
     >
-      <Paper
-        elevation={6}
-        sx={{
-          p: 5,
-          borderRadius: 4,
-          minWidth: 340,
-          maxWidth: 480,
-          width: "100%",
-        }}
-      >
-        <Typography variant="h5" fontWeight={700} mb={3} align="center">
-          Launchpad
-        </Typography>
-        <Grid container spacing={2} justifyContent="center">
-          {icons.map((icon) => (
-            <Grid
-              item
-              xs={6}
-              key={icon.name}
-              display="flex"
-              justifyContent="center"
-            >
-              <Button
-                variant="contained"
-                color="primary"
-                fullWidth
-                sx={{
-                  height: 56,
-                  fontWeight: 600,
-                  fontSize: 16,
-                  borderRadius: 2,
-                  textTransform: "none",
-                  boxShadow: 2,
-                }}
-                onClick={() => navigate(icon.path)}
-              >
-                {icon.name}
-              </Button>
-            </Grid>
-          ))}
-        </Grid>
-      </Paper>
-    </Box>
+      <Col>
+        <Card
+          style={{
+            borderRadius: 16,
+            minWidth: 340,
+            maxWidth: 480,
+            width: "100%",
+            padding: 32,
+          }}
+        >
+          <Typography.Title
+            level={3}
+            style={{
+              textAlign: "center",
+              marginBottom: 32,
+              fontWeight: 700,
+            }}
+          >
+            Launchpad
+          </Typography.Title>
+          <Row gutter={[16, 16]}>
+            {icons.map((icon) => (
+              <Col span={12} key={icon.name}>
+                <Button
+                  block
+                  size="large"
+                  style={{ borderRadius: 8, fontWeight: 600 }}
+                  onClick={() => navigate(icon.path)}
+                >
+                  {icon.name}
+                </Button>
+              </Col>
+            ))}
+          </Row>
+        </Card>
+      </Col>
+    </Row>
   );
 }
 

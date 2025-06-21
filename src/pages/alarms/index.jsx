@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Typography, List, ListItem, ListItemText } from "@mui/material";
+import { List, Typography, Card } from "antd";
 
 const dummyAlarms = [
   { id: 1, message: "새로운 메시지가 도착했습니다." },
@@ -9,17 +9,14 @@ const dummyAlarms = [
 
 export default function Alarms() {
   return (
-    <Box p={3}>
-      <Typography variant="h6" mb={2}>
+    <Card style={{ maxWidth: 480, margin: "32px auto" }}>
+      <Typography.Title level={5} style={{ marginBottom: 16 }}>
         알림 목록
-      </Typography>
-      <List>
-        {dummyAlarms.map((alarm) => (
-          <ListItem key={alarm.id}>
-            <ListItemText primary={alarm.message} />
-          </ListItem>
-        ))}
-      </List>
-    </Box>
+      </Typography.Title>
+      <List
+        dataSource={dummyAlarms}
+        renderItem={(alarm) => <List.Item key={alarm.id}>{alarm.message}</List.Item>}
+      />
+    </Card>
   );
 }

@@ -1,41 +1,32 @@
 import React, { useState } from "react";
-import FormControl from "@mui/material/FormControl";
-import InputLabel from "@mui/material/InputLabel";
-import Select from "@mui/material/Select";
-import MenuItem from "@mui/material/MenuItem";
-import Box from "@mui/material/Box";
+import { Select } from "antd";
 import ComboBox from "../../components/ComboBox";
-import comboBoxOptions, { nationCbOptions } from "../../values/comboBoxOptions"; // Import the comboBoxOptions and nationCbOptions
+import comboBoxOptions, { nationCbOptions } from "../../values/comboBoxOptions";
 
 const SelectUtil = () => {
   const [status, setStatus] = useState("");
-  const handleChange = (event) => {
-    setStatus(event.target.value);
+  const handleChange = (value) => {
+    setStatus(value);
   };
   return (
     <>
-      <FormControl fullWidth>
-        <InputLabel id="select-status">Status</InputLabel>
-        <Select
-          labelId="select-status"
-          id="select-status"
-          value={status}
-          label="Status"
-          onChange={handleChange}
-        >
-          <MenuItem value={10}>ToDo</MenuItem>
-          <MenuItem value={20}>InProgress</MenuItem>
-          <MenuItem value={30}>Completed</MenuItem>
-        </Select>
-      </FormControl>
-
-      <Box sx={{ mt: 3 }}>
+      <Select
+        style={{ width: "100%" }}
+        placeholder="Status"
+        value={status}
+        onChange={handleChange}
+        options={[
+          { value: 10, label: "ToDo" },
+          { value: 20, label: "InProgress" },
+          { value: 30, label: "Completed" },
+        ]}
+      />
+      <div style={{ marginTop: 24 }}>
         <ComboBox options={comboBoxOptions} label="Combo box1" />
-      </Box>
-      <Box sx={{ mt: 2 }}>
+      </div>
+      <div style={{ marginTop: 16 }}>
         <ComboBox options={nationCbOptions} label="Nation" />
-      </Box>
-      {/* Pass the options as a prop */}
+      </div>
     </>
   );
 };

@@ -1,16 +1,15 @@
 import React from "react";
-import Stack from "@mui/material/Stack";
-import Alert from "@mui/material/Alert";
+import { Space, Alert } from "antd";
 
-const AlarmUtil = () => {
+const AlertsUtil = () => {
   return (
-    <Stack sx={{ width: "100%" }} spacing={2}>
-      <Alert severity="success">This is a success Alert.</Alert>
-      <Alert severity="info">This is an info Alert.</Alert>
-      <Alert severity="warning">This is a warning Alert.</Alert>
-      <Alert severity="error">This is an error Alert.</Alert>
-    </Stack>
+    <Space direction="vertical" style={{ width: "100%" }} size="middle">
+      <Alert message="This is a success Alert." type="success" showIcon />
+      <Alert message="This is an info Alert." type="info" showIcon />
+      <Alert message="This is a warning Alert." type="warning" showIcon />
+      <Alert message="This is an error Alert." type="error" showIcon />
+    </Space>
   );
 };
 
-export default AlarmUtil;
+export default AlertsUtil;

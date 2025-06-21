@@ -1,13 +1,7 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
-import Typography from "@mui/material/Typography";
-import Paper from "@mui/material/Paper";
-import Button from "@mui/material/Button";
-import Stack from "@mui/material/Stack";
-import Alert from "@mui/material/Alert";
+import { Form, Input, Button, Typography, Alert, Space, Card, message } from "antd";
 import axios from "axios";
 import { addUser, udtUser } from "../../store/userSlice";
 import { USERS_API_URL } from "./api";
@@ -50,9 +44,10 @@ const UserDetail = () => {
   const [errorMsg, setErrorMsg] = useState("");
   const [emailError, setEmailError] = useState("");
   const [phoneError, setPhoneError] = useState("");
+  const [messageApi, contextHolder] = message.useMessage();
 
   if (!user && !isNew) {
-    return <Typography variant="h6">User not found</Typography>;
+    return <Typography.Title level={5}>User not found</Typography.Title>;
   }
 
   const handleChange = (e) => {
@@ -126,6 +121,7 @@ const UserDetail = () => {
         }
       }
       setSaveStatus("success");
+      messageApi.success("저장되었습니다.");
       navigate("/ServerApi");
     } catch (e) {
       setSaveStatus("error");
@@ -138,75 +134,47 @@ const UserDetail = () => {
   };
 
   return (
-    <Paper className="userDetailPaper">
-      <Typography variant="h5" gutterBottom>
+    <Card className="userDetailPaper" style={{ maxWidth: 480, margin: "32px auto" }}>
+      {contextHolder}
+      <Typography.Title level={4} style={{ marginBottom: 24 }}>
         {isNew ? "Add New User" : "User Detail"}
-      </Typography>
-      <Box component="form" className="userDetailForm">
-        <TextField
-          label="Name"
-          name="name"
-          value={form.name}
-          onChange={handleChange}
-        />
-        <TextField
-          label="Username"
-          name="username"
-          value={form.username}
-          onChange={handleChange}
-        />
-        <TextField
-          label="Email"
-          name="email"
-          value={form.email}
-          onChange={handleChange}
-          required
-          error={!!emailError}
-          helperText={emailError}
-        />
-        <TextField
-          label="Phone"
-          name="phone"
-          value={form.phone}
-          onChange={handleChange}
-          required
-          error={!!phoneError}
-          helperText={phoneError}
-        />
-        <TextField
-          label="Website"
-          name="website"
-          value={form.website}
-          onChange={handleChange}
-        />
-        <TextField
-          label="Company"
-          name="company"
-          value={form.company}
-          onChange={handleChange}
-        />
-        <TextField
-          label="Address"
-          name="address"
-          value={form.address}
-          onChange={handleChange}
-        />
-        <Stack direction="row" className="userDetailButtonRow">
+      </Typography.Title>
+      <Form layout="vertical" className="userDetailForm">
+        <Form.Item label="Name">
+          <Input name="name" value={form.name} onChange={handleChange} />
+        </Form.Item>
+        <Form.Item label="Username">
+          <Input name="username" value={form.username} onChange={handleChange} />
+        </Form.Item>
+        <Form.Item label="Email" required validateStatus={emailError ? "error" : ""} help={emailError}>
+          <Input name="email" value={form.email} onChange={handleChange} />
+        </Form.Item>
+        <Form.Item label="Phone" required validateStatus={phoneError ? "error" : ""} help={phoneError}>
+          <Input name="phone" value={form.phone} onChange={handleChange} />
+        </Form.Item>
+        <Form.Item label="Website">
+          <Input name="website" value={form.website} onChange={handleChange} />
+        </Form.Item>
+        <Form.Item label="Company">
+          <Input name="company" value={form.company} onChange={handleChange} />
+        </Form.Item>
+        <Form.Item label="Address">
+          <Input name="address" value={form.address} onChange={handleChange} />
+        </Form.Item>
+        <Space direction="horizontal" className="userDetailButtonRow">
           <Button
-            variant="outlined"
-            color="secondary"
             onClick={handleCancel}
             disabled={loading}
+            style={{ marginRight: 8 }}
           >
             취소
           </Button>
           <Button
-            variant="contained"
-            color="primary"
+            type="primary"
             onClick={handleSave}
+            loading={loading}
             disabled={
               !isChanged ||
-              loading ||
               !!emailError ||
               !form.email ||
               !!phoneError ||
@@ -215,15 +183,15 @@ const UserDetail = () => {
           >
             저장
           </Button>
-        </Stack>
+        </Space>
         {saveStatus === "success" && (
-          <Alert severity="success">저장되었습니다.</Alert>
+          <Alert message="저장되었습니다." type="success" showIcon style={{ marginTop: 16 }} />
         )}
         {saveStatus === "error" && (
-          <Alert severity="error">{errorMsg || "저장에 실패했습니다."}</Alert>
+          <Alert message={errorMsg || "저장에 실패했습니다."} type="error" showIcon style={{ marginTop: 16 }} />
         )}
-      </Box>
-    </Paper>
+      </Form>
+    </Card>
   );
 };
 

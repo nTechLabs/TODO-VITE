@@ -1,19 +1,19 @@
 import React from "react";
-import Button from "@mui/material/Button";
+import { Button } from "antd";
 
-function SearchButton() {
-  return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        height: "100%",
-      }}
-    >
-      <Button variant="contained">Search</Button>
-    </div>
-  );
-}
+const SearchButton = ({ onClick, children, ...props }) => (
+  <div
+    style={{
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      height: "100%",
+    }}
+  >
+    <Button type="primary" onClick={onClick} {...props}>
+      {children}
+    </Button>
+  </div>
+);
 
 export default SearchButton;

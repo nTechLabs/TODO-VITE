@@ -1,23 +1,19 @@
-import "./App.css";
+import React from "react";
+import { Layout } from "antd";
 import AppRouter from "./router";
 import store from "./store/store";
-import { Container } from "@mui/material"; // Import Container from Material-UI
-import { Provider } from "react-redux"; // Import Provider from react-redux
+import { Provider } from "react-redux";
 import ReactQueryProvider from "./pages/ServerApi/react-query-provider";
 
 function App() {
   return (
-    <>
-      <div>
-        <Container fixed>
-          <ReactQueryProvider>
-            <Provider store={store}>
-              <AppRouter />
-            </Provider>
-          </ReactQueryProvider>
-        </Container>
-      </div>
-    </>
+    <Layout style={{ minHeight: "100vh" }}>
+      <ReactQueryProvider>
+        <Provider store={store}>
+          <AppRouter />
+        </Provider>
+      </ReactQueryProvider>
+    </Layout>
   );
 }
 
