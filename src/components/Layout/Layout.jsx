@@ -1,80 +1,69 @@
 import React, { useState } from 'react';
 import { Button, Flex, Layout as AntLayout } from 'antd';
-import { useNavigate } from 'react-router-dom';
 import Home from '../../pages/Home';
 import SpacePage from '../../pages/Space';
 import TaskPage from '../../pages/Task';
+import staticName from '../../values/staticName.js';
+import './Layout.css';
 
 const { Header, Footer, Content } = AntLayout;
 
-const layoutStyle = {
-  borderRadius: 8,
-  overflow: 'hidden',
-  width: 400,
-  minHeight: 400,
-  height: 500,
-  display: 'flex',
-  flexDirection: 'column',
-  boxShadow: '0 2px 8px #f0f1f2',
-};
-const headerStyle = {
-  color: '#fff',
-  height: 64,
-  background: '#1677ff',
-  display: 'flex',
-  alignItems: 'center',
-  fontSize: 20,
-  fontWeight: 600,
-  paddingLeft: 24,
-};
-const contentStyle = {
-  flex: 1,
-  background: '#fff',
-  padding: 24,
-  fontSize: 16,
-  minHeight: 0,
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-};
-const footerStyle = {
-  color: '#fff',
-  background: '#1677ff',
-  textAlign: 'center',
-  fontWeight: 500,
-  padding: 16,
-  display: 'flex',
-  justifyContent: 'center',
-  gap: 16,
-};
-
 const Layout = () => {
-  const navigate = useNavigate();
   const [contentKey, setContentKey] = useState('home');
   let contentComponent = <Home />;
   if (contentKey === 'space') contentComponent = <SpacePage />;
   if (contentKey === 'task') contentComponent = <TaskPage />;
   return (
-    <div style={{ padding: 32, textAlign: 'center' }}>
-      <Flex gap="middle" wrap>
-        <AntLayout style={layoutStyle}>
-          <Header style={headerStyle}>Header</Header>
-          <Content style={contentStyle}>
-            {contentComponent}
+    <div className="layout-root">
+      <div className="layout-flex">
+        <AntLayout className="layout-main" style={{ minHeight: '100vh' }}>
+          <Header className="layout-header" style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 10, width: '100%' }}>Header</Header>
+          <Content
+            className="layout-content"
+            style={{
+              marginTop: 64, // Header height
+              marginBottom: 64, // Footer height
+              overflowY: 'scroll',
+              scrollbarWidth: 'none', // Firefox
+              msOverflowStyle: 'none', // IE/Edge
+              height: 'calc(100vh - 128px)', // 64px header + 64px footer
+              padding: 24,
+              background: '#fff',
+            }}
+          >
+            <div style={{ width: '100%', height: '100%', overflow: 'auto', scrollbarWidth: 'none' }}
+              className="hide-scrollbar"
+            >
+              {contentComponent}
+            </div>
           </Content>
-          <Footer style={footerStyle}>
+          <Footer
+            className="layout-footer"
+            style={{
+              position: 'fixed',
+              left: 0,
+              right: 0,
+              bottom: 0,
+              zIndex: 10,
+              width: '100%',
+              background: '#fff',
+              borderTop: '1px solid #eee',
+              textAlign: 'center',
+              padding: '12px 0',
+            }}
+          >
             <Button type="primary" shape="round" onClick={() => { setContentKey('home'); }}>
-              Home
+              {staticName.home.home}
             </Button>
             <Button type="default" shape="round" onClick={() => { setContentKey('space'); }}>
-              Space
+              {staticName.space.space}
             </Button>
             <Button type="default" shape="round" onClick={() => { setContentKey('task'); }}>
-              MyTask
+              {staticName.mytask.mytask}
             </Button>
           </Footer>
         </AntLayout>
-      </Flex>
+      </div>
     </div>
   );
 };
