@@ -15,6 +15,8 @@ import ServerApi from "../pages/ServerApi"; // Import ServerApi component
 import UserDetail from "../pages/ServerApi/UserDetail"; // Import UserDetail component
 import Alarms from "../pages/alarms";
 import SamplePage from "../pages/SamplePage"; // Import SamplePage component
+import Layout from "../components/Layout"; // Import Layout component
+import Home from "../pages/Home"; // Import Home component
 
 function AppRouter() {
   return (
@@ -41,6 +43,10 @@ function AppRouter() {
         <Route path="/alarms" element={<Alarms />} />
         <Route path="/sample" element={<SamplePage />} />
         {/* Add route for SamplePage */}
+        <Route path="/layout" element={<Layout />} />
+        {/* Add route for Layout */}
+        <Route path="/home" element={<Home />} />
+        {/* Add route for Home */}
       </Routes>
     </Router>
   );
