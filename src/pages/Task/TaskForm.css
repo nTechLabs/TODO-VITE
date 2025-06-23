@@ -1,0 +1,82 @@
+.taskform-root {
+  background: #cfd8dc;
+  width: 320px;
+  margin: 0 auto;
+  border-radius: 0 0 4px 4px;
+  box-shadow: 0 2px 8px #0001;
+  padding-bottom: 16px;
+}
+.taskform-topbar {
+  background: #1976a2;
+  color: white;
+  display: flex;
+  align-items: center;
+  padding: 8px 0 8px 8px;
+  border-radius: 4px 4px 0 0;
+}
+.taskform-close-btn {
+  color: white !important;
+  font-weight: bold;
+  font-size: 18px;
+  border: none;
+  background: none;
+  margin-right: 8px;
+  padding: 0 8px;
+}
+.taskform-title {
+  font-weight: 600;
+  font-size: 15px;
+  margin-left: 4px;
+}
+.taskform-body {
+  padding: 12px 8px 0 8px;
+}
+.taskform-input,
+.taskform-select {
+  width: 100%;
+  margin-bottom: 10px;
+  background: #1976a2 !important;
+  color: #fff !important;
+  border: none !important;
+  border-radius: 2px !important;
+}
+.taskform-input::placeholder,
+.taskform-select .ant-select-selection-placeholder {
+  color: #fff !important;
+  opacity: 0.8;
+}
+.taskform-date-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.taskform-date {
+  flex: 1;
+  background: #1976a2 !important;
+  color: #fff !important;
+  border: none !important;
+  border-radius: 2px !important;
+}
+.taskform-progress-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  gap: 8px;
+}
+.taskform-desc {
+  width: 100%;
+  margin-bottom: 16px;
+  background: #1976a2 !important;
+  color: #fff !important;
+  border: none !important;
+  border-radius: 2px !important;
+}
+.taskform-submit-btn {
+  background: #1976a2 !important;
+  color: #fff !important;
+  font-weight: 600;
+  border-radius: 2px !important;
+  margin: 0 auto;
+  display: block;
+  width: 90%;
+}
