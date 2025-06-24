@@ -54,39 +54,12 @@ import {
 } from "@ant-design/icons";
 import radioOptions from "../../values/radioOptions";
 import menuItems from "../../values/menuItems";
+import tabItems from "../../values/tabItems";
 import "./SampleComp.css";
 
 const { Title } = Typography;
 
 const description = "This is a description.";
-
-const tabItems = [
-  {
-    key: "1",
-    label: "Tab 1",
-    children: "Content of Tab Pane 1",
-  },
-  {
-    key: "2",
-    label: "Tab 2",
-    children: "Content of Tab Pane 2",
-  },
-  {
-    key: "3",
-    label: "Tab 3",
-    children: "Content of Tab Pane 3",
-  },
-];
-
-const iconTabItems = [AppleOutlined, AndroidOutlined].map((Icon, i) => {
-  const id = String(i + 1);
-  return {
-    key: id,
-    label: `Tab ${id}`,
-    children: `Tab ${id}`,
-    icon: <Icon />,
-  };
-});
 
 const onTabChange = (key) => {
   console.log(key);
@@ -139,6 +112,16 @@ const { Search } = Input;
 
 const onSearch = (value, _e, info) =>
   console.log(info === null || info === void 0 ? void 0 : info.source, value);
+
+const iconTabItems = [AppleOutlined, AndroidOutlined].map((Icon, i) => {
+  const id = String(i + 1);
+  return {
+    key: id,
+    label: `Tab ${id}`,
+    children: `Tab ${id}`,
+    icon: <Icon />,
+  };
+});
 
 const SampleComp = () => {
   const [value, setValue] = useState("");
