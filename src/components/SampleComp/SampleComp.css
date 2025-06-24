@@ -1,0 +1,133 @@
+.samplecomp-root {
+  text-align: left;
+  margin-top: 32px;
+  margin-left: 20px;
+  margin-right: 20px;
+  width: 100%;
+  max-width: 100vw;
+  box-sizing: border-box;
+  height: 100vh;
+  overflow-y: auto;
+}
+.samplecomp-btn-outlined {
+  border: 1.5px solid #1890ff !important;
+  color: #1890ff !important;
+}
+.samplecomp-btn-block {
+  margin-top: 16px !important;
+  width: 97% !important;
+}
+.samplecomp-flex-gap {
+  margin-top: 16px;
+  display: flex;
+  gap: 8px;
+}
+.samplecomp-spin {
+  margin-top: 16px;
+}
+.samplecomp-float-btn-group {
+  right: 40px;
+  bottom: 44px;
+}
+.samplecomp-icon-row {
+  margin-top: 24px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+.samplecomp-title-row {
+  margin-top: 40px;
+  white-space: nowrap;
+}
+.samplecomp-title-h1 {
+  margin-bottom: 0;
+  white-space: nowrap;
+}
+.samplecomp-color-row {
+  margin-top: 32px;
+}
+.samplecomp-link {
+  color: #1677ff;
+  font-size: 16px;
+  margin-top: 24px;
+  display: inline-block;
+}
+.samplecomp-align-row {
+  margin-top: 32px;
+  margin-right: 40px;
+}
+.samplecomp-popconfirm-row {
+  margin-top: 32px;
+}
+.samplecomp-dropdown-row {
+  margin-top: 24px;
+}
+.samplecomp-steps-row {
+  margin-top: 32px;
+}
+.samplecomp-tabs-row {
+  margin-top: 40px;
+}
+.samplecomp-autocomplete-row {
+  margin-top: 40px;
+}
+.samplecomp-cascader-row {
+  margin-top: 40px;
+}
+.samplecomp-card-row {
+  margin-top: 40px;
+}
+.samplecomp-badge-row {
+  margin-top: 40px;
+}
+.samplecomp-list-row {
+  margin-top: 40px;
+}
+.samplecomp-segmented-row {
+  margin-top: 40px;
+}
+.samplecomp-table-row {
+  margin-top: 40px;
+}
+.samplecomp-tag-row {
+  margin-top: 40px;
+}
+.samplecomp-tree-row {
+  margin-top: 40px;
+}
+.samplecomp-message-row {
+  margin-top: 40px;
+}
+.samplecomp-modal-row {
+  margin-top: 40px;
+}
+.samplecomp-notification-row {
+  margin-top: 40px;
+}
+.samplecomp-popconfirm-delete-row {
+  margin-top: 40px;
+}
+.samplecomp-progress-row {
+  margin-top: 40px;
+  margin-right: 40px;
+}
+.samplecomp-watermark-row {
+  margin-top: 40px;
+}
+.samplecomp-datepicker-row {
+  margin-top: 40px;
+}
+.samplecomp-form-row {
+  margin-top: 40px;
+}
+.samplecomp-search-row {
+  margin-top: 40px;
+}
+.samplecomp-radio-row {
+  margin-top: 40px;
+  margin-right: 40px;
+}
+.samplecomp-switch-row {
+  margin-top: 24px;
+}

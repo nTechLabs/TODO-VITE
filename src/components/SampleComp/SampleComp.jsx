@@ -1,33 +1,80 @@
 import React, { useState } from "react";
-import { Button, Spin, FloatButton, Typography, Popconfirm, Dropdown, Space, Steps, Tabs, AutoComplete, Cascader, Card, Badge, Avatar, Divider, List, Segmented, Table, Tag, Flex, Tree, message, Modal, notification, Progress, Watermark, DatePicker, Form, Radio, Input, Switch } from "antd";
-import { SearchOutlined, PlusOutlined, EditOutlined, LeftOutlined, RightOutlined, CloseOutlined, CheckOutlined, DownOutlined, MoreOutlined, AppleOutlined, AndroidOutlined, ClockCircleOutlined, CheckCircleOutlined, SyncOutlined, CloseCircleOutlined, ExclamationCircleOutlined, MinusCircleOutlined, AudioOutlined } from "@ant-design/icons";
-import radioOptions from '../../values/radioOptions';
+import {
+  Button,
+  Spin,
+  FloatButton,
+  Typography,
+  Popconfirm,
+  Dropdown,
+  Space,
+  Steps,
+  Tabs,
+  AutoComplete,
+  Cascader,
+  Card,
+  Badge,
+  Avatar,
+  Divider,
+  List,
+  Segmented,
+  Table,
+  Tag,
+  Flex,
+  Tree,
+  message,
+  Modal,
+  notification,
+  Progress,
+  Watermark,
+  DatePicker,
+  Form,
+  Radio,
+  Input,
+  Switch,
+} from "antd";
+import {
+  SearchOutlined,
+  PlusOutlined,
+  EditOutlined,
+  LeftOutlined,
+  RightOutlined,
+  CloseOutlined,
+  CheckOutlined,
+  DownOutlined,
+  MoreOutlined,
+  AppleOutlined,
+  AndroidOutlined,
+  ClockCircleOutlined,
+  CheckCircleOutlined,
+  SyncOutlined,
+  CloseCircleOutlined,
+  ExclamationCircleOutlined,
+  MinusCircleOutlined,
+  AudioOutlined,
+} from "@ant-design/icons";
+import radioOptions from "../../values/radioOptions";
+import menuItems from "../../values/menuItems";
+import "./SampleComp.css";
 
 const { Title } = Typography;
 
-const menuItems = [
-  { key: '1', label: 'Option 1' },
-  { key: '2', label: 'Option 2' },
-  { key: '3', label: 'Option 3' },
-];
-
-const description = 'This is a description.';
+const description = "This is a description.";
 
 const tabItems = [
   {
-    key: '1',
-    label: 'Tab 1',
-    children: 'Content of Tab Pane 1',
+    key: "1",
+    label: "Tab 1",
+    children: "Content of Tab Pane 1",
   },
   {
-    key: '2',
-    label: 'Tab 2',
-    children: 'Content of Tab Pane 2',
+    key: "2",
+    label: "Tab 2",
+    children: "Content of Tab Pane 2",
   },
   {
-    key: '3',
-    label: 'Tab 3',
-    children: 'Content of Tab Pane 3',
+    key: "3",
+    label: "Tab 3",
+    children: "Content of Tab Pane 3",
   },
 ];
 
@@ -51,32 +98,32 @@ const mockVal = (str, repeat = 1) => ({
 
 const cascaderOptions = [
   {
-    value: 'zhejiang',
-    label: 'Zhejiang',
+    value: "zhejiang",
+    label: "Zhejiang",
     children: [
       {
-        value: 'hangzhou',
-        label: 'Hangzhou',
+        value: "hangzhou",
+        label: "Hangzhou",
         children: [
           {
-            value: 'xihu',
-            label: 'West Lake',
+            value: "xihu",
+            label: "West Lake",
           },
         ],
       },
     ],
   },
   {
-    value: 'jiangsu',
-    label: 'Jiangsu',
+    value: "jiangsu",
+    label: "Jiangsu",
     children: [
       {
-        value: 'nanjing',
-        label: 'Nanjing',
+        value: "nanjing",
+        label: "Nanjing",
         children: [
           {
-            value: 'zhonghuamen',
-            label: 'Zhong Hua Men',
+            value: "zhonghuamen",
+            label: "Zhong Hua Men",
           },
         ],
       },
@@ -94,17 +141,19 @@ const onSearch = (value, _e, info) =>
   console.log(info === null || info === void 0 ? void 0 : info.source, value);
 
 const SampleComp = () => {
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState("");
   const [options, setOptions] = useState([]);
   const [anotherOptions, setAnotherOptions] = useState([]);
   const [form] = Form.useForm();
-  const [formLayout, setFormLayout] = useState('horizontal');
+  const [formLayout, setFormLayout] = useState("horizontal");
 
   const getPanelValue = (searchText) =>
-    !searchText ? [] : [mockVal(searchText), mockVal(searchText, 2), mockVal(searchText, 3)];
+    !searchText
+      ? []
+      : [mockVal(searchText), mockVal(searchText, 2), mockVal(searchText, 3)];
 
   const onSelect = (data) => {
-    console.log('onSelect', data);
+    console.log("onSelect", data);
   };
 
   const onChange = (data) => {
@@ -112,41 +161,41 @@ const SampleComp = () => {
   };
 
   const data = [
-    'Racing car sprays burning fuel into crowd.',
-    'Japanese princess to wed commoner.',
-    'Australian walks 100km after outback crash.',
-    'Man charged over missing wedding girl.',
-    'Los Angeles battles huge wildfires.',
+    "Racing car sprays burning fuel into crowd.",
+    "Japanese princess to wed commoner.",
+    "Australian walks 100km after outback crash.",
+    "Man charged over missing wedding girl.",
+    "Los Angeles battles huge wildfires.",
   ];
 
   // Table columns and data for Table demo
   const columns = [
     {
-      title: 'Name',
-      dataIndex: 'name',
-      key: 'name',
-      render: text => <a>{text}</a>,
+      title: "Name",
+      dataIndex: "name",
+      key: "name",
+      render: (text) => <a>{text}</a>,
     },
     {
-      title: 'Age',
-      dataIndex: 'age',
-      key: 'age',
+      title: "Age",
+      dataIndex: "age",
+      key: "age",
     },
     {
-      title: 'Address',
-      dataIndex: 'address',
-      key: 'address',
+      title: "Address",
+      dataIndex: "address",
+      key: "address",
     },
     {
-      title: 'Tags',
-      key: 'tags',
-      dataIndex: 'tags',
+      title: "Tags",
+      key: "tags",
+      dataIndex: "tags",
       render: (_, { tags }) => (
         <>
-          {tags.map(tag => {
-            let color = tag.length > 5 ? 'geekblue' : 'green';
-            if (tag === 'loser') {
-              color = 'volcano';
+          {tags.map((tag) => {
+            let color = tag.length > 5 ? "geekblue" : "green";
+            if (tag === "loser") {
+              color = "volcano";
             }
             return (
               <Tag color={color} key={tag}>
@@ -158,8 +207,8 @@ const SampleComp = () => {
       ),
     },
     {
-      title: 'Action',
-      key: 'action',
+      title: "Action",
+      key: "action",
       render: (_, record) => (
         <Space size="middle">
           <a>Invite {record.name}</a>
@@ -170,55 +219,55 @@ const SampleComp = () => {
   ];
   const tableData = [
     {
-      key: '1',
-      name: 'John Brown',
+      key: "1",
+      name: "John Brown",
       age: 32,
-      address: 'New York No. 1 Lake Park',
-      tags: ['nice', 'developer'],
+      address: "New York No. 1 Lake Park",
+      tags: ["nice", "developer"],
     },
     {
-      key: '2',
-      name: 'Jim Green',
+      key: "2",
+      name: "Jim Green",
       age: 42,
-      address: 'London No. 1 Lake Park',
-      tags: ['loser'],
+      address: "London No. 1 Lake Park",
+      tags: ["loser"],
     },
     {
-      key: '3',
-      name: 'Joe Black',
+      key: "3",
+      name: "Joe Black",
       age: 32,
-      address: 'Sydney No. 1 Lake Park',
-      tags: ['cool', 'teacher'],
+      address: "Sydney No. 1 Lake Park",
+      tags: ["cool", "teacher"],
     },
   ];
 
   // Tree data for Tree demo
   const treeData = [
     {
-      title: 'parent 1',
-      key: '0-0',
+      title: "parent 1",
+      key: "0-0",
       children: [
         {
-          title: 'parent 1-0',
-          key: '0-0-0',
+          title: "parent 1-0",
+          key: "0-0-0",
           children: [
             {
-              title: 'leaf',
-              key: '0-0-0-0',
+              title: "leaf",
+              key: "0-0-0-0",
             },
             {
-              title: 'leaf',
-              key: '0-0-0-1',
+              title: "leaf",
+              key: "0-0-0-1",
             },
           ],
         },
         {
-          title: 'parent 1-1',
-          key: '0-0-1',
+          title: "parent 1-1",
+          key: "0-0-1",
           children: [
             {
-              title: 'leaf',
-              key: '0-0-1-0',
+              title: "leaf",
+              key: "0-0-1-0",
             },
           ],
         },
@@ -227,18 +276,19 @@ const SampleComp = () => {
   ];
 
   const onTreeSelect = (selectedKeys, info) => {
-    console.log('selected', selectedKeys, info);
+    console.log("selected", selectedKeys, info);
   };
   const onTreeCheck = (checkedKeys, info) => {
-    console.log('onCheck', checkedKeys, info);
+    console.log("onCheck", checkedKeys, info);
   };
 
   // Ant Design message demo
   const [messageApi, contextHolder] = message.useMessage();
   const success = () => {
     messageApi.open({
-      type: 'success',
-      content: 'This is a prompt message for success, and it will disappear in 3 seconds',
+      type: "success",
+      content:
+        "This is a prompt message for success, and it will disappear in 3 seconds",
       duration: 3,
     });
   };
@@ -270,7 +320,7 @@ const SampleComp = () => {
       </Space>
     );
     api.open({
-      message: 'Notification Title',
+      message: "Notification Title",
       description:
         'A function will be be called after the notification is closed (automatically after the "duration" time of manually).',
       btn,
@@ -280,13 +330,13 @@ const SampleComp = () => {
   };
 
   // Popconfirm with confirm/cancel handlers demo
-  const confirm = e => {
+  const confirm = (e) => {
     console.log(e);
-    message.success('Click on Yes');
+    message.success("Click on Yes");
   };
-  const cancel = e => {
+  const cancel = (e) => {
     console.log(e);
-    message.error('Click on No');
+    message.error("Click on No");
   };
 
   const onFormLayoutChange = ({ layout }) => {
@@ -294,110 +344,137 @@ const SampleComp = () => {
   };
 
   return (
-    <div style={{ textAlign: "left", marginTop: 32, marginLeft: 20, marginRight: 20, width: '100%', maxWidth: '100vw', boxSizing: 'border-box' }}>
-      <Button type="default" style={{ border: "1.5px solid #1890ff", color: "#1890ff" }}>
+    <div className="samplecomp-root">
+      <Button type="default" className="samplecomp-btn-outlined">
         Outlined Button
       </Button>
-      <div style={{ marginTop: 16, display: "flex", gap: 8 }}>
+      <div className="samplecomp-flex-gap">
         <Button icon={<SearchOutlined />} />
         <Button icon={<SearchOutlined />}>Search</Button>
       </div>
-      <div style={{ marginTop: 16 }}>
+      <div className="samplecomp-spin">
         <Spin />
       </div>
-      <Button type="primary" block style={{ marginTop: 16, width: '97%' }}>
+      <Button type="primary" block className="samplecomp-btn-block">
         Block Button
       </Button>
-      <FloatButton.Group shape="circle" style={{ right: 40, bottom: 44 }}>
+      <FloatButton.Group shape="circle" className="samplecomp-float-btn-group">
         <FloatButton icon={<PlusOutlined />} />
         <FloatButton icon={<EditOutlined />} />
         <FloatButton icon={<SearchOutlined />} />
       </FloatButton.Group>
-      <div style={{ marginTop: 24, textAlign: "center", display: "flex", justifyContent: "center", gap: 16 }}>
+      <div className="samplecomp-icon-row">
         <LeftOutlined style={{ fontSize: 24 }} />
         <RightOutlined style={{ fontSize: 24 }} />
         <CloseOutlined style={{ fontSize: 24 }} />
         <CheckOutlined style={{ fontSize: 24 }} />
       </div>
-      <div style={{ marginTop: 40, whiteSpace: "nowrap" }}>
-        <Title level={1} style={{ marginBottom: 0, whiteSpace: "nowrap" }}>h1. Ant Design</Title>
+      <div className="samplecomp-title-row">
+        <Title level={1} className="samplecomp-title-h1">
+          h1. Ant Design
+        </Title>
         <Title level={2}>h2. Ant Design</Title>
         <Title level={3}>h3. Ant Design</Title>
         <Title level={4}>h4. Ant Design</Title>
         <Title level={5}>h5. Ant Design</Title>
       </div>
-      <div style={{ marginTop: 32 }}>
+      <div className="samplecomp-color-row">
         <div style={{ fontWeight: 500 }}>Ant Design (default)</div>
-        <div style={{ color: '#8c8c8c', marginTop: 8 }}>Ant Design (secondary)</div>
-        <div style={{ color: '#52c41a', marginTop: 8 }}>Ant Design (success)</div>
-        <div style={{ color: '#faad14', marginTop: 8 }}>Ant Design (warning)</div>
-        <div style={{ color: '#ff4d4f', marginTop: 8 }}>Ant Design (danger)</div>
-        <div style={{ color: '#bfbfbf', marginTop: 8 }}>Ant Design (disabled)</div>
+        <div style={{ color: "#8c8c8c", marginTop: 8 }}>
+          Ant Design (secondary)
+        </div>
+        <div style={{ color: "#52c41a", marginTop: 8 }}>
+          Ant Design (success)
+        </div>
+        <div style={{ color: "#faad14", marginTop: 8 }}>
+          Ant Design (warning)
+        </div>
+        <div style={{ color: "#ff4d4f", marginTop: 8 }}>
+          Ant Design (danger)
+        </div>
+        <div style={{ color: "#bfbfbf", marginTop: 8 }}>
+          Ant Design (disabled)
+        </div>
       </div>
-      <div style={{ marginTop: 24 }}>
-        <a href="#" style={{ color: '#1677ff', fontSize: 16 }}>
-          Ant Design (Link)
-        </a>
+      <a href="#" className="samplecomp-link">
+        Ant Design (Link)
+      </a>
+      <div className="samplecomp-align-row">
+        <div style={{ textAlign: "center" }}>Center Text</div>
+        <div style={{ textAlign: "left" }}>Left Text</div>
+        <div style={{ textAlign: "right" }}>Right Text</div>
       </div>
-      <div style={{ marginTop: 32,marginRight: 40 }}>
-        <div style={{ textAlign: 'center' }}>Center Text</div>
-        <div style={{ textAlign: 'left' }}>Left Text</div>
-        <div style={{ textAlign: 'right' }}>Right Text</div>
-      </div>
-      <div style={{ marginTop: 32 }}>
-        <Popconfirm title="Are you sure delete this task?" okText="Yes" cancelText="No">
+      <div className="samplecomp-popconfirm-row">
+        <Popconfirm
+          title="Are you sure delete this task?"
+          okText="Yes"
+          cancelText="No"
+        >
           <Button>Confirm</Button>
         </Popconfirm>
       </div>
-      <div style={{ marginTop: 24 }}>
+      <div className="samplecomp-dropdown-row">
         <Dropdown
           menu={{ items: menuItems }}
           placement="bottomLeft"
           trigger={["click"]}
         >
-          <Button style={{ width: 120, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <Button
+            style={{
+              width: 120,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
             Button <DownOutlined style={{ fontSize: 14, marginLeft: 8 }} />
           </Button>
         </Dropdown>
       </div>
-      <div style={{ marginTop: 24 }}>
+      <div className="samplecomp-dropdown-row">
         <Space.Compact style={{ width: 150 }}>
-          <Button style={{ flex: 1, borderTopRightRadius: 0, borderBottomRightRadius: 0 }}>Dropdown</Button>
-          <Dropdown menu={{ items: menuItems }} placement="bottomRight" trigger={["click"]}>
-            <Button style={{ borderTopLeftRadius: 0, borderBottomLeftRadius: 0, borderLeft: 'none' }} icon={<MoreOutlined />} />
+          <Button
+            style={{
+              flex: 1,
+              borderTopRightRadius: 0,
+              borderBottomRightRadius: 0,
+            }}
+          >
+            Dropdown
+          </Button>
+          <Dropdown
+            menu={{ items: menuItems }}
+            placement="bottomRight"
+            trigger={["click"]}
+          >
+            <Button
+              style={{
+                borderTopLeftRadius: 0,
+                borderBottomLeftRadius: 0,
+                borderLeft: "none",
+              }}
+              icon={<MoreOutlined />}
+            />
           </Dropdown>
         </Space.Compact>
       </div>
-      <div style={{ marginTop: 32 }}>
+      <div className="samplecomp-steps-row">
         <Steps
           current={1}
           items={[
-            {
-              title: 'Finished',
-              description,
-            },
-            {
-              title: 'In Progress',
-              description,
-              subTitle: 'Left 00:00:08',
-            },
-            {
-              title: 'Waiting',
-              description,
-            },
+            { title: "Finished", description },
+            { title: "In Progress", description, subTitle: "Left 00:00:08" },
+            { title: "Waiting", description },
           ]}
         />
       </div>
-      <div style={{ marginTop: 40 }}>
+      <div className="samplecomp-tabs-row">
         <Tabs defaultActiveKey="1" items={tabItems} onChange={onTabChange} />
       </div>
-      <div style={{ marginTop: 40 }}>
-        <Tabs
-          defaultActiveKey="2"
-          items={iconTabItems}
-        />
+      <div className="samplecomp-tabs-row">
+        <Tabs defaultActiveKey="2" items={iconTabItems} />
       </div>
-      <div style={{ marginTop: 40 }}>
+      <div className="samplecomp-autocomplete-row">
         <AutoComplete
           options={options}
           style={{ width: 200 }}
@@ -417,19 +494,28 @@ const SampleComp = () => {
           placeholder="control mode"
         />
       </div>
-      <div style={{ marginTop: 40 }}>
-        <Cascader options={cascaderOptions} onChange={onCascaderChange} placeholder="Please select" style={{ width: 220 }} />
+      <div className="samplecomp-cascader-row">
+        <Cascader
+          options={cascaderOptions}
+          onChange={onCascaderChange}
+          placeholder="Please select"
+          style={{ width: 220 }}
+        />
       </div>
-      <div style={{ marginTop: 40 }}>
+      <div className="samplecomp-card-row">
         <Space direction="vertical" size={16}>
-          <Card title="Default size card" extra={<a href="#">More</a>} style={{ width: 300 }}>
+          <Card
+            title="Default size card"
+            extra={<a href="#">More</a>}
+            style={{ width: 300 }}
+          >
             <p>Card content</p>
             <p>Card content</p>
             <p>Card content</p>
           </Card>
         </Space>
       </div>
-      <div style={{ marginTop: 40 }}>
+      <div className="samplecomp-badge-row">
         <Space size="middle">
           <Badge count={5}>
             <Avatar shape="square" size="large" />
@@ -437,37 +523,37 @@ const SampleComp = () => {
           <Badge count={0} showZero>
             <Avatar shape="square" size="large" />
           </Badge>
-          <Badge count={<ClockCircleOutlined style={{ color: '#f5222d' }} />}>
+          <Badge count={<ClockCircleOutlined style={{ color: "#f5222d" }} />}>
             <Avatar shape="square" size="large" />
           </Badge>
         </Space>
       </div>
-      <div style={{ marginTop: 40 }}>
+      <div className="samplecomp-list-row">
         <Divider orientation="left">Default Size</Divider>
         <List
           header={<div>Header</div>}
           footer={<div>Footer</div>}
           bordered
           dataSource={data}
-          renderItem={item => (
+          renderItem={(item) => (
             <List.Item>
               <Typography.Text mark>[ITEM]</Typography.Text> {item}
             </List.Item>
           )}
         />
       </div>
-      <div style={{ marginTop: 40 }}>
+      <div className="samplecomp-segmented-row">
         <Segmented
-          options={['Daily', 'Weekly', 'Monthly', 'Quarterly', 'Yearly']}
-          onChange={value => {
+          options={["Daily", "Weekly", "Monthly", "Quarterly", "Yearly"]}
+          onChange={(value) => {
             console.log(value); // string
           }}
         />
       </div>
-      <div style={{ marginTop: 40 }}>
+      <div className="samplecomp-table-row">
         <Table columns={columns} dataSource={tableData} />
       </div>
-      <div style={{ marginTop: 40 }}>
+      <div className="samplecomp-tag-row">
         <Divider orientation="left">With icon</Divider>
         <Flex gap="4px 0" wrap>
           <Tag icon={<CheckCircleOutlined />} color="success">
@@ -490,29 +576,29 @@ const SampleComp = () => {
           </Tag>
         </Flex>
       </div>
-      <div style={{ marginTop: 40 }}>
+      <div className="samplecomp-tree-row">
         <Divider orientation="left">Tree</Divider>
         <Tree
           checkable
-          defaultExpandedKeys={['0-0-0', '0-0-1']}
-          defaultSelectedKeys={['0-0-1']}
-          defaultCheckedKeys={['0-0-0', '0-0-1']}
+          defaultExpandedKeys={["0-0-0", "0-0-1"]}
+          defaultSelectedKeys={["0-0-1"]}
+          defaultCheckedKeys={["0-0-0", "0-0-1"]}
           onSelect={onTreeSelect}
           onCheck={onTreeCheck}
           treeData={treeData}
         />
       </div>
-      <div style={{ marginTop: 40 }}>
+      <div className="samplecomp-message-row">
         {contextHolder}
         <Button onClick={success}>Customized display duration</Button>
       </div>
-      <div style={{ marginTop: 40 }}>
+      <div className="samplecomp-modal-row">
         <Button type="primary" onClick={showModal}>
           Open Modal
         </Button>
         <Modal
           title="Basic Modal"
-          closable={{ 'aria-label': 'Custom Close Button' }}
+          closable={{ "aria-label": "Custom Close Button" }}
           open={isModalOpen}
           onOk={handleOk}
           onCancel={handleCancel}
@@ -522,13 +608,13 @@ const SampleComp = () => {
           <p>Some contents...</p>
         </Modal>
       </div>
-      <div style={{ marginTop: 40 }}>
+      <div className="samplecomp-notification-row">
         {notificationContextHolder}
         <Button type="primary" onClick={openNotification}>
           Open the notification box
         </Button>
       </div>
-      <div style={{ marginTop: 40 }}>
+      <div className="samplecomp-popconfirm-delete-row">
         <Popconfirm
           title="Delete the task"
           description="Are you sure to delete this task?"
@@ -540,7 +626,7 @@ const SampleComp = () => {
           <Button danger>Delete</Button>
         </Popconfirm>
       </div>
-      <div style={{ marginTop: 40, marginRight: 40 }}>
+      <div className="samplecomp-progress-row">
         <Flex gap="small" vertical>
           <Progress percent={30} />
           <Progress percent={50} status="active" />
@@ -549,23 +635,23 @@ const SampleComp = () => {
           <Progress percent={50} showInfo={false} />
         </Flex>
       </div>
-      <div style={{ marginTop: 40 }}>
+      <div className="samplecomp-watermark-row">
         <Watermark content="Sk Hynix X0159750">
           <div style={{ height: 300 }} />
         </Watermark>
       </div>
-      <div style={{ marginTop: 40 }}>
+      <div className="samplecomp-datepicker-row">
         <Space direction="vertical">
           <DatePicker onChange={onChange} />
         </Space>
       </div>
-      <div style={{ marginTop: 40 }}>
+      <div className="samplecomp-form-row">
         <Form
           layout={formLayout}
           form={form}
           initialValues={{ layout: formLayout }}
           onValuesChange={onFormLayoutChange}
-          style={{ maxWidth: formLayout === 'inline' ? 'none' : 600 }}
+          style={{ maxWidth: formLayout === "inline" ? "none" : 600 }}
         >
           <Form.Item label="Form Layout" name="layout">
             <Radio.Group value={formLayout}>
@@ -585,12 +671,16 @@ const SampleComp = () => {
           </Form.Item>
         </Form>
       </div>
-      <div style={{ marginTop: 40 }}>
+      <div className="samplecomp-search-row">
         <Space direction="vertical">
-          <Search placeholder="input search text" onSearch={onSearch} enterButton />
+          <Search
+            placeholder="input search text"
+            onSearch={onSearch}
+            enterButton
+          />
         </Space>
       </div>
-      <div style={{ marginTop: 40, marginRight: 40 }}>
+      <div className="samplecomp-radio-row">
         <Flex vertical gap="middle">
           <Radio.Group block options={radioOptions} defaultValue="Apple" />
           <Radio.Group
@@ -600,9 +690,14 @@ const SampleComp = () => {
             optionType="button"
             buttonStyle="solid"
           />
-          <Radio.Group block options={radioOptions} defaultValue="Pear" optionType="button" />
+          <Radio.Group
+            block
+            options={radioOptions}
+            defaultValue="Pear"
+            optionType="button"
+          />
         </Flex>
-        <div style={{ marginTop: 24 }}>
+        <div className="samplecomp-switch-row">
           <Switch defaultChecked />
           <br />
           <Switch size="small" defaultChecked />
