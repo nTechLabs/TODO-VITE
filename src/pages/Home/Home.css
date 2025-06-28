@@ -35,7 +35,7 @@ body, #root {
 .home-title-badge-row {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between; /* badge를 우측 끝에 정렬 */
   width: 100%;
   margin-bottom: 8px;
   gap: 16px; /* 간격을 16px로 넓힘 */
@@ -59,7 +59,7 @@ body, #root {
   border-radius: 12px;
   padding: 2px 10px;
   font-weight: 600;
-  font-size: 12px;
+  font-size: 8px;
   min-width: 18px;
   text-align: center;
   display: inline-block;
