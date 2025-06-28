@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Flex, Layout as AntLayout } from 'antd';
+import { HomeOutlined, SearchOutlined, BellOutlined } from '@ant-design/icons';
 import Home from '../../pages/Home';
 import SpacePage from '../../pages/Space';
 import TaskPage from '../../pages/Task';
@@ -17,7 +18,16 @@ const Layout = () => {
     <div className="layout-root">
       <div className="layout-flex">
         <AntLayout className="layout-main">
-          <Header className="layout-header header-fixed">Header</Header>
+          <Header className="layout-header header-fixed">
+            <div className="layout-header-inner">
+              <HomeOutlined className="layout-header-icon home" />
+              <span className="layout-header-title">Header</span>
+              <div className="layout-header-right-icons" style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: '16px' }}>
+                <SearchOutlined className="layout-header-icon search" style={{ marginRight: '8px' }} />
+                <BellOutlined className="layout-header-icon bell" />
+              </div>
+            </div>
+          </Header>
           <Content className="layout-content">
             <div className="hide-scrollbar content-center">
               {contentComponent}

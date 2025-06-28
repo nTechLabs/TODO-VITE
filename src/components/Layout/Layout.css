@@ -41,7 +41,43 @@ body, html {
   font-size: 20px;
   font-weight: 600;
   padding-left: 24px;
+  padding-right: 0px;
+  width: 100%;
 }
+.layout-header-inner {
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
+.layout-header-title {
+  flex: 1;
+  width: 100px;
+  text-align: center;
+  font-size: 20px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.layout-header-right-icons {
+  display: flex;
+  padding-right: 24px;
+}
+
+.layout-header-icon.search {
+  font-size: 20px;
+  color: #555;
+  cursor: pointer;
+  padding-right: 10px;
+}
+
+.layout-header-icon.bell {
+  font-size: 20px;
+  color: #faad14;
+  cursor: pointer;
+  margin-right: 2px;
+}
+
 .layout-content {
   margin-bottom: 20px; /* Footer height */
   overflow-y: scroll;
