@@ -20,10 +20,10 @@ const Layout = () => {
         <AntLayout className="layout-main">
           <Header className="layout-header header-fixed">
             <div className="layout-header-inner">
-              <HomeOutlined className="layout-header-icon home" onClick={() => setContentKey('home')} style={{ cursor: 'pointer' }} />
+              <HomeOutlined className="layout-header-icon home" onClick={() => setContentKey('home')} />
               <span className="layout-header-title">Header</span>
-              <div className="layout-header-right-icons" style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: '16px' }}>
-                <SearchOutlined className="layout-header-icon search" style={{ marginRight: '8px' }} />
+              <div className="layout-header-right-icons">
+                <SearchOutlined className="layout-header-icon search" />
                 <BellOutlined className="layout-header-icon bell" />
               </div>
             </div>

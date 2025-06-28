@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Space, Badge } from 'antd';
+import { Card, Space } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import cardContents from '../../values/cardContents';
 import './home.css';
@@ -17,18 +17,16 @@ const Home = () => {
             onClick={() => navigate('/home/CardDetail')}
             style={{ cursor: 'pointer' }}
           >
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%', marginBottom: 8, flexWrap: 'wrap' }}>
-              <span style={{ fontWeight: 600, fontSize: 16, wordBreak: 'break-all', flex: '1 1 120px', minWidth: 0 }}>{card.title}</span>
-              <Badge count={card.count} style={{ backgroundColor: '#faad14', marginLeft: 8 }} />
+            <div className="home-title-badge-row">
+              <span className="home-title">{card.title}</span>
+              <span className="home-badge">{card.count}</span>
             </div>
-            <div style={{ marginBottom: 4 }}>
-              <span style={{ background: '#f5f5f5', borderRadius: 6, padding: '2px 10px', fontWeight: 500, color: '#555', fontSize: 14, display: 'inline-block', marginBottom: 2 }}>{card.spaceName}</span>
+            <div className="home-space-task">
+              <span className="home-space">{card.spaceName}</span>
               <br />
-              <span style={{ fontWeight: 400, color: '#222', fontSize: 15 }}>{card.taskName}</span>
+              <span className="home-task">{card.taskName}</span>
             </div>
-            <div style={{ textAlign: 'center', color: '#888', fontSize: 13, marginTop: 8, wordBreak: 'break-all', whiteSpace: 'normal', width: '100%', overflowWrap: 'anywhere' }}>
-              {card.DateTime}
-            </div>
+            <div className="home-date">{card.DateTime}</div>
           </Card>
         ))}
       </Space>

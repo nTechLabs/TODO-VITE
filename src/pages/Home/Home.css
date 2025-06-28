@@ -31,4 +31,72 @@ body, #root {
   box-sizing: border-box;
 }
 
+/* 카드 타이틀과 배지 행 중앙 정렬 */
+.home-title-badge-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 8px;
+  gap: 16px; /* 간격을 16px로 넓힘 */
+  flex-wrap: nowrap;
+}
+
+.home-title {
+  font-weight: 600;
+  font-size: 16px;
+  word-break: break-all;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: center;
+}
+
+.home-badge {
+  background-color: #faad14;
+  color: #fff;
+  border-radius: 12px;
+  padding: 2px 10px;
+  font-weight: 600;
+  font-size: 12px;
+  min-width: 18px;
+  text-align: center;
+  display: inline-block;
+  flex-shrink: 0;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+
+.home-space-task {
+  margin-bottom: 4px;
+}
+
+.home-space {
+  background: #f5f5f5;
+  border-radius: 6px;
+  padding: 2px 10px;
+  font-weight: 500;
+  color: #555;
+  font-size: 14px;
+  display: inline-block;
+  margin-bottom: 2px;
+}
+
+.home-task {
+  font-weight: 400;
+  color: #222;
+  font-size: 15px;
+}
+
+.home-date {
+  text-align: center;
+  color: #888;
+  font-size: 13px;
+  margin-top: 8px;
+  word-break: break-all;
+  white-space: normal;
+  width: 100%;
+  overflow-wrap: anywhere;
+}
+
 
