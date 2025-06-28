@@ -1,13 +1,19 @@
 import React from 'react';
 import { Card, Space } from 'antd';
 import cardContents from '../../values/cardContents';
+import './home.css';
 
 const Home = () => {
   return (
-    <div style={{ padding: 32, textAlign: 'center' }}>
-      <Space direction="vertical" size={16}>
+    <div className="home-root">
+      <Space direction="vertical">
         {cardContents.map((card, idx) => (
-          <Card key={idx} title={card.title} extra={card.extra} style={card.style}>
+          <Card
+            key={idx}
+            title={card.title}
+            extra={card.extra}
+            className="home-card"
+          >
             <p>{card.spaceName}</p>
             <p>{card.taskName}</p>
             <p>{card.DateTime}</p>
