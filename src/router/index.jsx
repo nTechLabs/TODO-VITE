@@ -17,6 +17,7 @@ import Alarms from "../pages/alarms";
 import SamplePage from "../pages/SamplePage"; // Import SamplePage component
 import Layout from "../components/Layout"; // Import Layout component
 import Home from "../pages/Home"; // Import Home component
+import CardDetail from "../pages/Home/CardDetail"; // Import CardDetail component
 
 function AppRouter() {
   return (
@@ -47,6 +48,8 @@ function AppRouter() {
         {/* Add route for Layout */}
         <Route path="/home" element={<Home />} />
         {/* Add route for Home */}
+        <Route path="/home/CardDetail" element={<CardDetail />} />
+        {/* Add route for CardDetail */}
       </Routes>
     </Router>
   );
