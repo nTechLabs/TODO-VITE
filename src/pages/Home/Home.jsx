@@ -12,10 +12,9 @@ const Home = () => {
         {cardContents.map((card, idx) => (
           <Card
             key={idx}
-            className="home-card"
+            className="home-card card-pointer"
             hoverable
             onClick={() => navigate('/home/CardDetail')}
-            style={{ cursor: 'pointer' }}
           >
             <div className="home-title-badge-row">
               <span className="home-title">{card.title}</span>

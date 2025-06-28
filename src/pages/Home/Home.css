@@ -99,4 +99,8 @@ body, #root {
   overflow-wrap: anywhere;
 }
 
+.card-pointer {
+  cursor: pointer;
+}
+
 
