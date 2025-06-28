@@ -89,7 +89,7 @@ body, #root {
 }
 
 .home-date {
-  text-align: center;
+  text-align: right;
   color: #888;
   font-size: 13px;
   margin-top: 8px;

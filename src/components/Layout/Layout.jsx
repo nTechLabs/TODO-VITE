@@ -34,13 +34,13 @@ const Layout = () => {
             </div>
           </Content>
           <Footer className="layout-footer footer-fixed">
-            <Button type="primary" shape="round" onClick={() => { setContentKey('home'); }}>
+            <Button type="default" shape="default" onClick={() => { setContentKey('home'); }}>
               {staticName.home.home}
             </Button>
-            <Button type="default" shape="round" onClick={() => { setContentKey('space'); }}>
+            <Button type="default" shape="default" onClick={() => { setContentKey('space'); }}>
               {staticName.space.space}
             </Button>
-            <Button type="default" shape="round" onClick={() => { setContentKey('task'); }}>
+            <Button type="default" shape="default" onClick={() => { setContentKey('task'); }}>
               {staticName.mytask.mytask}
             </Button>
           </Footer>
