@@ -1,17 +1,9 @@
 import React, { useState } from "react";
 import { Typography, Card, Form, Input, Button, DatePicker, Row, Col, Dropdown, Menu } from "antd";
 import { RightOutlined, CalendarOutlined } from "@ant-design/icons";
+import statusOptions from "../../../values/statusOptions";
 
 const { RangePicker } = DatePicker;
-
-const statusOptions = [
-  "전체",
-  "임시보관",
-  "신청",
-  "검토중",
-  "반려",
-  "승인"
-];
 
 function VisitReservation() {
   const [status, setStatus] = useState("전체");
