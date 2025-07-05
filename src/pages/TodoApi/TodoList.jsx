@@ -42,20 +42,11 @@ const TodoList = () => {
   const handleModalOk = () => {
     form.validateFields().then((values) => {
       if (editTodo) {
-        // 수정: fetch된 todo라면 todoItems에 없으므로 새로 추가, 이미 있으면 수정
-        setTodoItems((prev) => {
-          const exists = prev.some((todo) => todo.id === editTodo.id);
-          if (exists) {
-            return prev.map((todo) =>
-              todo.id === editTodo.id ? { ...todo, ...values } : todo
-            );
-          } else {
-            return [
-              { ...editTodo, ...values },
-              ...prev,
-            ];
-          }
-        });
+        setTodoItems((prev) =>
+          prev.map((todo) =>
+            todo.id === editTodo.id ? { ...todo, ...values } : todo
+          )
+        );
       } else {
         handleAddTodo(values);
       }
