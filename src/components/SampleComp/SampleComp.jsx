@@ -811,9 +811,9 @@ const DynamicTextFields = () => {
           key={field.id}
           style={{
             marginBottom: 8,
-            marginLeft: level * INDENT,
-            width: `calc(100% - ${level * INDENT}px)`,
-            maxWidth: FIELD_ROW_MAX - level * INDENT,
+            marginLeft: INDENT,
+            width: `calc(100% - ${INDENT}px)`,
+            maxWidth: FIELD_ROW_MAX - INDENT,
             transition: 'max-width 0.2s',
           }}
         >
