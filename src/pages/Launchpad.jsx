@@ -18,7 +18,8 @@ function Launchpad() {
     { name: "ServerApi", path: "/ServerApi" },
     { name: "SampleComp", path: "/sample" },
     { name: "Layout", path: "/layout" },
-    { name: "Alarms", path: "/alarms" }, // 추가: 알림 버튼
+    { name: "Alarms", path: "/alarms" },
+    { name: "ToDo", path: "/todoapi", icon: "📝" }, // ToDo 아이콘 추가
   ];
 
   return (
@@ -56,6 +57,7 @@ function Launchpad() {
                   style={{ borderRadius: 8, fontWeight: 600 }}
                   onClick={() => navigate(icon.path)}
                 >
+                  {icon.icon && <span style={{ marginRight: 8 }}>{icon.icon}</span>}
                   {icon.name}
                 </Button>
               </Col>
