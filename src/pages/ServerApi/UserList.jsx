@@ -81,14 +81,14 @@ const UserList = () => {
                 navigate(`/ServerApi/user/${user.id}`);
             }}
             style={{ cursor: "pointer" }}
-            actions={[
+          >
+            <div style={{ marginLeft: 20, marginRight: 16 }}>
               <Checkbox
                 checked={checked.includes(user.id)}
                 onChange={() => handleToggle(user.id)}
                 onClick={e => e.stopPropagation()}
               />
-            ]}
-          >
+            </div>
             <List.Item.Meta
               title={user.name}
               description={user.email}
