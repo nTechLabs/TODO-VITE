@@ -801,7 +801,9 @@ const DynamicTextFields = () => {
   };
 
   // 트리 구조 렌더링
-  const INDENT = 20; // 들여쓰기 px
+  const INDENT = 24; // 들여쓰기 px
+  const BUTTONS_WIDTH = 80; // 버튼 영역 고정폭(px)
+  const FIELD_ROW_MAX = 400; // 전체 row 최대폭(px)
   const renderFields = (nodes, level = 0) => (
     <div>
       {nodes.map(field => (
@@ -809,27 +811,36 @@ const DynamicTextFields = () => {
           key={field.id}
           style={{
             marginBottom: 8,
-            marginLeft: level === 0 ? 0 : INDENT,
-            borderLeft: level > 0 ? '2px solid #f0f0f0' : undefined,
-            paddingLeft: level > 0 ? 8 : 0,
+            marginLeft: level * INDENT,
+            width: `calc(100% - ${level * INDENT}px)`,
+            maxWidth: FIELD_ROW_MAX - level * INDENT,
+            transition: 'max-width 0.2s',
           }}
         >
-          <div style={{ display: 'flex', alignItems: 'center', minHeight: 36 }}>
+          <div style={{ display: 'flex', alignItems: 'center', width: '100%' }}>
             <Input
               value={field.value}
               onChange={e => handleFieldChange(field.id, e.target.value)}
-              style={{ maxWidth: 240, marginRight: 8 }}
+              style={{
+                flex: 1,
+                minWidth: 40,
+                maxWidth: `calc(100% - ${BUTTONS_WIDTH}px)`,
+                marginRight: 8,
+                transition: 'max-width 0.2s',
+              }}
             />
-            <Button
-              icon={<PlusOutlined />}
-              onClick={() => handleAdd(field.id)}
-              style={{ marginRight: 4 }}
-            />
-            <Button
-              icon={<CloseOutlined />}
-              danger
-              onClick={() => handleDelete(field.id)}
-            />
+            <div style={{ display: 'flex', gap: 4, minWidth: BUTTONS_WIDTH, justifyContent: 'flex-end' }}>
+              <Button
+                icon={<PlusOutlined />}
+                onClick={() => handleAdd(field.id)}
+                style={{ marginRight: 4 }}
+              />
+              <Button
+                icon={<CloseOutlined />}
+                danger
+                onClick={() => handleDelete(field.id)}
+              />
+            </div>
           </div>
           {field.children && field.children.length > 0 && (
             <div style={{ marginTop: 8 }}>
