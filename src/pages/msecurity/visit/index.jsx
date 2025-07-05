@@ -35,20 +35,18 @@ function VisitReservation() {
         </Row>
         <Row gutter={16} align="middle">
           <Col span={24}>
-            <div style={{ display: 'flex', alignItems: 'center' }}>
-              <Form.Item label="방문기간" name="visitPeriod" style={{ flex: 1, marginBottom: 16 }}>
-                <RangePicker
-                  style={{ width: '100%' }}
-                  placeholder={["시작일", "종료일"]}
-                  inputReadOnly
-                  allowClear
-                  separator={<span style={{ color: '#bfbfbf', fontSize: 18, margin: '0 8px' }}>→</span>}
-                  picker="date"
-                  format="YYYY-MM-DD"
-                  placement="bottomLeft"
-                />
-              </Form.Item>
-              <CalendarOutlined style={{ fontSize: 22, color: '#bfbfbf', marginLeft: 8, marginTop: 24 }} />
+            <div style={{ display: 'flex', alignItems: 'center', marginBottom: 16 }}>
+              <span style={{ fontWeight: 500, fontSize: 16, minWidth: 80, marginRight: 16 }}>방문기간</span>
+              <RangePicker
+                style={{ flex: 1 }}
+                placeholder={["시작일", "종료일"]}
+                inputReadOnly
+                allowClear
+                separator={<span style={{ color: '#bfbfbf', fontSize: 18, margin: '0 8px' }}>→</span>}
+                picker="date"
+                format="YYYY-MM-DD"
+                placement="bottomLeft"
+              />
             </div>
           </Col>
         </Row>
