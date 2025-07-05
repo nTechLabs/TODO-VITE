@@ -22,6 +22,7 @@ import TodoApi from "../pages/TodoApi"; // Import TodoApi component
 import AlbumApi from "../pages/AlbumApi"; // Import AlbumApi component
 import MSecurity from "../pages/msecurity";
 import VisitReservation from "../pages/msecurity/visit"; // Import VisitReservation component
+import VisitList from "../pages/msecurity/visit/visitList"; // Import VisitList component
 
 function AppRouter() {
   return (
@@ -60,7 +61,8 @@ function AppRouter() {
         {/* Add route for AlbumApi */}
         <Route path="/msecurity" element={<MSecurity />} />
         <Route path="/msecurity/visit" element={<VisitReservation />} />
-        {/* Add route for VisitReservation */}
+        <Route path="/msecurity/visit/list" element={<VisitList />} />
+        {/* Add route for VisitList */}
       </Routes>
     </Router>
   );

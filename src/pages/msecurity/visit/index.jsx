@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import { Typography, Card, Form, Input, Button, DatePicker, Row, Col, Dropdown, Menu } from "antd";
 import { RightOutlined, CalendarOutlined } from "@ant-design/icons";
+import { useNavigate } from "react-router-dom";
 import statusOptions from "./values/statusOptions";
+import VisitList from "./visitList";
 
 const { RangePicker } = DatePicker;
 
 function VisitReservation() {
   const [status, setStatus] = useState("전체");
   const [restricted, setRestricted] = useState("전체");
+  const navigate = useNavigate();
 
   const menu = (
     <Menu
@@ -99,7 +102,7 @@ function VisitReservation() {
           </Col>
         </Row>
         <Form.Item style={{ textAlign: "center", marginTop: 24 }}>
-          <Button type="primary" htmlType="submit" style={{ width: 200 }}>
+          <Button type="primary" htmlType="button" style={{ width: 200 }} onClick={() => navigate("/msecurity/visit/list")}>
             검색
           </Button>
         </Form.Item>
