@@ -42,11 +42,20 @@ const TodoList = () => {
   const handleModalOk = () => {
     form.validateFields().then((values) => {
       if (editTodo) {
-        setTodoItems((prev) =>
-          prev.map((todo) =>
-            todo.id === editTodo.id ? { ...todo, ...values } : todo
-          )
-        );
+        // 수정: fetch된 todo라면 todoItems에 없으므로 새로 추가, 이미 있으면 수정
+        setTodoItems((prev) => {
+          const exists = prev.some((todo) => todo.id === editTodo.id);
+          if (exists) {
+            return prev.map((todo) =>
+              todo.id === editTodo.id ? { ...todo, ...values } : todo
+            );
+          } else {
+            return [
+              { ...editTodo, ...values },
+              ...prev,
+            ];
+          }
+        });
       } else {
         handleAddTodo(values);
       }
@@ -68,12 +77,20 @@ const TodoList = () => {
         renderItem={item => {
           const isCompleted = item.completed || checkedIds.includes(item.id);
           return (
-            <List.Item style={{ justifyContent: 'flex-start' }} onClick={() => handleItemClick(item)}>
+            <List.Item
+              style={{ justifyContent: 'flex-start', cursor: 'pointer' }}
+              onClick={e => {
+                // 체크박스 클릭 시 모달 X
+                if (e.target.type !== 'checkbox') handleItemClick(item);
+              }}
+              onMouseOver={e => { e.currentTarget.style.cursor = 'pointer'; }}
+            >
               <Checkbox
                 checked={isCompleted}
                 disabled={item.completed}
                 onChange={e => { e.stopPropagation(); !item.completed && handleToggle(item.id); }}
                 style={{ marginRight: 16 }}
+                onClick={e => e.stopPropagation()}
               />
               <span>{item.title}</span>
             </List.Item>
