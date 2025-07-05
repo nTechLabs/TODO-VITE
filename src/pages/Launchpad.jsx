@@ -18,8 +18,7 @@ function Launchpad() {
     { name: "ServerApi", path: "/ServerApi" },
     { name: "SampleComp", path: "/sample" },
     { name: "Layout", path: "/layout" },
-    { name: "Alarms", path: "/alarms" },
-    { name: "ToDo", path: "/todoapi" }, // ToDo 버튼 추가
+    { name: "Alarms", path: "/alarms" }, // 추가: 알림 버튼
   ];
 
   return (
