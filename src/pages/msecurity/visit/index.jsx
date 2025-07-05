@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Typography, Card, Form, Input, Button, DatePicker, Row, Col, Dropdown, Menu } from "antd";
 import { RightOutlined, CalendarOutlined } from "@ant-design/icons";
-import statusOptions from "../../../values/statusOptions";
+import statusOptions from "./values/statusOptions";
 
 const { RangePicker } = DatePicker;
 
@@ -35,43 +35,42 @@ function VisitReservation() {
         </Row>
         <Row gutter={16} align="middle">
           <Col span={24}>
-            <div style={{ display: 'flex', alignItems: 'center', marginBottom: 16 }}>
-              <span style={{ fontWeight: 500, fontSize: 16, minWidth: 80, marginRight: 16 }}>방문기간</span>
-              <RangePicker
-                style={{ flex: 1 }}
-                placeholder={["시작일", "종료일"]}
-                inputReadOnly
-                allowClear
-                separator={<span style={{ color: '#bfbfbf', fontSize: 18, margin: '0 8px' }}>→</span>}
-                picker="date"
-                format="YYYY-MM-DD"
-                placement="bottomLeft"
-              />
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+              <Form.Item label="방문기간" name="visitPeriod" style={{ flex: 1, marginBottom: 16 }}>
+                <RangePicker
+                  style={{ width: '100%' }}
+                  placeholder={["시작일", "종료일"]}
+                  inputReadOnly
+                  allowClear
+                  separator={<span style={{ color: '#bfbfbf', fontSize: 18, margin: '0 8px' }}>→</span>}
+                  picker="date"
+                  format="YYYY-MM-DD"
+                  placement="bottomLeft"
+                />
+              </Form.Item>
+              <CalendarOutlined style={{ fontSize: 22, color: '#bfbfbf', marginLeft: 8, marginTop: 24 }} />
             </div>
           </Col>
         </Row>
-        <Row gutter={16} align="middle">
+        <Row gutter={16}>
           <Col span={24}>
-            <div style={{ display: 'flex', alignItems: 'center', marginBottom: 16 }}>
-              <span style={{ fontWeight: 500, fontSize: 16, minWidth: 80, marginRight: 16 }}>방문업체명</span>
-              <Input placeholder="검색어를 입력해주세요." style={{ flex: 1 }} />
-            </div>
+            <Form.Item label="방문업체명" name="company">
+              <Input placeholder="검색어를 입력해주세요." />
+            </Form.Item>
           </Col>
         </Row>
-        <Row gutter={16} align="middle">
+        <Row gutter={16}>
           <Col span={24}>
-            <div style={{ display: 'flex', alignItems: 'center', marginBottom: 16 }}>
-              <span style={{ fontWeight: 500, fontSize: 16, minWidth: 80, marginRight: 16 }}>신청기간</span>
-              <RangePicker style={{ flex: 1 }} />
-            </div>
+            <Form.Item label="신청기간" name="applyPeriod">
+              <RangePicker style={{ width: '100%' }} />
+            </Form.Item>
           </Col>
         </Row>
-        <Row gutter={16} align="middle">
+        <Row gutter={16}>
           <Col span={24}>
-            <div style={{ display: 'flex', alignItems: 'center', marginBottom: 16 }}>
-              <span style={{ fontWeight: 500, fontSize: 16, minWidth: 80, marginRight: 16 }}>방문객명</span>
-              <Input placeholder="검색어를 입력해주세요." style={{ flex: 1 }} />
-            </div>
+            <Form.Item label="방문객명" name="visitor">
+              <Input placeholder="검색어를 입력해주세요." />
+            </Form.Item>
           </Col>
         </Row>
         <Row gutter={16}>
