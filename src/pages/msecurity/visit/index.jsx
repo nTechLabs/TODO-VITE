@@ -50,25 +50,28 @@ function VisitReservation() {
             </div>
           </Col>
         </Row>
-        <Row gutter={16}>
+        <Row gutter={16} align="middle">
           <Col span={24}>
-            <Form.Item label="방문업체명" name="company">
-              <Input placeholder="검색어를 입력해주세요." />
-            </Form.Item>
+            <div style={{ display: 'flex', alignItems: 'center', marginBottom: 16 }}>
+              <span style={{ fontWeight: 500, fontSize: 16, minWidth: 80, marginRight: 16 }}>방문업체명</span>
+              <Input placeholder="검색어를 입력해주세요." style={{ flex: 1 }} />
+            </div>
           </Col>
         </Row>
-        <Row gutter={16}>
+        <Row gutter={16} align="middle">
           <Col span={24}>
-            <Form.Item label="신청기간" name="applyPeriod">
-              <RangePicker style={{ width: '100%' }} />
-            </Form.Item>
+            <div style={{ display: 'flex', alignItems: 'center', marginBottom: 16 }}>
+              <span style={{ fontWeight: 500, fontSize: 16, minWidth: 80, marginRight: 16 }}>신청기간</span>
+              <RangePicker style={{ flex: 1 }} />
+            </div>
           </Col>
         </Row>
-        <Row gutter={16}>
+        <Row gutter={16} align="middle">
           <Col span={24}>
-            <Form.Item label="방문객명" name="visitor">
-              <Input placeholder="검색어를 입력해주세요." />
-            </Form.Item>
+            <div style={{ display: 'flex', alignItems: 'center', marginBottom: 16 }}>
+              <span style={{ fontWeight: 500, fontSize: 16, minWidth: 80, marginRight: 16 }}>방문객명</span>
+              <Input placeholder="검색어를 입력해주세요." style={{ flex: 1 }} />
+            </div>
           </Col>
         </Row>
         <Row gutter={16}>
