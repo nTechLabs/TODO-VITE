@@ -19,6 +19,7 @@ import Layout from "../components/Layout"; // Import Layout component
 import Home from "../pages/Home"; // Import Home component
 import CardDetail from "../pages/Home/CardDetail"; // Import CardDetail component
 import TodoApi from "../pages/TodoApi"; // Import TodoApi component
+import AlbumApi from "../pages/AlbumApi"; // Import AlbumApi component
 
 function AppRouter() {
   return (
@@ -53,6 +54,8 @@ function AppRouter() {
         {/* Add route for CardDetail */}
         <Route path="/todoapi" element={<TodoApi />} />
         {/* Add route for TodoApi */}
+        <Route path="/albumapi" element={<AlbumApi />} />
+        {/* Add route for AlbumApi */}
       </Routes>
     </Router>
   );

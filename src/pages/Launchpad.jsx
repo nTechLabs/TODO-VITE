@@ -20,6 +20,7 @@ function Launchpad() {
     { name: "Layout", path: "/layout" },
     { name: "Alarms", path: "/alarms" },
     { name: "ToDo", path: "/todoapi", icon: "📝" }, // ToDo 아이콘 추가
+    { name: "Album", path: "/albumapi", icon: "📀" }, // Album 아이콘 및 경로 추가
   ];
 
   return (
