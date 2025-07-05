@@ -1,10 +1,28 @@
-import React from "react";
-import { Typography, Card, Form, Input, Button, DatePicker, Row, Col } from "antd";
-import { RightOutlined } from "@ant-design/icons";
+import React, { useState } from "react";
+import { Typography, Card, Form, Input, Button, DatePicker, Row, Col, Dropdown, Menu } from "antd";
+import { RightOutlined, CalendarOutlined } from "@ant-design/icons";
 
 const { RangePicker } = DatePicker;
 
+const statusOptions = [
+  "전체",
+  "임시보관",
+  "신청",
+  "검토중",
+  "반려",
+  "승인"
+];
+
 function VisitReservation() {
+  const [status, setStatus] = useState("전체");
+
+  const menu = (
+    <Menu
+      onClick={({ key }) => setStatus(key)}
+      items={statusOptions.map(option => ({ key: option, label: option }))}
+    />
+  );
+
   return (
     <Card style={{ maxWidth: 600, margin: "40px auto", borderRadius: 12 }}>
       <Typography.Title level={4} style={{ textAlign: "center" }}>
@@ -15,17 +33,31 @@ function VisitReservation() {
           <Col span={24}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', minHeight: 32, marginBottom: 8 }}>
               <span style={{ fontWeight: 500, fontSize: 16 }}>처리상태</span>
-              <span style={{ fontSize: 16, color: '#888', display: 'flex', alignItems: 'center' }}>
-                전체 <RightOutlined style={{ fontSize: 14, marginLeft: 2 }} />
-              </span>
+              <Dropdown overlay={menu} trigger={["click"]} placement="bottomRight">
+                <span style={{ fontSize: 16, color: '#888', display: 'flex', alignItems: 'center', cursor: 'pointer', userSelect: 'none' }}>
+                  {status} <RightOutlined style={{ fontSize: 14, marginLeft: 2 }} />
+                </span>
+              </Dropdown>
             </div>
           </Col>
         </Row>
-        <Row gutter={16}>
+        <Row gutter={16} align="middle">
           <Col span={24}>
-            <Form.Item label="방문기간" name="visitPeriod">
-              <RangePicker style={{ width: '100%' }} />
-            </Form.Item>
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+              <Form.Item label="방문기간" name="visitPeriod" style={{ flex: 1, marginBottom: 16 }}>
+                <RangePicker
+                  style={{ width: '100%' }}
+                  placeholder={["시작일", "종료일"]}
+                  inputReadOnly
+                  allowClear
+                  separator={<span style={{ color: '#bfbfbf', fontSize: 18, margin: '0 8px' }}>→</span>}
+                  picker="date"
+                  format="YYYY-MM-DD"
+                  placement="bottomLeft"
+                />
+              </Form.Item>
+              <CalendarOutlined style={{ fontSize: 22, color: '#bfbfbf', marginLeft: 8, marginTop: 24 }} />
+            </div>
           </Col>
         </Row>
         <Row gutter={16}>
