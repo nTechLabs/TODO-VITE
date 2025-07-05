@@ -36,7 +36,7 @@ function VisitReservation() {
         <Row gutter={16} align="middle" style={{ marginBottom: 0 }}>
           <Col span={24}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', minHeight: 32, marginBottom: 8 }}>
-              <span style={{ fontWeight: 500, fontSize: 16 }}>처리상태</span>
+              <span style={{ fontWeight: 500, fontSize: 16, minWidth: 80 }}>처리상태</span>
               <Dropdown overlay={menu} trigger={["click"]} placement="bottomRight">
                 <span style={{ fontSize: 16, color: '#888', display: 'flex', alignItems: 'center', cursor: 'pointer', userSelect: 'none' }}>
                   {status} <RightOutlined style={{ fontSize: 14, marginLeft: 2 }} />
@@ -45,10 +45,10 @@ function VisitReservation() {
             </div>
           </Col>
         </Row>
-        <Row gutter={16} align="middle">
+        <Row gutter={16} align="middle" style={{ marginBottom: 0 }}>
           <Col span={24}>
-            <div style={{ display: 'flex', alignItems: 'center', marginBottom: 16 }}>
-              <span style={{ fontWeight: 500, fontSize: 16, minWidth: 80, marginRight: 16 }}>방문기간</span>
+            <div style={{ display: 'flex', alignItems: 'center', marginBottom: 8 }}>
+              <span style={{ fontWeight: 500, fontSize: 16, minWidth: 80 }}>방문기간</span>
               <RangePicker
                 style={{ flex: 1 }}
                 placeholder={["시작일", "종료일"]}
@@ -59,38 +59,37 @@ function VisitReservation() {
                 format="YYYY-MM-DD"
                 placement="bottomLeft"
               />
-
             </div>
           </Col>
         </Row>
-        <Row gutter={16} align="middle">
+        <Row gutter={16} align="middle" style={{ marginBottom: 0 }}>
           <Col span={24}>
-            <div style={{ display: 'flex', alignItems: 'center', marginBottom: 16 }}>
-              <span style={{ fontWeight: 500, fontSize: 16, minWidth: 80, marginRight: 16 }}>방문업체명</span>
+            <div style={{ display: 'flex', alignItems: 'center', marginBottom: 8 }}>
+              <span style={{ fontWeight: 500, fontSize: 16, minWidth: 80 }}>방문업체명</span>
               <Input placeholder="검색어를 입력해주세요." style={{ flex: 1 }} />
             </div>
           </Col>
         </Row>
-        <Row gutter={16} align="middle">
+        <Row gutter={16} align="middle" style={{ marginBottom: 0 }}>
           <Col span={24}>
-            <div style={{ display: 'flex', alignItems: 'center', marginBottom: 16 }}>
-              <span style={{ fontWeight: 500, fontSize: 16, minWidth: 80, marginRight: 16 }}>신청기간</span>
+            <div style={{ display: 'flex', alignItems: 'center', marginBottom: 8 }}>
+              <span style={{ fontWeight: 500, fontSize: 16, minWidth: 80 }}>신청기간</span>
               <RangePicker style={{ flex: 1 }} />
             </div>
           </Col>
         </Row>
-        <Row gutter={16} align="middle">
+        <Row gutter={16} align="middle" style={{ marginBottom: 0 }}>
           <Col span={24}>
-            <div style={{ display: 'flex', alignItems: 'center', marginBottom: 16 }}>
-              <span style={{ fontWeight: 500, fontSize: 16, minWidth: 80, marginRight: 16 }}>방문객명</span>
+            <div style={{ display: 'flex', alignItems: 'center', marginBottom: 8 }}>
+              <span style={{ fontWeight: 500, fontSize: 16, minWidth: 80 }}>방문객명</span>
               <Input placeholder="검색어를 입력해주세요." style={{ flex: 1 }} />
             </div>
           </Col>
         </Row>
-        <Row gutter={16} align="middle">
+        <Row gutter={16} align="middle" style={{ marginBottom: 0 }}>
           <Col span={24}>
-            <div style={{ display: 'flex', alignItems: 'center', marginBottom: 16, justifyContent: 'space-between' }}>
-              <span style={{ fontWeight: 500, fontSize: 16, minWidth: 80, marginRight: 16 }}>제재대상</span>
+            <div style={{ display: 'flex', alignItems: 'center', marginBottom: 8, justifyContent: 'space-between' }}>
+              <span style={{ fontWeight: 500, fontSize: 16, minWidth: 80 }}>제재대상</span>
               <Dropdown overlay={restrictedMenu} trigger={["click"]} placement="bottomRight">
                 <span style={{ fontSize: 16, color: '#888', display: 'flex', alignItems: 'center', cursor: 'pointer', userSelect: 'none' }}>
                   {restricted} <RightOutlined style={{ fontSize: 14, marginLeft: 2 }} />
