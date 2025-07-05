@@ -23,6 +23,7 @@ import AlbumApi from "../pages/AlbumApi"; // Import AlbumApi component
 import MSecurity from "../pages/msecurity";
 import VisitReservation from "../pages/msecurity/visit"; // Import VisitReservation component
 import VisitList from "../pages/msecurity/visit/visitList"; // Import VisitList component
+import VisitDetail from "../pages/msecurity/visit/visitDetail"; // Import VisitDetail component
 
 function AppRouter() {
   return (
@@ -63,6 +64,8 @@ function AppRouter() {
         <Route path="/msecurity/visit" element={<VisitReservation />} />
         <Route path="/msecurity/visit/list" element={<VisitList />} />
         {/* Add route for VisitList */}
+        <Route path="/msecurity/visit/detail/:idx" element={<VisitDetail />} />
+        {/* Add route for VisitDetail */}
       </Routes>
     </Router>
   );

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Typography, Card, Form, Input, Button, DatePicker, Row, Col, Dropdown, Menu } from "antd";
 import { RightOutlined, CalendarOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
-import statusOptions from "values/statusOptions";
+import statusOptions from "../../../values/statusOptions"; // Adjust the import path as necessary
 import VisitList from "./visitList";
 
 const { RangePicker } = DatePicker;

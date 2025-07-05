@@ -1,6 +1,9 @@
 import React from "react";
 import { Typography } from "antd";
 import { HomeOutlined, SearchOutlined } from "@ant-design/icons";
+import { useNavigate } from "react-router-dom";
+
+// Mock data for visit list
 
 const mockData = [
   {
@@ -41,6 +44,7 @@ const mockData = [
 ];
 
 function VisitList() {
+  const navigate = useNavigate();
   return (
     <div style={{ maxWidth: 600, margin: "40px auto", borderRadius: 12, background: '#fff', boxShadow: '0 2px 8px #f0f1f2' }}>
       <div style={{ display: 'flex', alignItems: 'center', borderBottom: '1px solid #eee', padding: '12px 0 8px 0', marginBottom: 8 }}>
@@ -52,7 +56,11 @@ function VisitList() {
       </div>
       <div style={{ background: '#fff', borderRadius: 8, minHeight: 320, padding: 0 }}>
         {mockData.map((item, idx) => (
-          <div key={idx} style={{ borderBottom: idx !== mockData.length - 1 ? '1px solid #f0f0f0' : 'none', padding: '16px 0 8px 0', display: 'flex', alignItems: 'flex-start' }}>
+          <div
+            key={idx}
+            style={{ borderBottom: idx !== mockData.length - 1 ? '1px solid #f0f0f0' : 'none', padding: '16px 0 8px 0', display: 'flex', alignItems: 'flex-start', cursor: 'pointer' }}
+            onClick={() => navigate(`/msecurity/visit/detail/${idx}`)}
+          >
             <div style={{ flex: 1 }}>
               <div style={{ display: 'flex', alignItems: 'center', marginBottom: 2 }}>
                 <span style={{ fontWeight: 500, fontSize: 16 }}>{item.name}</span>
