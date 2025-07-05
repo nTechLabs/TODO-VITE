@@ -19,8 +19,9 @@ function Launchpad() {
     { name: "SampleComp", path: "/sample" },
     { name: "Layout", path: "/layout" },
     { name: "Alarms", path: "/alarms" },
-    { name: "ToDo", path: "/todoapi", icon: "📝" }, // ToDo 아이콘 추가
-    { name: "Album", path: "/albumapi", icon: "📀" }, // Album 아이콘 및 경로 추가
+    { name: "ToDo", path: "/todoapi", icon: "📝" },
+    { name: "Album", path: "/albumapi", icon: "📀" },
+    { name: "MSecurity", path: "/msecurity", icon: "🔒" }, // MSecurity 버튼 추가
   ];
 
   return (
