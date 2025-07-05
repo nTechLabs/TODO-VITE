@@ -801,11 +801,20 @@ const DynamicTextFields = () => {
   };
 
   // 트리 구조 렌더링
+  const INDENT = 20; // 들여쓰기 px
   const renderFields = (nodes, level = 0) => (
     <div>
       {nodes.map(field => (
-        <div key={field.id} style={{ marginBottom: 8, marginLeft: level * 24 }}>
-          <div style={{ display: 'flex', alignItems: 'center' }}>
+        <div
+          key={field.id}
+          style={{
+            marginBottom: 8,
+            marginLeft: level === 0 ? 0 : INDENT,
+            borderLeft: level > 0 ? '2px solid #f0f0f0' : undefined,
+            paddingLeft: level > 0 ? 8 : 0,
+          }}
+        >
+          <div style={{ display: 'flex', alignItems: 'center', minHeight: 36 }}>
             <Input
               value={field.value}
               onChange={e => handleFieldChange(field.id, e.target.value)}
@@ -833,7 +842,11 @@ const DynamicTextFields = () => {
   );
 
   return (
-    <div>
+    <Card
+      title="동적 트리 텍스트필드"
+      style={{ maxWidth: 480, margin: '0 auto', padding: 0, borderRadius: 12, boxShadow: '0 2px 8px #f0f1f2' }}
+      bodyStyle={{ padding: 24 }}
+    >
       <div style={{ display: 'flex', alignItems: 'center', marginBottom: 16 }}>
         <Input
           placeholder="Enter text and press Enter"
@@ -879,7 +892,7 @@ const DynamicTextFields = () => {
           {JSON.stringify(jsonResult, null, 2)}
         </pre>
       </Modal>
-    </div>
+    </Card>
   );
 };
 
