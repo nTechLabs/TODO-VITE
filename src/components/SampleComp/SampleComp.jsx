@@ -686,6 +686,199 @@ const SampleComp = () => {
           <Switch size="small" defaultChecked />
         </div>
       </div>
+      <div className="samplecomp-dynamic-textfields-row" style={{ margin: '32px 0' }}>
+        <DynamicTextFields />
+      </div>
+    </div>
+  );
+};
+
+const DynamicTextFields = () => {
+  const [fields, setFields] = useState([]);
+  const [inputValue, setInputValue] = useState("");
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalParentId, setModalParentId] = useState(null);
+  const [modalValue, setModalValue] = useState("");
+  const [jsonResult, setJsonResult] = useState(null);
+  const [saveModalOpen, setSaveModalOpen] = useState(false);
+
+  // 트리 구조로 필드 관리
+  const addField = (parentId = null, value = "") => {
+    const newField = { id: Date.now() + Math.random(), value, children: [] };
+    if (!parentId) {
+      setFields([...fields, newField]);
+    } else {
+      setFields(addChild(fields, parentId, newField));
+    }
+  };
+
+  // 재귀적으로 parentId에 child 추가
+  const addChild = (nodes, parentId, child) => {
+    return nodes.map(node => {
+      if (node.id === parentId) {
+        return { ...node, children: [...node.children, child] };
+      } else if (node.children && node.children.length > 0) {
+        return { ...node, children: addChild(node.children, parentId, child) };
+      } else {
+        return node;
+      }
+    });
+  };
+
+  // 엔터 입력 시 루트에 추가
+  const handleInputKeyDown = (e) => {
+    if (e.key === "Enter" && inputValue.trim()) {
+      addField(null, inputValue);
+      setInputValue("");
+    }
+  };
+
+  // 필드 값 변경 (트리 구조)
+  const handleFieldChange = (id, value) => {
+    setFields(updateField(fields, id, value));
+  };
+  const updateField = (nodes, id, value) => {
+    return nodes.map(node => {
+      if (node.id === id) {
+        return { ...node, value };
+      } else if (node.children && node.children.length > 0) {
+        return { ...node, children: updateField(node.children, id, value) };
+      } else {
+        return node;
+      }
+    });
+  };
+
+  // 필드 삭제 (트리 구조)
+  const handleDelete = (id) => {
+    setFields(deleteField(fields, id));
+  };
+  const deleteField = (nodes, id) => {
+    return nodes
+      .filter(node => node.id !== id)
+      .map(node => ({
+        ...node,
+        children: node.children ? deleteField(node.children, id) : [],
+      }));
+  };
+
+  // 필드 추가 (오른쪽 + 아이콘, child로 추가, modal)
+  const handleAdd = (id) => {
+    setModalParentId(id);
+    setModalValue("");
+    setModalOpen(true);
+  };
+
+  const handleModalOk = () => {
+    if (modalValue.trim()) {
+      addField(modalParentId, modalValue);
+      setModalOpen(false);
+      setModalParentId(null);
+      setModalValue("");
+    }
+  };
+
+  const handleModalCancel = () => {
+    setModalOpen(false);
+    setModalParentId(null);
+    setModalValue("");
+  };
+
+  // 저장 버튼 클릭 시 트리 -> id, parentId, value json 변환
+  const handleSave = () => {
+    const result = [];
+    const traverse = (nodes, parentId = null) => {
+      nodes.forEach(node => {
+        result.push({ id: node.id, parentId, value: node.value });
+        if (node.children && node.children.length > 0) {
+          traverse(node.children, node.id);
+        }
+      });
+    };
+    traverse(fields);
+    setJsonResult(result);
+    setSaveModalOpen(true);
+  };
+
+  // 트리 구조 렌더링
+  const renderFields = (nodes, level = 0) => (
+    <div>
+      {nodes.map(field => (
+        <div key={field.id} style={{ marginBottom: 8, marginLeft: level * 24 }}>
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <Input
+              value={field.value}
+              onChange={e => handleFieldChange(field.id, e.target.value)}
+              style={{ maxWidth: 240, marginRight: 8 }}
+            />
+            <Button
+              icon={<PlusOutlined />}
+              onClick={() => handleAdd(field.id)}
+              style={{ marginRight: 4 }}
+            />
+            <Button
+              icon={<CloseOutlined />}
+              danger
+              onClick={() => handleDelete(field.id)}
+            />
+          </div>
+          {field.children && field.children.length > 0 && (
+            <div style={{ marginTop: 8 }}>
+              {renderFields(field.children, level + 1)}
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+  );
+
+  return (
+    <div>
+      <div style={{ display: 'flex', alignItems: 'center', marginBottom: 16 }}>
+        <Input
+          placeholder="Enter text and press Enter"
+          value={inputValue}
+          onChange={e => setInputValue(e.target.value)}
+          onKeyDown={handleInputKeyDown}
+          style={{ maxWidth: 320, marginRight: 8 }}
+        />
+        <Button type="primary" onClick={handleSave}>저장</Button>
+      </div>
+      {renderFields(fields)}
+      <Modal
+        title="Add Child Field"
+        open={modalOpen}
+        onOk={handleModalOk}
+        onCancel={handleModalCancel}
+        okText="Add"
+        cancelText="Cancel"
+        width={320}
+        bodyStyle={{ padding: 16 }}
+        destroyOnClose
+      >
+        <Input
+          placeholder="Enter child value"
+          value={modalValue}
+          onChange={e => setModalValue(e.target.value)}
+          onPressEnter={handleModalOk}
+          autoFocus
+        />
+      </Modal>
+      <Modal
+        title="저장된 JSON 데이터"
+        open={saveModalOpen}
+        onOk={() => setSaveModalOpen(false)}
+        onCancel={() => setSaveModalOpen(false)}
+        okText="확인"
+        cancelText="닫기"
+        width={400}
+        bodyStyle={{ padding: 16 }}
+        destroyOnClose
+      >
+        <pre style={{ background: '#f6f6f6', padding: 12, borderRadius: 6, margin: 0 }}>
+          {JSON.stringify(jsonResult, null, 2)}
+        </pre>
+      </Modal>
     </div>
   );
 };
