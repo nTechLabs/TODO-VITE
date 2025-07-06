@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { List, Spin, Alert, Typography, FloatButton, Modal, Input, Form, Button, Space } from "antd";
 import { useQuery } from "@tanstack/react-query";
 import { PlusOutlined } from "@ant-design/icons";
-import { ALBUMS_API_URL } from "../../api/api";
+import { ALBUMS_API_URL } from "../../interface/api";
 
 const fetchAlbums = async () => {
   const res = await fetch(ALBUMS_API_URL);

@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 import axios from "axios";
-import { USERS_API_URL } from "../api/api";
+import { USERS_API_URL } from "../interface/api";
 
 const useUserZStore = create(
   devtools((set, get) => ({
