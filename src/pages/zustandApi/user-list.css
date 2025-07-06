@@ -1,1 +1,37 @@
-// ...existing code from ServerApi/user-list.css...
+/* User List Styles */
+
+.userListContainer {
+  position: relative;
+  padding-bottom: 80px;
+}
+
+.deleteButtonRow {
+  position: fixed;
+  bottom: 24px;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  z-index: 1000;
+  gap: 16px;
+}
+
+.deleteAlert {
+  position: fixed;
+  bottom: 70px;
+  left: 0;
+  width: 100%;
+  z-index: 1200;
+}
+
+.userDetailPaper {
+  padding: 32px;
+  max-width: 500px;
+  margin: 32px auto 0 auto;
+}
+
+.userDetailTitle {
+  margin-bottom: 24px;
+}
+
+/* 추가적으로 필요한 스타일은 여기에 작성하세요 */

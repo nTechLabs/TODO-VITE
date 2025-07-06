@@ -30,7 +30,7 @@ const UserList = () => {
     messageApi.success("삭제되었습니다.");
   };
 
-  if (isLoading) return <Spin size="large" style={{ display: "block", margin: "40px auto" }} />;
+  if (isLoading) return <Spin size="large" className="userListSpinner" />;
   if (isError)
     return <Alert type="error" message={error} showIcon />;
 
@@ -48,7 +48,7 @@ const UserList = () => {
             }}
             style={{ cursor: "pointer" }}
           >
-            <div style={{ marginLeft: 20, marginRight: 16 }}>
+            <div className="userListCheckboxContainer">
               <Checkbox
                 checked={checked.includes(user.id)}
                 onChange={() => toggleChecked(user.id)}
@@ -65,11 +65,11 @@ const UserList = () => {
       <FloatButton
         icon={<PlusOutlined />}
         type="primary"
-        style={{ right: 24, bottom: 80 }}
+        className="userListFloatButton"
         onClick={() => navigate("/zustandApi/user/new")}
         tooltip="Add User"
       />
-      <Space direction="horizontal" style={{ marginTop: 16 }} className="deleteButtonRow">
+      <Space direction="horizontal" className="deleteButtonRow">
         <Button
           type="primary"
           danger

@@ -99,7 +99,7 @@ const UserDetail = () => {
   return (
     <Card className="userDetailPaper">
       {contextHolder}
-      <Typography.Title level={4} style={{ marginBottom: 24 }}>
+      <Typography.Title level={4} className="userDetailTitle">
         {isNew ? "Add User" : "Edit User"}
       </Typography.Title>
       <Form layout="vertical">
