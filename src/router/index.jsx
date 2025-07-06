@@ -24,6 +24,7 @@ import MSecurity from "../pages/msecurity";
 import VisitReservation from "../pages/msecurity/visit"; // Import VisitReservation component
 import VisitList from "../pages/msecurity/visit/visitList"; // Import VisitList component
 import VisitDetail from "../pages/msecurity/visit/visitDetail"; // Import VisitDetail component
+import ZustandApi from "../pages/zustandApi"; // Import ZustandApi component
 
 function AppRouter() {
   return (
@@ -66,6 +67,8 @@ function AppRouter() {
         {/* Add route for VisitList */}
         <Route path="/msecurity/visit/detail/:idx" element={<VisitDetail />} />
         {/* Add route for VisitDetail */}
+        <Route path="/zustandApi" element={<ZustandApi />} />
+        {/* Add route for ZustandApi */}
       </Routes>
     </Router>
   );
