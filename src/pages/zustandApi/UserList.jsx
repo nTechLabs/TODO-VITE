@@ -9,6 +9,7 @@ import "./user-list.css";
 const UserList = () => {
   const navigate = useNavigate();
   const [messageApi, contextHolder] = message.useMessage();
+  const store = useUserZStore();
   const {
     users,
     isLoading,
@@ -19,11 +20,13 @@ const UserList = () => {
     fetchUsers,
     toggleChecked,
     deleteUsers,
-  } = useUserZStore();
+  } = store;
 
   useEffect(() => {
-    if (users.length === 0) fetchUsers();
-  }, [fetchUsers, users.length]);
+    if (!isNew && store.users.length === 0) {
+      store.fetchUsers();
+    }
+  }, [isNew, store]);
 
   const handleDelete = async () => {
     await deleteUsers();
@@ -43,8 +46,9 @@ const UserList = () => {
           <List.Item
             key={user.id}
             onClick={e => {
-              if (e.target.type !== "checkbox")
+              if (e.target.type !== "checkbox") {
                 navigate(`/zustandApi/user/${user.id}`);
+              }
             }}
             style={{ cursor: "pointer" }}
           >
@@ -56,7 +60,7 @@ const UserList = () => {
               />
             </div>
             <List.Item.Meta
-              title={user.name}
+              title={<span className="userListUserName" onClick={() => navigate(`/zustandApi/user/${user.id}`)}>{user.name}</span>}
               description={user.email}
             />
           </List.Item>
