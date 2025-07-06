@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { List, Checkbox, Button, Alert, Spin, Space, FloatButton, message } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
-import useUserZStore from "./userZstore";
+import useUserZStore from "../../store/userZstore";
 import "antd/dist/reset.css";
 import "./user-list.css";
 

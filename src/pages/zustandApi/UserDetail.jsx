@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Form, Input, Button, Typography, Alert, Space, Card, message } from "antd";
-import useUserZStore from "./userZstore";
+import useUserZStore from "../../store/userZstore";
 import "./user-list.css";
 
 const UserDetail = () => {
