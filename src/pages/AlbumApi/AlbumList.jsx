@@ -2,7 +2,13 @@ import React, { useState } from "react";
 import { List, Spin, Alert, Typography, FloatButton, Modal, Input, Form, Button, Space } from "antd";
 import { useQuery } from "@tanstack/react-query";
 import { PlusOutlined } from "@ant-design/icons";
-import { fetchAlbums } from "./api";
+import { ALBUMS_API_URL } from "../../api/api";
+
+const fetchAlbums = async () => {
+  const res = await fetch(ALBUMS_API_URL);
+  if (!res.ok) throw new Error("Network response was not ok");
+  return res.json();
+};
 
 const AlbumList = () => {
   const { data, isLoading, isError, error } = useQuery({

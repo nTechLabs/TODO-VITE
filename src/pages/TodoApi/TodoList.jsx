@@ -2,7 +2,13 @@ import React, { useState } from "react";
 import { List, Checkbox, Spin, Alert, Typography, FloatButton, Modal, Input, Form, Button, Switch } from "antd";
 import { useQuery } from "@tanstack/react-query";
 import { PlusOutlined } from "@ant-design/icons";
-import { fetchTodos } from "../../api/api";
+
+const TODOS_API_URL = "https://jsonplaceholder.typicode.com/todos";
+const fetchTodos = async () => {
+  const res = await fetch(TODOS_API_URL);
+  if (!res.ok) throw new Error("Network response was not ok");
+  return res.json();
+};
 
 const TodoList = () => {
   const { data, isLoading, isError, error } = useQuery({
