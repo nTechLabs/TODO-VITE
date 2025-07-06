@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Form, Input, Button, Typography, Alert, Space, Card, message } from "antd";
-import useUserStore from "./userDetailStore";
+import useUserStore from "./userStore";
 import "./user-list.css";
 
 const UserDetail = () => {
