@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { List, Checkbox, Spin, Alert, Typography, FloatButton, Modal, Input, Form, Button, Switch } from "antd";
 import { useQuery } from "@tanstack/react-query";
 import { PlusOutlined } from "@ant-design/icons";
-import { fetchTodos } from "./api";
+import { fetchTodos } from "../../api/api";
 
 const TodoList = () => {
   const { data, isLoading, isError, error } = useQuery({
