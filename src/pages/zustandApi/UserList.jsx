@@ -1,61 +1,33 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { List, Checkbox, Button, Alert, Spin, Space, FloatButton, message } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import { USERS_API_URL } from "../../api/api";
+import useUserStore from "./userStore";
 import "antd/dist/reset.css";
 import "./user-list.css";
 
-const fetchUsersApi = async () => {
-  const res = await fetch(USERS_API_URL);
-  if (!res.ok) throw new Error("Network response was not ok");
-  return res.json();
-};
-
 const UserList = () => {
   const navigate = useNavigate();
-  const [users, setUsers] = useState([]);
-  const [checked, setChecked] = useState([]);
-  const [deleteError, setDeleteError] = useState("");
   const [messageApi, contextHolder] = message.useMessage();
-  const [isLoading, setIsLoading] = useState(true);
-  const [isError, setIsError] = useState(false);
-  const [error, setError] = useState("");
+  const {
+    users,
+    isLoading,
+    isError,
+    error,
+    checked,
+    deleteError,
+    fetchUsers,
+    toggleChecked,
+    deleteUsers,
+  } = useUserStore();
 
   useEffect(() => {
-    fetchUsersApi()
-      .then((data) => {
-        setUsers(data);
-        setIsLoading(false);
-      })
-      .catch((err) => {
-        setIsError(true);
-        setError(err.message);
-        setIsLoading(false);
-      });
-  }, []);
-
-  const handleToggle = (id) => {
-    setChecked((prev) =>
-      prev.includes(id) ? prev.filter((c) => c !== id) : [...prev, id]
-    );
-  };
+    fetchUsers();
+  }, [fetchUsers]);
 
   const handleDelete = async () => {
-    setDeleteError("");
-    try {
-      await Promise.all(
-        checked.map(async (id) => {
-          await axios.delete(`${USERS_API_URL}/${id}`);
-        })
-      );
-      setUsers((prev) => prev.filter((u) => !checked.includes(u.id)));
-      setChecked([]);
-      messageApi.success("삭제되었습니다.");
-    } catch (e) {
-      setDeleteError(e?.message || "삭제에 실패했습니다.");
-    }
+    await deleteUsers();
+    messageApi.success("삭제되었습니다.");
   };
 
   if (isLoading) return <Spin size="large" style={{ display: "block", margin: "40px auto" }} />;
@@ -79,7 +51,7 @@ const UserList = () => {
             <div style={{ marginLeft: 20, marginRight: 16 }}>
               <Checkbox
                 checked={checked.includes(user.id)}
-                onChange={() => handleToggle(user.id)}
+                onChange={() => toggleChecked(user.id)}
                 onClick={e => e.stopPropagation()}
               />
             </div>
