@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { List, Checkbox, Button, Alert, Spin, Space, FloatButton, message } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
-import useUserStore from "./userStore";
+import useUserZStore from "./userZstore";
 import "antd/dist/reset.css";
 import "./user-list.css";
 
@@ -19,7 +19,7 @@ const UserList = () => {
     fetchUsers,
     toggleChecked,
     deleteUsers,
-  } = useUserStore();
+  } = useUserZStore();
 
   useEffect(() => {
     if (users.length === 0) fetchUsers();
