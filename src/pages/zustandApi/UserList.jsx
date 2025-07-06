@@ -23,10 +23,8 @@ const UserList = () => {
   } = store;
 
   useEffect(() => {
-    if (!isNew && store.users.length === 0) {
-      store.fetchUsers();
-    }
-  }, [isNew, store]);
+    if (users.length === 0) fetchUsers();
+  }, [fetchUsers, users.length]);
 
   const handleDelete = async () => {
     await deleteUsers();
