@@ -32,4 +32,4 @@ const userSlice = createSlice({
 });
 
 export const { getUsers, addUser, delUser, udtUser } = userSlice.actions;
-export default userSlice.reducer;
+export default userSlice; // Export the slice object, not just the reducer

@@ -12,7 +12,7 @@ const store = configureStore({
     calculator: calculatorSlice.reducer, // Add calculator slice
     login: loginSlice.reducer, // Add login slice
     cars: carSlice.reducer, // Add car slice
-    users: userSlice, // Add user slice
+    users: userSlice.reducer, // Use reducer property for userSlice
     todo: todoSlice.reducer, // Add todo slice
   },
 });
