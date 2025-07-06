@@ -4,6 +4,7 @@ import calculatorSlice from "./calculatorSlice"; // Import calculatorSlice
 import loginSlice from "./loginSlice"; // Import loginSlice
 import carSlice from "./carSlice"; // Import carSlice
 import userSlice from "./userSlice"; // Import userSlice
+import todoSlice from "./todoSlice"; // Import todoSlice
 
 const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ const store = configureStore({
     login: loginSlice.reducer, // Add login slice
     cars: carSlice.reducer, // Add car slice
     users: userSlice, // Add user slice
+    todo: todoSlice.reducer, // Add todo slice
   },
 });
 
