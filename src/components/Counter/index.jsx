@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { Button, Space, Divider, Typography, Row, Col, InputNumber, Card, List, Tag } from "antd";
+import { Button, Space, Divider, Typography, Row, Col, InputNumber, Card } from "antd";
 import { useSelector, useDispatch } from "react-redux";
-import { PlusOutlined, MinusOutlined, ReloadOutlined, ClearOutlined, HistoryOutlined } from "@ant-design/icons";
+import { PlusOutlined, MinusOutlined, ReloadOutlined } from "@ant-design/icons";
 import { counterSliceActs } from "../../store/counterSlice";
 import Zcounter from "../Zcounter";
+import "./Counter.css";
 
 const { Title, Text } = Typography;
 
@@ -13,11 +14,11 @@ function Counter() {
   const [customValue, setCustomValue] = useState(5);
 
   return (
-    <div style={{ padding: '20px', maxWidth: '1200px', margin: '0 auto' }}>
+    <div className="counter-container">
       <Space direction="vertical" size="large" style={{ width: '100%' }}>
         {/* Zcounter (Zustand) - 위쪽에 렌더링 */}
         <div>
-          <Title level={2} style={{ textAlign: 'center', marginBottom: '20px' }}>
+          <Title level={2} className="counter-section-title">
             Zustand Counter
           </Title>
           <Zcounter />
@@ -27,7 +28,7 @@ function Counter() {
         
         {/* Counter (Redux Toolkit) - 아래쪽에 렌더링 */}
         <div>
-          <Title level={2} style={{ textAlign: 'center', marginBottom: '20px' }}>
+          <Title level={2} className="counter-section-title">
             Redux Toolkit Counter
           </Title>
           
