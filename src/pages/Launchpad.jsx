@@ -8,6 +8,7 @@ function Launchpad() {
   const icons = [
     { name: "Vite", path: "/Vite" },
     { name: "Counter", path: "/Counter" },
+    { name: "Zcounter", path: "/zcounter", icon: "🔢" },
     { name: "FormGuide", path: "/formGuide" },
     { name: "Function1", path: "/main?component=function1" },
     { name: "Cars", path: "/main?component=cars" },
