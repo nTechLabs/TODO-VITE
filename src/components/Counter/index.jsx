@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { Button, Space, Divider, Typography, Row, Col, InputNumber, Card } from "antd";
+import { Button, Space, Divider, Typography, Row, Col, InputNumber, Card, List, Tag } from "antd";
 import { useSelector, useDispatch } from "react-redux";
-import { PlusOutlined, MinusOutlined, ReloadOutlined } from "@ant-design/icons";
+import { PlusOutlined, MinusOutlined, ReloadOutlined, HistoryOutlined, ClearOutlined } from "@ant-design/icons";
 import { counterSliceActs } from "../../store/counterSlice";
-import Zcounter from "../Zcounter";
+import Zcounter from "./Zcounter";
 import "./Counter.css";
 
 const { Title, Text } = Typography;

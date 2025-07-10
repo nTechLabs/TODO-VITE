@@ -1,6 +1,6 @@
 import React from "react";
 import { Space, Typography } from "antd";
-import Zcounter from "../../components/Zcounter";
+import Zcounter from "../../components/Counter/Zcounter";
 
 const { Title, Paragraph } = Typography;
 

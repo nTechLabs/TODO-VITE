@@ -98,6 +98,29 @@
   color: #fa8c16;
 }
 
+/* Zcounter (Zustand Counter) 스타일 */
+.zcounter-card {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.zcounter-display {
+  text-align: center;
+}
+
+.zcounter-number {
+  margin: 20px 0;
+}
+
+.zcounter-button-group {
+  width: 100%;
+  justify-content: center;
+}
+
+.zcounter-custom-input {
+  width: 80px;
+}
+
 /* 반응형 디자인 */
 @media (max-width: 768px) {
   .counter-container {
