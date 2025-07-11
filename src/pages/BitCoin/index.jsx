@@ -72,44 +72,52 @@ function BitCoin() {
     { value: 'jpy', label: 'JPY (¥)' },
   ];
 
-  // 24시간 가격 히스토리 데이터 가져오기
-  const fetch24hData = async () => {
-    try {
-      const [bitcoinResponse, ethereumResponse] = await Promise.all([
-        fetch('https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=1&interval=30m'),
-        fetch('https://api.coingecko.com/api/v3/coins/ethereum/market_chart?vs_currency=usd&days=1&interval=30m')
-      ]);
-
-      if (!bitcoinResponse.ok || !ethereumResponse.ok) {
-        throw new Error('Failed to fetch 24h data');
-      }
-
-      const [bitcoinData, ethereumData] = await Promise.all([
-        bitcoinResponse.json(),
-        ethereumResponse.json()
-      ]);
-
-      // 24시간 데이터 포맷팅 (48개 포인트, 30분 간격)
-      const formatHistoryData = (data) => {
-        return data.prices.map(([timestamp, price]) => ({
-          time: new Date(timestamp).toLocaleTimeString('en-US', { 
-            hour: '2-digit', 
-            minute: '2-digit',
-            hour12: false 
-          }),
-          price: price,
-          timestamp: timestamp
-        }));
-      };
-
-      setChartData24h({
-        bitcoin: formatHistoryData(bitcoinData),
-        ethereum: formatHistoryData(ethereumData)
+  // 3개월 가격 히스토리 데이터 생성 (Mock 데이터)
+  const generate3MonthData = () => {
+    const data = { bitcoin: [], ethereum: [] };
+    const now = new Date();
+    const threemonthsAgo = new Date(now.getTime() - (90 * 24 * 60 * 60 * 1000)); // 3개월 전
+    
+    // 비트코인 기준 가격
+    const bitcoinBasePrice = 45000;
+    const ethereumBasePrice = 3200;
+    
+    // 3개월 동안의 일별 데이터 생성 (90일)
+    for (let i = 0; i < 90; i++) {
+      const currentDate = new Date(threemonthsAgo.getTime() + (i * 24 * 60 * 60 * 1000));
+      
+      // 비트코인 가격 시뮬레이션
+      const bitcoinVolatility = 0.03; // 3% 변동성
+      const bitcoinTrend = Math.sin(i / 15) * 0.05; // 주기적 트렌드
+      const bitcoinRandom = (Math.random() - 0.5) * bitcoinVolatility;
+      const bitcoinPrice = bitcoinBasePrice * (1 + bitcoinTrend + bitcoinRandom);
+      
+      // 이더리움 가격 시뮬레이션
+      const ethereumVolatility = 0.04; // 4% 변동성
+      const ethereumTrend = Math.sin(i / 12) * 0.06; // 주기적 트렌드
+      const ethereumRandom = (Math.random() - 0.5) * ethereumVolatility;
+      const ethereumPrice = ethereumBasePrice * (1 + ethereumTrend + ethereumRandom);
+      
+      data.bitcoin.push({
+        time: currentDate.toLocaleDateString('en-US', { 
+          month: 'short', 
+          day: 'numeric' 
+        }),
+        price: bitcoinPrice,
+        timestamp: currentDate.getTime()
       });
-
-    } catch (err) {
-      console.error('Error fetching 24h data:', err);
+      
+      data.ethereum.push({
+        time: currentDate.toLocaleDateString('en-US', { 
+          month: 'short', 
+          day: 'numeric' 
+        }),
+        price: ethereumPrice,
+        timestamp: currentDate.getTime()
+      });
     }
+    
+    setChartData24h(data);
   };
 
   // 암호화폐 가격 정보 가져오기
@@ -169,8 +177,8 @@ function BitCoin() {
         ]);
       }
       
-      // 24시간 차트 데이터 가져오기
-      await fetch24hData();
+      // 3개월 차트 데이터 생성
+      generate3MonthData();
       
     } catch (err) {
       setError(err.message);
@@ -213,8 +221,8 @@ function BitCoin() {
     }
   };
 
-  // 24시간 차트 데이터 생성 (이중 Y축)
-  const create24hChartData = () => {
+  // 3개월 차트 데이터 생성 (이중 Y축)
+  const create3MonthChartData = () => {
     if (!chartData24h.bitcoin.length || !chartData24h.ethereum.length) {
       return null;
     }
@@ -233,8 +241,8 @@ function BitCoin() {
           pointBackgroundColor: '#ff8c00',
           pointBorderColor: '#ffffff',
           pointBorderWidth: 2,
-          pointRadius: 2,
-          pointHoverRadius: 6,
+          pointRadius: 1,
+          pointHoverRadius: 4,
           yAxisID: 'y', // 왼쪽 Y축 사용
         },
         {
@@ -248,8 +256,8 @@ function BitCoin() {
           pointBackgroundColor: '#1890ff',
           pointBorderColor: '#ffffff',
           pointBorderWidth: 2,
-          pointRadius: 2,
-          pointHoverRadius: 6,
+          pointRadius: 1,
+          pointHoverRadius: 4,
           yAxisID: 'y1', // 오른쪽 Y축 사용
         },
       ],
@@ -439,8 +447,8 @@ function BitCoin() {
     }
   };
 
-  // 24시간 차트 옵션
-  const chart24hOptions = {
+  // 3개월 차트 옵션
+  const chart3MonthOptions = {
     responsive: true,
     maintainAspectRatio: false,
     plugins: {
@@ -484,13 +492,22 @@ function BitCoin() {
         },
         ticks: {
           color: '#666',
-          maxTicksLimit: 8,
+          maxTicksLimit: 12,
           callback: function(value, index) {
-            // 3시간마다 시간 표시 (6개 포인트마다)
-            if (index % 6 === 0) {
+            // 1주일마다 날짜 표시 (7일마다)
+            if (index % 7 === 0) {
               return this.getLabelForValue(value);
             }
             return '';
+          }
+        },
+        title: {
+          display: true,
+          text: '3개월 기간 (90일)',
+          color: '#666',
+          font: {
+            size: 12,
+            weight: 'bold'
           }
         }
       },
@@ -731,21 +748,21 @@ function BitCoin() {
             </Row>
           )}
 
-          {/* 24시간 가격 히스토리 차트 */}
-          {create24hChartData() && (
+          {/* 3개월 가격 히스토리 차트 */}
+          {create3MonthChartData() && (
             <Card 
-              title="24-Hour Price Chart (Bitcoin vs Ethereum)" 
+              title="3개월 가격 차트 (Bitcoin vs Ethereum)" 
               className="price-history-card"
               extra={
                 <Space>
                   <Tag color="orange">Bitcoin</Tag>
                   <Tag color="blue">Ethereum</Tag>
-                  <Tag color="green">48 data points (30min intervals)</Tag>
+                  <Tag color="green">90일 데이터 (일별)</Tag>
                 </Space>
               }
             >
               <div className="chart-container">
-                <Line data={create24hChartData()} options={chart24hOptions} />
+                <Line data={create3MonthChartData()} options={chart3MonthOptions} />
               </div>
             </Card>
           )}
