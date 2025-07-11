@@ -748,25 +748,6 @@ function BitCoin() {
             </Row>
           )}
 
-          {/* 3개월 가격 히스토리 차트 */}
-          {create3MonthChartData() && (
-            <Card 
-              title="3개월 가격 차트 (Bitcoin vs Ethereum)" 
-              className="price-history-card"
-              extra={
-                <Space>
-                  <Tag color="orange">Bitcoin</Tag>
-                  <Tag color="blue">Ethereum</Tag>
-                  <Tag color="green">90일 데이터 (일별)</Tag>
-                </Space>
-              }
-            >
-              <div className="chart-container">
-                <Line data={create3MonthChartData()} options={chart3MonthOptions} />
-              </div>
-            </Card>
-          )}
-
           {/* 실시간 가격 히스토리 차트 (Bitcoin + Ethereum) */}
           {(priceHistory.length > 0 || ethereumHistory.length > 0) && createRealtimeChartData() && (
             <Card 
@@ -784,6 +765,25 @@ function BitCoin() {
             >
               <div className="chart-container">
                 <Line data={createRealtimeChartData()} options={realtimeChartOptions} />
+              </div>
+            </Card>
+          )}
+
+          {/* 3개월 가격 히스토리 차트 */}
+          {create3MonthChartData() && (
+            <Card 
+              title="3개월 가격 차트 (Bitcoin vs Ethereum)" 
+              className="price-history-card"
+              extra={
+                <Space>
+                  <Tag color="orange">Bitcoin</Tag>
+                  <Tag color="blue">Ethereum</Tag>
+                  <Tag color="green">90일 데이터 (일별)</Tag>
+                </Space>
+              }
+            >
+              <div className="chart-container">
+                <Line data={create3MonthChartData()} options={chart3MonthOptions} />
               </div>
             </Card>
           )}
