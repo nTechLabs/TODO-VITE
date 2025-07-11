@@ -156,25 +156,49 @@ function BitCoin() {
       const ethereumPrice = formattedData.find(crypto => crypto.id === 'ethereum')?.price;
       
       if (bitcoinPrice) {
-        setPriceHistory(prev => [
-          ...prev.slice(-9), // 최근 10개만 유지
-          {
-            time: new Date().toLocaleTimeString(),
-            price: bitcoinPrice,
-            timestamp: Date.now()
-          }
-        ]);
+        setPriceHistory(prev => {
+          const now = Date.now();
+          const twentyFourHoursAgo = now - (24 * 60 * 60 * 1000); // 24시간 전
+          
+          // 24시간 이내의 데이터만 유지
+          const filteredHistory = prev.filter(entry => entry.timestamp > twentyFourHoursAgo);
+          
+          return [
+            ...filteredHistory,
+            {
+              time: new Date().toLocaleTimeString('en-US', { 
+                hour: '2-digit', 
+                minute: '2-digit',
+                hour12: false 
+              }),
+              price: bitcoinPrice,
+              timestamp: now
+            }
+          ];
+        });
       }
       
       if (ethereumPrice) {
-        setEthereumHistory(prev => [
-          ...prev.slice(-9), // 최근 10개만 유지
-          {
-            time: new Date().toLocaleTimeString(),
-            price: ethereumPrice,
-            timestamp: Date.now()
-          }
-        ]);
+        setEthereumHistory(prev => {
+          const now = Date.now();
+          const twentyFourHoursAgo = now - (24 * 60 * 60 * 1000); // 24시간 전
+          
+          // 24시간 이내의 데이터만 유지
+          const filteredHistory = prev.filter(entry => entry.timestamp > twentyFourHoursAgo);
+          
+          return [
+            ...filteredHistory,
+            {
+              time: new Date().toLocaleTimeString('en-US', { 
+                hour: '2-digit', 
+                minute: '2-digit',
+                hour12: false 
+              }),
+              price: ethereumPrice,
+              timestamp: now
+            }
+          ];
+        });
       }
       
       // 3개월 차트 데이터 생성
@@ -386,7 +410,23 @@ function BitCoin() {
         },
         ticks: {
           color: '#666',
-          maxTicksLimit: 6,
+          maxTicksLimit: 12,
+          callback: function(value, index) {
+            // 2시간마다 시간 표시
+            if (index % 2 === 0) {
+              return this.getLabelForValue(value);
+            }
+            return '';
+          }
+        },
+        title: {
+          display: true,
+          text: '24시간 실시간 (5분 간격)',
+          color: '#666',
+          font: {
+            size: 12,
+            weight: 'bold'
+          }
         }
       },
       y: {
@@ -751,14 +791,14 @@ function BitCoin() {
           {/* 실시간 가격 히스토리 차트 (Bitcoin + Ethereum) */}
           {(priceHistory.length > 0 || ethereumHistory.length > 0) && createRealtimeChartData() && (
             <Card 
-              title="Real-time Price Chart (Bitcoin & Ethereum)" 
+              title="24시간 실시간 가격 차트 (Bitcoin & Ethereum)" 
               className="price-history-card"
               extra={
                 <Space>
                   <Tag color="orange">Bitcoin</Tag>
                   <Tag color="blue">Ethereum</Tag>
                   <Tag color="green">
-                    {Math.max(priceHistory.length, ethereumHistory.length)} data points
+                    24시간 데이터 ({Math.max(priceHistory.length, ethereumHistory.length)} points)
                   </Tag>
                 </Space>
               }
