@@ -73,30 +73,52 @@ function BitCoin() {
   ];
 
   // 3개월 가격 히스토리 데이터 생성 (Mock 데이터)
-  const generate3MonthData = () => {
+  const generate3MonthData = (currentBitcoinPrice, currentEthereumPrice) => {
     const data = { bitcoin: [], ethereum: [] };
     const now = new Date();
     const threemonthsAgo = new Date(now.getTime() - (90 * 24 * 60 * 60 * 1000)); // 3개월 전
     
-    // 비트코인 기준 가격
-    const bitcoinBasePrice = 45000;
-    const ethereumBasePrice = 3200;
+    // 현재 실제 가격을 기준으로 설정
+    const bitcoinBasePrice = currentBitcoinPrice || 45000;
+    const ethereumBasePrice = currentEthereumPrice || 3200;
     
     // 3개월 동안의 일별 데이터 생성 (90일)
     for (let i = 0; i < 90; i++) {
       const currentDate = new Date(threemonthsAgo.getTime() + (i * 24 * 60 * 60 * 1000));
       
-      // 비트코인 가격 시뮬레이션
+      // 진행률 (0부터 1까지)
+      const progress = i / 89;
+      
+      // 비트코인 가격 시뮬레이션 (3개월 전부터 현재까지)
       const bitcoinVolatility = 0.03; // 3% 변동성
       const bitcoinTrend = Math.sin(i / 15) * 0.05; // 주기적 트렌드
       const bitcoinRandom = (Math.random() - 0.5) * bitcoinVolatility;
-      const bitcoinPrice = bitcoinBasePrice * (1 + bitcoinTrend + bitcoinRandom);
+      
+      // 마지막 날(오늘)에는 현재 가격으로 수렴
+      let bitcoinPrice;
+      if (i === 89) {
+        bitcoinPrice = bitcoinBasePrice; // 마지막 날은 정확한 현재 가격
+      } else {
+        // 3개월 전 가격에서 현재 가격까지 점진적 변화
+        const startPrice = bitcoinBasePrice * 0.85; // 3개월 전 가격 (현재의 85%)
+        const priceProgression = startPrice + (bitcoinBasePrice - startPrice) * progress;
+        bitcoinPrice = priceProgression * (1 + bitcoinTrend + bitcoinRandom);
+      }
       
       // 이더리움 가격 시뮬레이션
       const ethereumVolatility = 0.04; // 4% 변동성
       const ethereumTrend = Math.sin(i / 12) * 0.06; // 주기적 트렌드
       const ethereumRandom = (Math.random() - 0.5) * ethereumVolatility;
-      const ethereumPrice = ethereumBasePrice * (1 + ethereumTrend + ethereumRandom);
+      
+      let ethereumPrice;
+      if (i === 89) {
+        ethereumPrice = ethereumBasePrice; // 마지막 날은 정확한 현재 가격
+      } else {
+        // 3개월 전 가격에서 현재 가격까지 점진적 변화
+        const startPrice = ethereumBasePrice * 0.80; // 3개월 전 가격 (현재의 80%)
+        const priceProgression = startPrice + (ethereumBasePrice - startPrice) * progress;
+        ethereumPrice = priceProgression * (1 + ethereumTrend + ethereumRandom);
+      }
       
       data.bitcoin.push({
         time: currentDate.toLocaleDateString('en-US', { 
@@ -201,8 +223,10 @@ function BitCoin() {
         });
       }
       
-      // 3개월 차트 데이터 생성
-      generate3MonthData();
+      // 3개월 차트 데이터 생성 (현재 가격 기준)
+      const currentBitcoinPrice = formattedData.find(crypto => crypto.id === 'bitcoin')?.price;
+      const currentEthereumPrice = formattedData.find(crypto => crypto.id === 'ethereum')?.price;
+      generate3MonthData(currentBitcoinPrice, currentEthereumPrice);
       
     } catch (err) {
       setError(err.message);
@@ -818,7 +842,7 @@ function BitCoin() {
                 <Space>
                   <Tag color="orange">Bitcoin</Tag>
                   <Tag color="blue">Ethereum</Tag>
-                  <Tag color="green">90일 데이터 (일별)</Tag>
+                  <Tag color="green">90일 데이터 (현재 가격 기준)</Tag>
                 </Space>
               }
             >
