@@ -27,6 +27,7 @@ import VisitDetail from "../pages/msecurity/visit/visitDetail"; // Import VisitD
 import ZustandApi from "../pages/zustandApi"; // Import ZustandApi component
 import ZustandUserDetail from "../pages/zustandApi/UserDetail"; // Import ZustandApi UserDetail component
 import ZcounterPage from "../pages/Zcounter"; // Import ZcounterPage component
+import BitCoin from "../pages/BitCoin"; // Import BitCoin component
 
 function AppRouter() {
   return (
@@ -75,6 +76,8 @@ function AppRouter() {
         {/* Add route for ZcounterPage */}
         <Route path="/zustandApi/user/:id" element={<UserDetail />} />
         {/* Add route for ZustandApi UserDetail */}
+        <Route path="/bitcoin" element={<BitCoin />} />
+        {/* Add route for BitCoin */}
       </Routes>
     </Router>
   );
