@@ -1,6 +1,6 @@
 # VSCode Custom Snippet Zustand Store Template
 
-아래는 VSCode 사용자 스니펫에 등록할 수 있는 Zustand + devtools 스토어 템플릿 예시입니다.
+Zustand + devtools 스토어 템플릿 예시입니다.
 
 ```json
 {
@@ -33,23 +33,23 @@
       "    /**",
       "     * ID로 항목을 찾는 함수",
       "     */",
-      "    get${1:Item}ById: (id) => get().list.find((item) => String(item.id) === String(id)),",
+      "    get${1:Item}ById: (id) => get().${1:Item}.find((item) => String(item.id) === String(id)),",
       "    /**",
       "     * 항목 추가 함수",
       "     */",
-      "    add${1:Item}: (item) => set((state) => ({ list: [...state.list, item] })),",
+      "    add${1:Item}: (item) => set((state) => ({ ${1:Item}: [...state.${1:Item}, item] })),",
       "    /**",
       "     * 항목 삭제 함수",
       "     */",
-      "    delete${1:Item}: (id) => set((state) => ({ list: state.list.filter((v) => v.id !== id) })),",
+      "    delete${1:Item}: (id) => set((state) => ({ ${1:Item}: state.${1:Item}.filter((v) => v.id !== id) })),",
       "    /**",
       "     * 항목 수정 함수",
       "     */",
-      "    update${1:Item}: (id, newItem) => set((state) => ({ list: state.list.map((v) => v.id === id ? newItem : v) })),",
+      "    update${1:Item}: (id, newItem) => set((state) => ({ ${1:Item}: state.${1:Item}.map((v) => v.id === id ? newItem : v) })),",
       "    /**",
       "     * 전체 목록 초기화 함수",
       "     */",
-      "    clear: () => set({ list: [] }),",
+      "    clear: () => set({ ${1:Item}: [] }),",
       "  }), { name: '${1:Item}Store' })",
       ");",
     ],
