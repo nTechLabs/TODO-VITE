@@ -25,9 +25,8 @@ const UserList = () => {
     users, // 사용자 목록
     isLoading, // 로딩 상태
     isError, // 에러 상태
-    error, // 에러 메시지
+    errorMsg, // 에러 메시지
     checked, // 체크된 사용자 ID 목록
-    deleteError, // 삭제 에러 메시지
     fetchUsers, // 사용자 목록 가져오기 함수
     toggleChecked, // 체크 상태 토글 함수
     deleteUsers, // 사용자 삭제 함수
@@ -52,7 +51,7 @@ const UserList = () => {
   
   // 에러 발생 시 에러 메시지 표시
   if (isError)
-    return <Alert type="error" message={error} showIcon />;
+    return <Alert type="error" message={errorMsg} showIcon />;
 
   return (
     <div className="userListContainer">
@@ -112,8 +111,8 @@ const UserList = () => {
       </Space>
       
       {/* 삭제 에러 메시지 표시 */}
-      {deleteError && (
-        <Alert type="error" message={deleteError} showIcon className="deleteAlert" />
+      {errorMsg && (
+        <Alert type="error" message={errorMsg} showIcon className="deleteAlert" />
       )}
     </div>
   );
