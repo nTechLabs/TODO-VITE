@@ -37,6 +37,25 @@ src/
 
 ---
 
+## 2-1. Redux DevTools 연동 (devtools 미들웨어 적용)
+
+- 개발 중 상태 변화를 시각적으로 추적하려면 [Redux DevTools](https://github.com/reduxjs/redux-devtools)와 연동하는 것이 좋습니다.
+- Zustand의 `devtools` 미들웨어를 사용하면 손쉽게 DevTools를 사용할 수 있습니다.
+- 적용 예시:
+  ```js
+  import { create } from 'zustand';
+  import { devtools } from 'zustand/middleware';
+
+  const useUserZStore = create(
+    devtools((set, get) => ({
+      // ...상태 및 액션 정의...
+    }), { name: 'UserZStore' })
+  );
+  ```
+- DevTools 확장 프로그램을 설치하면 브라우저에서 상태 변화를 실시간으로 확인할 수 있습니다.
+
+---
+
 ## 3. 사용자 목록(UserList.jsx) 구현
 
 - Zustand 스토어에서 사용자 목록을 받아와 리스트로 렌더링합니다.
