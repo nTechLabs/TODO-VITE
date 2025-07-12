@@ -1,6 +1,15 @@
 // React 및 필요한 라이브러리 임포트
 import React, { useEffect } from "react";
-import { List, Checkbox, Button, Alert, Spin, Space, FloatButton, message } from "antd";
+import {
+  List,
+  Checkbox,
+  Button,
+  Alert,
+  Spin,
+  Space,
+  FloatButton,
+  message,
+} from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import useUserZStore from "../../store/userZstore";
@@ -19,7 +28,7 @@ const UserList = () => {
   const navigate = useNavigate(); // 라우터 네비게이션 훅
   const [messageApi, contextHolder] = message.useMessage(); // Ant Design 메시지 API
   const store = useUserZStore(); // Zustand 스토어 훅
-  
+
   // 스토어에서 필요한 상태와 함수들 구조분해 할당
   const {
     users, // 사용자 목록
@@ -48,22 +57,20 @@ const UserList = () => {
 
   // 로딩 중일 때 스피너 표시
   if (isLoading) return <Spin size="large" className="userListSpinner" />;
-  
+
   // 에러 발생 시 에러 메시지 표시
-  if (isError)
-    return <Alert type="error" message={errorMsg} showIcon />;
+  if (isError) return <Alert type="error" message={errorMsg} showIcon />;
 
   return (
-    <div className="userListContainer">
+    <div>
       {contextHolder} {/* 메시지 컨텍스트 홀더 */}
-      
       {/* 사용자 목록 렌더링 */}
       <List
         dataSource={users}
-        renderItem={user => (
+        renderItem={(user) => (
           <List.Item
             key={user.id}
-            onClick={e => {
+            onClick={(e) => {
               // 체크박스 클릭이 아닌 경우에만 상세 페이지로 이동
               if (e.target.type !== "checkbox") {
                 navigate(`/zustandApi/user/${user.id}`);
@@ -72,34 +79,37 @@ const UserList = () => {
             style={{ cursor: "pointer" }}
           >
             {/* 체크박스 컨테이너 */}
-            <div className="userListCheckboxContainer">
-              <Checkbox
-                checked={checked.includes(user.id)}
-                onChange={() => toggleChecked(user.id)}
-                onClick={e => e.stopPropagation()} // 이벤트 버블링 방지
-              />
-            </div>
-            
+
+              <div>
+                <Checkbox
+                  checked={checked.includes(user.id)}
+                  onChange={() => toggleChecked(user.id)}
+                  onClick={(e) => e.stopPropagation()} // 이벤트 버블링 방지
+                />
+              </div>
+
+
             {/* 사용자 정보 표시 */}
             <List.Item.Meta
-              title={<span className="userListUserName" onClick={() => navigate(`/zustandApi/user/${user.id}`)}>{user.name}</span>}
+              title={
+                <span onClick={() => navigate(`/zustandApi/user/${user.id}`)}>
+                  {user.name}
+                </span>
+              }
               description={user.email}
             />
           </List.Item>
         )}
       />
-      
       {/* 새 사용자 추가 플로팅 버튼 */}
       <FloatButton
         icon={<PlusOutlined />}
         type="primary"
-        className="userListFloatButton"
         onClick={() => navigate("/zustandApi/user/new")}
         tooltip="Add User"
       />
-      
       {/* 삭제 버튼 */}
-      <Space direction="horizontal" className="deleteButtonRow">
+      <Space direction="horizontal">
         <Button
           type="primary"
           danger
@@ -109,10 +119,13 @@ const UserList = () => {
           Delete
         </Button>
       </Space>
-      
       {/* 삭제 에러 메시지 표시 */}
       {errorMsg && (
-        <Alert type="error" message={errorMsg} showIcon className="deleteAlert" />
+        <Alert
+          type="error"
+          message={errorMsg}
+          showIcon
+        />
       )}
     </div>
   );
