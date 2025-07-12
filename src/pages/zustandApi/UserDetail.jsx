@@ -17,7 +17,15 @@ const UserDetail = () => {
   const navigate = useNavigate(); // 라우터 네비게이션 훅
   const isNew = id === "new"; // 새 사용자 추가 모드인지 확인
   const store = useUserZStore(); // Zustand 스토어 훅
-  const user = !isNew ? store.getUserById(id) : null; // 기존 사용자 정보 가져오기
+  const { users, fetchUsers, getUserById } = store;
+  const user = !isNew ? getUserById(id) : null; // 기존 사용자 정보 가져오기
+
+  // users가 비어있으면 fetchUsers 호출 (상세 진입 시 데이터 보장)
+  useEffect(() => {
+    if (!isNew && users.length === 0) {
+      fetchUsers();
+    }
+  }, [isNew, users.length, fetchUsers]);
 
   // 폼 초기값 설정 (새 사용자 vs 기존 사용자)
   const initialForm = isNew

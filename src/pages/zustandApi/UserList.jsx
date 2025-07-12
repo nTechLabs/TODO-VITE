@@ -41,10 +41,11 @@ const UserList = () => {
     deleteUsers, // 사용자 삭제 함수
   } = store;
 
-  // 컴포넌트 마운트 시 사용자 목록이 비어있으면 데이터 가져오기
+  // ZustandApi 페이지 진입 시 항상 사용자 목록을 가져오도록 수정
   useEffect(() => {
-    if (users.length === 0) fetchUsers();
-  }, [fetchUsers, users.length]);
+    fetchUsers();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   /**
    * 선택된 사용자들을 삭제하는 핸들러
