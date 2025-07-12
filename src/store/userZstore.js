@@ -9,7 +9,8 @@ import { USERS_API_URL } from "../interface/api";
  * 사용자 목록 조회, 추가, 수정, 삭제 기능을 제공
  */
 const useUserZStore = create(
-  devtools((set, get) => ({
+  devtools(
+    (set, get) => ({
     // === 상태 변수들 ===
     users: [], // 사용자 목록 배열
     isLoading: false, // 데이터 로딩 상태
@@ -114,7 +115,9 @@ const useUserZStore = create(
         set({ errorMsg: e?.message || "수정 실패", saveStatus: "error", loading: false });
       }
     },
-  }), { name: "UserZStore" }) // Redux DevTools에서 확인 가능한 스토어 이름
+    }),
+    { name: "UserZStore" }
+  )
 );
 
 export default useUserZStore;
