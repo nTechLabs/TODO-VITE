@@ -127,13 +127,15 @@ src/
 - **Flux**는 Facebook에서 제안한 단방향 데이터 흐름(One-way Data Flow) 아키텍처 패턴입니다.
 - React와 함께 상태 관리를 체계적으로 하기 위해 고안되었습니다.
 - 데이터 흐름: View → Action → Reducer → Store → State -> View
+  ![Flux 패턴 다이어그램](./flux.png)
+
 - Flux 패턴의 장점:
   - 데이터 흐름이 단방향이므로 버그 추적이 쉽고 예측 가능
   - 상태 변경이 명확하게 추적됨
 - Redux, Zustand 등은 Flux 패턴의 원칙을 따르거나 변형한 라이브러리입니다.
 - Zustand는 Flux의 단방향 데이터 흐름을 간단한 API로 구현할 수 있게 해줍니다.
-  ![Flux 패턴 다이어그램](./flux.png)
 
 ---
 
 이 가이드대로 따라하면 zustandApi 기반의 사용자 관리 기능을 빠르게 개발할 수 있습니다!
+
