@@ -1,7 +1,10 @@
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 import { TASKS_API_URL } from "../interface/api";
-import { is } from "date-fns/locale";
+/**
+ * Task 관리를 위한 Zustand 스토어
+ * 할 일 목록 조회, 추가, 수정, 삭제 기능을 제공
+ */
 export const useTaskStore = create(
   devtools(
     (set, get) => ({

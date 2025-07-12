@@ -1,0 +1,59 @@
+# VSCode Custom Snippet Zustand Store Template
+
+아래는 VSCode 사용자 스니펫에 등록할 수 있는 Zustand + devtools 스토어 템플릿 예시입니다.
+
+```json
+{
+  "store template": {
+    "prefix": "store-template",
+    "body": [
+      "import { create } from 'zustand';",
+      "import { devtools } from 'zustand/middleware';",
+      "import { ${1:Item}_API_URL } from '../interface/api';",
+      "export const use${1:Item}Store = create(",
+      "  devtools((set, get) => ({",
+      "    ${1:Item}: [],",
+      "    isLoading: false, // API 호출 등 비동기 작업의 로딩 상태",
+      "    isError: false,   // 에러 발생 여부 (API 실패 등)",
+      "    errorMsg: '',",
+      "    /**",
+      "     * 비동기 데이터 목록을 불러오는 함수",
+      "     * API 호출 및 에러/로딩 상태 관리",
+      "     */",
+      "    fetchList: async () => {",
+      "      set({ isLoading: true, isError: false, errorMsg: '' });",
+      "      try {",
+      "         const response = await fetch(${1:Item}_API_URL);",
+      "         const data = await response.json();",
+      "         set({ ${1:Item}: data, isLoading: false });",
+      "      } catch (e) {",
+      "        set({ isError: true, errorMsg: e.message, isLoading: false });",
+      "      }",
+      "    },",
+      "    /**",
+      "     * ID로 항목을 찾는 함수",
+      "     */",
+      "    get${1:Item}ById: (id) => get().list.find((item) => String(item.id) === String(id)),",
+      "    /**",
+      "     * 항목 추가 함수",
+      "     */",
+      "    add${1:Item}: (item) => set((state) => ({ list: [...state.list, item] })),",
+      "    /**",
+      "     * 항목 삭제 함수",
+      "     */",
+      "    delete${1:Item}: (id) => set((state) => ({ list: state.list.filter((v) => v.id !== id) })),",
+      "    /**",
+      "     * 항목 수정 함수",
+      "     */",
+      "    update${1:Item}: (id, newItem) => set((state) => ({ list: state.list.map((v) => v.id === id ? newItem : v) })),",
+      "    /**",
+      "     * 전체 목록 초기화 함수",
+      "     */",
+      "    clear: () => set({ list: [] }),",
+      "  }), { name: '${1:Item}Store' })",
+      ");",
+    ],
+    "description": "Zustand + devtools 기본 스토어 템플릿 (Item 이름 사용자 지정)"
+  }
+}
+```
