@@ -6,7 +6,7 @@ import { List, Checkbox, Button, Alert, Spin, Space, FloatButton, message } from
 import { PlusOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { USERS_API_URL } from "../../api/api";
+import { USERS_API_URL } from "../../interface/api";
 import "antd/dist/reset.css";
 import "./user-list.css";
 

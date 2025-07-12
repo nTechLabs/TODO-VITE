@@ -2,13 +2,14 @@ import React, { useEffect } from "react";
 import { List, Checkbox, Button, Alert, Spin, Space, FloatButton, message } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
-import useUserZStore from "./userZstore";
+import useUserZStore from "../../store/userZstore";
 import "antd/dist/reset.css";
 import "./user-list.css";
 
 const UserList = () => {
   const navigate = useNavigate();
   const [messageApi, contextHolder] = message.useMessage();
+  const store = useUserZStore();
   const {
     users,
     isLoading,
@@ -19,7 +20,7 @@ const UserList = () => {
     fetchUsers,
     toggleChecked,
     deleteUsers,
-  } = useUserZStore();
+  } = store;
 
   useEffect(() => {
     if (users.length === 0) fetchUsers();
@@ -43,8 +44,9 @@ const UserList = () => {
           <List.Item
             key={user.id}
             onClick={e => {
-              if (e.target.type !== "checkbox")
+              if (e.target.type !== "checkbox") {
                 navigate(`/zustandApi/user/${user.id}`);
+              }
             }}
             style={{ cursor: "pointer" }}
           >
@@ -56,7 +58,7 @@ const UserList = () => {
               />
             </div>
             <List.Item.Meta
-              title={user.name}
+              title={<span className="userListUserName" onClick={() => navigate(`/zustandApi/user/${user.id}`)}>{user.name}</span>}
               description={user.email}
             />
           </List.Item>

@@ -21,6 +21,7 @@ function Launchpad() {
     { name: "Alarms", path: "/alarms" },
     { name: "ToDo", path: "/todoapi", icon: "📝" },
     { name: "Album", path: "/albumapi", icon: "📀" },
+    { name: "BitCoin", path: "/bitcoin", icon: "₿" },
     { name: "MSecurity", path: "/msecurity", icon: "🔒" }, // MSecurity 버튼 추가
     { name: "ZustandApi", path: "/zustandApi", icon: "🦊" },
   ];

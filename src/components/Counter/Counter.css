@@ -1,0 +1,137 @@
+/* Counter 컴포넌트 메인 컨테이너 */
+.counter-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* 간단한 Counter 컴포넌트 */
+.counter-simple-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.counter-simple-display {
+  min-width: 32px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 500;
+  margin: 0 8px;
+}
+
+/* 섹션 타이틀 */
+.counter-section-title {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Redux Toolkit Counter 카드 */
+.redux-counter-card {
+  text-align: center;
+  min-width: 500px;
+}
+
+/* 카운트 표시 */
+.counter-display {
+  margin-bottom: 20px;
+}
+
+.counter-number {
+  font-size: 48px;
+  margin: 20px 0;
+  color: #1890ff;
+}
+
+/* 버튼 그룹 */
+.counter-buttons {
+  margin-bottom: 20px;
+}
+
+.counter-custom-section {
+  margin-bottom: 20px;
+}
+
+.counter-custom-input {
+  width: 80px;
+}
+
+/* 비교 섹션 */
+.comparison-section {
+  text-align: center;
+}
+
+.comparison-card {
+  padding: 16px;
+  border-radius: 8px;
+}
+
+.comparison-card-zustand {
+  background: #f6ffed;
+  border: 1px solid #b7eb8f;
+}
+
+.comparison-card-redux-toolkit {
+  background: #e6f7ff;
+  border: 1px solid #91d5ff;
+}
+
+.comparison-card-classic-redux {
+  background: #fff7e6;
+  border: 1px solid #ffd591;
+}
+
+.comparison-card-title {
+  text-align: center;
+}
+
+.comparison-card-title.zustand {
+  color: #52c41a;
+}
+
+.comparison-card-title.redux-toolkit {
+  color: #1890ff;
+}
+
+.comparison-card-title.classic-redux {
+  color: #fa8c16;
+}
+
+/* Zcounter (Zustand Counter) 스타일 */
+.zcounter-card {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.zcounter-display {
+  text-align: center;
+}
+
+.zcounter-number {
+  margin: 20px 0;
+}
+
+.zcounter-button-group {
+  width: 100%;
+  justify-content: center;
+}
+
+.zcounter-custom-input {
+  width: 80px;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .counter-container {
+    padding: 16px;
+  }
+  
+  .redux-counter-card {
+    min-width: auto;
+  }
+  
+  .counter-number {
+    font-size: 36px;
+  }
+}

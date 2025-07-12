@@ -4,7 +4,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { Form, Input, Button, Typography, Alert, Space, Card, message } from "antd";
 import axios from "axios";
 import { addUser, udtUser } from "../../store/userSlice";
-import { USERS_API_URL } from "../../api/api";
+import { USERS_API_URL } from "../../interface/api";
 import "./user-list.css";
 
 const UserDetail = () => {

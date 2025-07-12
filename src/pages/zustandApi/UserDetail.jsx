@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Form, Input, Button, Typography, Alert, Space, Card, message } from "antd";
-import useUserStore from "./userStore";
+import useUserZStore from "../../store/userZstore";
 import "./user-list.css";
 
 const UserDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const isNew = id === "new";
-  const store = useUserStore();
+  const store = useUserZStore();
   const user = !isNew ? store.getUserById(id) : null;
 
   const initialForm = isNew
