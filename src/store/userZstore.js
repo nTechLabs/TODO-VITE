@@ -14,14 +14,10 @@ const useUserZStore = create(
     users: [], // 사용자 목록 배열
     isLoading: false, // 데이터 로딩 상태
     isError: false, // 에러 발생 여부
-    error: "", // 에러 메시지
+    errorMsg: "", // 모든 에러 메시지 통합
     checked: [], // 체크된 사용자 ID 배열 (삭제용)
-    deleteError: "", // 삭제 시 에러 메시지
     saveStatus: null, // 저장 상태 ('success' | 'error' | null)
     loading: false, // 저장/수정 로딩 상태
-    errorMsg: "", // 저장/수정 에러 메시지
-    emailError: "", // 이메일 유효성 검사 에러
-    phoneError: "", // 전화번호 유효성 검사 에러
     // === 액션 함수들 ===
     
     /**
@@ -29,14 +25,14 @@ const useUserZStore = create(
      * 로딩 상태를 관리하고 에러 처리를 수행
      */
     fetchUsers: async () => {
-      set({ isLoading: true, isError: false, error: "" });
+      set({ isLoading: true, isError: false, errorMsg: "" });
       try {
         const res = await fetch(USERS_API_URL);
         if (!res.ok) throw new Error("Network response was not ok");
         const data = await res.json();
         set({ users: data, isLoading: false });
       } catch (err) {
-        set({ isError: true, error: err.message, isLoading: false });
+        set({ isError: true, errorMsg: err.message, isLoading: false });
       }
     },
     
@@ -63,7 +59,7 @@ const useUserZStore = create(
      * 각 사용자에 대해 DELETE 요청을 보내고 로컬 상태 업데이트
      */
     deleteUsers: async () => {
-      set({ deleteError: "" });
+      set({ errorMsg: "" });
       try {
         // 체크된 모든 사용자에 대해 병렬로 삭제 요청
         await Promise.all(
@@ -77,7 +73,7 @@ const useUserZStore = create(
           checked: [],
         }));
       } catch (e) {
-        set({ deleteError: e?.message || "삭제에 실패했습니다." });
+        set({ errorMsg: e?.message || "삭제에 실패했습니다." });
       }
     },
     
