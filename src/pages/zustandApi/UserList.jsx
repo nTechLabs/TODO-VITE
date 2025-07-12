@@ -69,36 +69,28 @@ const UserList = () => {
       <List
         dataSource={users}
         renderItem={(user) => (
-          <List.Item
-            key={user.id}
-            onClick={(e) => {
-              // 체크박스 클릭이 아닌 경우에만 상세 페이지로 이동
-              if (e.target.type !== "checkbox") {
-                navigate(`/zustandApi/user/${user.id}`);
-              }
-            }}
-            style={{ cursor: "pointer" }}
-          >
-            {/* 체크박스 컨테이너 */}
-
+          <List.Item key={user.id} style={{ cursor: "pointer" }}>
+            <div
+              style={{ display: "flex", alignItems: "center", width: "100%" }}
+              onClick={() => navigate(`/zustandApi/user/${user.id}`)}
+            >
+              {/* 체크박스 컨테이너 */}
               <div>
                 <Checkbox
                   checked={checked.includes(user.id)}
-                  onChange={() => toggleChecked(user.id)}
-                  onClick={(e) => e.stopPropagation()} // 이벤트 버블링 방지
+                  onChange={(e) => {
+                    e.stopPropagation();
+                    toggleChecked(user.id);
+                  }}
                 />
               </div>
-
-
-            {/* 사용자 정보 표시 */}
-            <List.Item.Meta
-              title={
-                <span onClick={() => navigate(`/zustandApi/user/${user.id}`)}>
-                  {user.name}
-                </span>
-              }
-              description={user.email}
-            />
+              {/* 사용자 정보 표시 */}
+              <List.Item.Meta
+                title={user.name}
+                description={user.email}
+                style={{ marginLeft: 8 }}
+              />
+            </div>
           </List.Item>
         )}
       />

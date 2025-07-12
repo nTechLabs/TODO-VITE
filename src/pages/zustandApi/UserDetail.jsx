@@ -18,7 +18,11 @@ const UserDetail = () => {
   const isNew = id === "new"; // 새 사용자 추가 모드인지 확인
   const store = useUserZStore(); // Zustand 스토어 훅
   const { users, fetchUsers, getUserById } = store;
+
   const user = !isNew ? getUserById(id) : null; // 기존 사용자 정보 가져오기
+  // 로딩/에러/존재 여부 상태를 위한 변수
+  const shouldShowLoading = !isNew && users.length === 0;
+  const shouldShowNotFound = !user && !isNew && users.length > 0;
 
   // users가 비어있으면 fetchUsers 호출 (상세 진입 시 데이터 보장)
   useEffect(() => {
@@ -26,6 +30,7 @@ const UserDetail = () => {
       fetchUsers();
     }
   }, [isNew, users.length, fetchUsers]);
+
 
   // 폼 초기값 설정 (새 사용자 vs 기존 사용자)
   const initialForm = isNew
@@ -78,8 +83,16 @@ const UserDetail = () => {
     setForm(newInitialForm);
   }, [id, user, isNew]);
 
-  // 사용자를 찾을 수 없는 경우 에러 메시지 표시
-  if (!user && !isNew) {
+  // 로딩/에러/존재 여부에 따라 조기 리턴
+  if (shouldShowLoading) {
+    return <Typography.Title level={5}>Loading...</Typography.Title>;
+  }
+  if (shouldShowNotFound) {
+    return <Typography.Title level={5}>User not found</Typography.Title>;
+  }
+
+  // users가 로드된 후에도 사용자를 찾을 수 없는 경우 에러 메시지 표시
+  if (!user && !isNew && users.length > 0) {
     return <Typography.Title level={5}>User not found</Typography.Title>;
   }
 
