@@ -5,13 +5,13 @@ import { useNavigate } from "react-router-dom";
 const UserItem = ({ user, checked, toggleChecked }) => {
   const navigate = useNavigate();
   return (
-    <List.Item key={user.id} style={{ cursor: "pointer" }}>
+    <List.Item key={user.id} className="user-list-item">
       <div
-        style={{ display: "flex", alignItems: "center", width: "100%" }}
+        className="user-list-item-content"
         onClick={() => navigate(`/zustandApi/user/${user.id}`)}
       >
         {/* 체크박스 컨테이너 */}
-        <div style={{ display: "flex", alignItems: "center", marginRight: 16 }}>
+        <div className="user-list-checkbox">
           <Checkbox
             checked={checked.includes(user.id)}
             onChange={(e) => {
@@ -30,7 +30,7 @@ const UserItem = ({ user, checked, toggleChecked }) => {
               <div>{user.company?.name || user.company || ''}</div>
             </div>
           }
-          style={{ marginLeft: 8 }}
+          className="user-list-meta"
         />
       </div>
     </List.Item>
