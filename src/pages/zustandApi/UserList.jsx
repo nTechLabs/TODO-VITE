@@ -1,4 +1,4 @@
-// React 및 필요한 라이브러리 임포트
+// React 및 antd 필요한 라이브러리 임포트
 import React, { useEffect } from "react";
 import {
   List,
@@ -17,9 +17,9 @@ import "antd/dist/reset.css";
 import "./user-list.css";
 
 /**
- * 사용자 목록을 표시하는 컴포넌트
+ * 주요기능요약
  * - 사용자 목록 조회 및 표시
- * - 개별 사용자 선택 (체크박스)
+ * - 체크박스를 이용한 개별 사용자 선택
  * - 선택된 사용자 삭제
  * - 새 사용자 추가 버튼
  * - 사용자 클릭 시 상세 페이지로 이동
@@ -27,7 +27,6 @@ import "./user-list.css";
 const UserList = () => {
   const navigate = useNavigate(); // 라우터 네비게이션 훅
   const [messageApi, contextHolder] = message.useMessage(); // Ant Design 메시지 API
-  const store = useUserZStore(); // Zustand 스토어 훅
 
   // 스토어에서 필요한 상태와 함수들 구조분해 할당
   const {
@@ -39,7 +38,7 @@ const UserList = () => {
     fetchUsers, // 사용자 목록 가져오기 함수
     toggleChecked, // 체크 상태 토글 함수
     deleteUsers, // 사용자 삭제 함수
-  } = store;
+  } = useUserZStore();
 
   // ZustandApi 페이지 진입 시 항상 사용자 목록을 가져오도록 수정
   useEffect(() => {
@@ -47,6 +46,7 @@ const UserList = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+//** Handler 를 구현하는 영역
   /**
    * 선택된 사용자들을 삭제하는 핸들러
    * 삭제 완료 후 성공 메시지 표시
@@ -55,6 +55,7 @@ const UserList = () => {
     await deleteUsers();
     messageApi.success("삭제되었습니다.");
   };
+//** Handler 를 구현하는 영역 **//
 
   // 로딩 중일 때 스피너 표시
   if (isLoading) return <Spin size="large" className="userListSpinner" />;
@@ -62,6 +63,8 @@ const UserList = () => {
   // 에러 발생 시 에러 메시지 표시
   if (isError) return <Alert type="error" message={errorMsg} showIcon />;
 
+
+  // Return JSX
   return (
     <div className="userlist-scroll-hide">
       {contextHolder} {/* 메시지 컨텍스트 홀더 */}
@@ -107,8 +110,3 @@ const UserList = () => {
 };
 
 export default UserList;
-
-// 스타일: 스크롤바 숨기기 (크로스브라우징)
-// src/pages/zustandApi/user-list.css에 아래 코드 추가 필요:
-// .userlist-scroll-hide::-webkit-scrollbar { display: none; }
-// .userlist-scroll-hide { -ms-overflow-style: none; scrollbar-width: none; }
