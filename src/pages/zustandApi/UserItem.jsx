@@ -11,7 +11,7 @@ const UserItem = ({ user, checked, toggleChecked }) => {
         onClick={() => navigate(`/zustandApi/user/${user.id}`)}
       >
         {/* 체크박스 컨테이너 */}
-        <div>
+        <div style={{ display: "flex", alignItems: "center", marginRight: 16 }}>
           <Checkbox
             checked={checked.includes(user.id)}
             onChange={(e) => {
