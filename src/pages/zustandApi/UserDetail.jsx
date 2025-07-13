@@ -1,7 +1,7 @@
 // React 및 필요한 라이브러리 임포트
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { Form, Input, Button, Typography, Alert, Space, Card, message } from "antd";
+import { Form, Input, Button, Typography, Alert, Space, Card, message, Spin } from "antd";
 import useUserZStore from "../../store/userZstore";
 import "./user-list.css";
 
@@ -19,16 +19,20 @@ const UserDetail = () => {
   const { getUserById, addUser, updateUser, saveStatus, errorMsg, loading } = useUserZStore();
 
   const [user, setUser] = useState(null);
+  const [userLoading, setUserLoading] = useState(false);
   // const user = !isNew ? getUserById(id) : null; // 기존 사용자 정보 가져오기
   // 상세 진입 시 데이터 보장 (users length 체크 제거)
   useEffect(() => {
     if (!isNew) {
+      setUserLoading(true);
       (async () => {
         try {
-          const data = await getUserById(id); // getUserById는 서버에서 user 정보를 받아오는 비동기 함수여야 함
+          const data = await getUserById(id);
           setUser(data);
         } catch {
           setUser(null);
+        } finally {
+          setUserLoading(false);
         }
       })();
     }
@@ -86,8 +90,12 @@ const UserDetail = () => {
     setForm(newInitialForm);
   }, [id, user, isNew]);
 
+  // 사용자 정보 로딩 중에는 아무것도 렌더링하지 않음 (또는 스피너)
+  if (!isNew && userLoading) {
+    return <Spin style={{ display: "block", margin: "40px auto" }} size="large" />;
+  }
   // 사용자 정보가 없으면 에러 메시지 표시
-  if (!user && !isNew) {
+  if (!user && !isNew && !userLoading) {
     return <Typography.Title level={5}>User not found</Typography.Title>;
   }
 
