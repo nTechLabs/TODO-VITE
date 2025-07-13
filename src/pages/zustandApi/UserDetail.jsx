@@ -16,15 +16,21 @@ const UserDetail = () => {
   const { id } = useParams(); // URL 파라미터에서 사용자 ID 추출
   const navigate = useNavigate(); // 라우터 네비게이션 훅
   const isNew = id === "new"; // 새 사용자 추가 모드인지 확인
-  const store = useUserZStore(); // Zustand 스토어 훅
-  const { getUserById } = store;
+  const { getUserById, addUser, updateUser, saveStatus, errorMsg, loading } = useUserZStore();
 
-  const user = !isNew ? getUserById(id) : null; // 기존 사용자 정보 가져오기
-
+  const [user, setUser] = useState(null);
+  // const user = !isNew ? getUserById(id) : null; // 기존 사용자 정보 가져오기
   // 상세 진입 시 데이터 보장 (users length 체크 제거)
   useEffect(() => {
     if (!isNew) {
-      getUserById(id);
+      (async () => {
+        try {
+          const data = await getUserById(id); // getUserById는 서버에서 user 정보를 받아오는 비동기 함수여야 함
+          setUser(data);
+        } catch {
+          setUser(null);
+        }
+      })();
     }
   }, [isNew, getUserById, id]);
 
@@ -145,19 +151,17 @@ const UserDetail = () => {
   const handleSave = async () => {
     // 유효성 검사 에러가 있으면 저장하지 않음
     if (emailError || phoneError) return;
-    
     if (isNew) {
-      await store.addUser(form); // 새 사용자 추가
+      await addUser(form); // 새 사용자 추가
     } else {
-      await store.updateUser({ ...form, id }); // 기존 사용자 수정
+      await updateUser({ ...form, id }); // 기존 사용자 수정
     }
-    
     // 저장 결과에 따라 메시지 표시 및 페이지 이동
-    if (store.saveStatus === "success") {
+    if (saveStatus === "success") {
       messageApi.success("저장되었습니다.");
       navigate("/zustandApi");
-    } else if (store.saveStatus === "error") {
-      messageApi.error(store.errorMsg);
+    } else if (saveStatus === "error") {
+      messageApi.error(errorMsg);
     }
   };
 
@@ -213,7 +217,7 @@ const UserDetail = () => {
           <Button 
             type="primary" 
             onClick={handleSave} 
-            loading={store.loading} 
+            loading={loading}
             disabled={!!emailError || !!phoneError} // 유효성 검사 에러가 있으면 비활성화
           >
             Save
@@ -221,8 +225,8 @@ const UserDetail = () => {
         </Space>
         
         {/* 저장 에러 메시지 표시 */}
-        {store.saveStatus === "error" && (
-          <Alert type="error" message={store.errorMsg} showIcon style={{ marginTop: 16 }} />
+        {saveStatus === "error" && (
+          <Alert type="error" message={errorMsg} showIcon style={{ marginTop: 16 }} />
         )}
       </Form>
     </Card>

@@ -42,27 +42,35 @@ const useUserZStore = create(
        * @param {string|number} id - 사용자 ID
        * @returns {Object|undefined} 찾은 사용자 객체 또는 undefined
        */
-      // 잘못된 사용법 (무한루프 발생)
-      // 컴포넌트에서 selector(상태 구독)로 직접 사용하면 무한 렌더링이 발생할 수 있습니다.
-      // const user = useUserZStore((state) => state.getUserById(id));
+      // [사용자 조회 함수 사용 가이드]
+      // findUserById: (id) => get().users.find((u) => String(u.id) === String(id))
+      //   - 사용 목적: 이미 로컬 상태(users 배열)에 데이터가 있을 때 빠르게 찾고 싶을 때 사용 (비동기 아님)
+      //   - 예시: 목록에서 상세로 이동 시, 이미 users가 채워져 있으면 findUserById로 바로 조회
+      //   - 사용 예시:
+      //     const findUserById = useUserZStore((state) => state.findUserById);
+      //     const user = findUserById(id);
 
-      // 올바른 사용법 (이벤트 핸들러에서 호출)
-      // const getUserById = useUserZStore((state) => state.getUserById);
-      // const [user, setUser] = useState(null);
-
-      // const handleClick = async () => {
-      //   const data = await getUserById(id);
-      //   setUser(data);
-      // };
-
-      // // 또는 useEffect에서
-      // useEffect(() => {
-      //   (async () => {
-      //     const data = await getUserById(id);
-      //     setUser(data);
-      //   })();
-      // }, [id]);
-      getUserById: (id) => get().users.find((u) => String(u.id) === String(id)),
+      // getUserById: async (id) => { ... }
+      //   - 사용 목적: 서버에서 항상 최신 정보를 받아오고 싶을 때 사용 (비동기)
+      //   - 예시: 상세 페이지 진입 시, 서버에서 직접 사용자 정보를 받아와야 할 때
+      //   - 사용 예시:
+      //     const getUserById = useUserZStore((state) => state.getUserById);
+      //     useEffect(() => {
+      //       (async () => {
+      //         const data = await getUserById(id);
+      //         setUser(data);
+      //       })();
+      //     }, [id]);
+      // ⚠️ 주의: getUserById와 같은 async 함수를 selector로 직접 사용하면 무한 렌더링이 발생할 수 있습니다.
+      //   반드시 이벤트 핸들러나 useEffect 등에서 호출하세요.
+      getUserById: async (id) => {
+        try {
+          const res = await axios.get(`${USERS_API_URL}/${id}`);
+          return res.data;
+        } catch (err) {
+          set({ isError: true, errorMsg: err.message, isLoading: false });
+        }
+      },
 
       /**
        * 사용자 체크 상태를 토글하는 함수 (삭제용)
