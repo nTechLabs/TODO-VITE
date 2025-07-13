@@ -63,7 +63,7 @@ const UserList = () => {
   if (isError) return <Alert type="error" message={errorMsg} showIcon />;
 
   return (
-    <div>
+    <div className="userlist-scroll-hide">
       {contextHolder} {/* 메시지 컨텍스트 홀더 */}
       {/* 사용자 목록 렌더링 */}
       <List
@@ -107,3 +107,8 @@ const UserList = () => {
 };
 
 export default UserList;
+
+// 스타일: 스크롤바 숨기기 (크로스브라우징)
+// src/pages/zustandApi/user-list.css에 아래 코드 추가 필요:
+// .userlist-scroll-hide::-webkit-scrollbar { display: none; }
+// .userlist-scroll-hide { -ms-overflow-style: none; scrollbar-width: none; }
