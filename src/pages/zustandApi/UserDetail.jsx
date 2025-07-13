@@ -17,19 +17,19 @@ const UserDetail = () => {
   const navigate = useNavigate(); // 라우터 네비게이션 훅
   const isNew = id === "new"; // 새 사용자 추가 모드인지 확인
   const store = useUserZStore(); // Zustand 스토어 훅
-  const { users, fetchUsers, getUserById } = store;
+  const { users, getUserById } = store;
 
   const user = !isNew ? getUserById(id) : null; // 기존 사용자 정보 가져오기
   // 로딩/에러/존재 여부 상태를 위한 변수
   const shouldShowLoading = !isNew && users.length === 0;
   const shouldShowNotFound = !user && !isNew && users.length > 0;
 
-  // users가 비어있으면 fetchUsers 호출 (상세 진입 시 데이터 보장)
+  // users가 비어있으면 getUserById 호출 (상세 진입 시 데이터 보장)
   useEffect(() => {
     if (!isNew && users.length === 0) {
-      fetchUsers();
+      getUserById(id);
     }
-  }, [isNew, users.length, fetchUsers]);
+  }, [isNew, users.length, getUserById, id]);
 
 
   // 폼 초기값 설정 (새 사용자 vs 기존 사용자)
