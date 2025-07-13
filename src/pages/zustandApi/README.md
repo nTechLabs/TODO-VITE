@@ -1,6 +1,7 @@
 # Zustand API 개발 가이드
 
-이 프로젝트는 React와 Zustand를 활용하여 사용자 목록을 관리하는 예제입니다. 아래 단계별 가이드를 따라하면 쉽고 빠르게 zustandApi 기능을 개발할 수 있습니다.
+이 프로젝트는 React와 Zustand를 활용하여 사용자 목록을 관리하는 예제입니다. 
+아래 단계별 가이드를 따라하면 쉽고 빠르게 zustandApi 기능을 개발할 수 있습니다.
 
 ---
 
@@ -12,6 +13,7 @@ src/
     zustandApi/
       index.jsx         # 메인 페이지 (UserList 포함)
       UserList.jsx      # 사용자 목록 컴포넌트
+      UserItem.jsx      # 사용자 목록의 각 사용자(행) 렌더링 컴포넌트
       UserDetail.jsx    # 사용자 상세/수정/추가 컴포넌트
   store/
     userZstore.js      # Zustand 사용자 스토어
@@ -22,15 +24,17 @@ src/
 ## 2. Zustand 스토어(userZstore.js) 준비
 
 - 사용자 목록, 로딩/에러 상태, CRUD 액션 함수들을 정의합니다.
-- `fetchUsers`, `addUser`, `updateUser`, `deleteUsers` 등 비동기 함수 포함.
+- `fetchUsers`, `addUser`, `updateUser`, `deleteUsers`, `getUserById` 등 비동기 함수 포함.
 - 예시:
   ```js
   const useUserZStore = create(
     devtools((set, get) => ({
       users: [],
-      fetchUsers: async () => { ... },
-      addUser: async (user) => { ... },
-      // ...
+      fetchUsers: async () => { /* 사용자 목록 불러오기 */ },
+      addUser: async (user) => { /* 새 사용자 추가 */ },
+      updateUser: async (user) => { /* 사용자 정보 수정 */ },
+      deleteUsers: async () => { /* 여러 사용자 삭제 */ },
+      getUserById: async (id) => { /* 서버에서 사용자 정보 조회 */ },
     }))
   );
   ```
@@ -43,9 +47,10 @@ src/
 - Zustand의 `devtools` 미들웨어를 사용하면 손쉽게 DevTools를 사용할 수 있습니다.
 - 적용 예시:
   ```js
-  import { create } from 'zustand';
-  import { devtools } from 'zustand/middleware';
+  import { create } from 'zustand'; // Zustand 기본 함수
+  import { devtools } from 'zustand/middleware'; // Redux DevTools 미들웨어
 
+  // devtools 미들웨어를 적용한 Zustand 스토어 예시
   const useUserZStore = create(
     devtools((set, get) => ({
       // ...상태 및 액션 정의...
