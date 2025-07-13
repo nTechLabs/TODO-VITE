@@ -1,3 +1,35 @@
+/* 스크롤바 숨기고 세로 스크롤만 유지 (크로스브라우징) */
+.userlist-scroll-hide {
+  min-height: 100vh;
+  height: 100vh;
+  overflow-y: auto;
+  -ms-overflow-style: none; /* IE/Edge */
+  scrollbar-width: none;    /* Firefox */
+}
+.userlist-scroll-hide::-webkit-scrollbar {
+  display: none;            /* Chrome/Safari */
+}
+/* UserItem 컴포넌트 스타일 */
+.user-list-item {
+  cursor: pointer;
+}
+
+.user-list-item-content {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.user-list-checkbox {
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
+  margin-right: 16px;
+}
+
+.user-list-meta {
+  margin-left: 8px;
+}
 /* User List Styles */
 
 .userListContainer {

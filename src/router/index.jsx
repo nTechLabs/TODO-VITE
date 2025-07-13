@@ -13,6 +13,7 @@ import Vite from "../pages/Vite/index"; // Import Vite component
 import Contact from "../pages/Contact";
 import ServerApi from "../pages/ServerApi"; // Import ServerApi component
 import UserDetail from "../pages/ServerApi/UserDetail"; // Import UserDetail component
+import ZuserDetail from "../pages/zustandApi/UserDetail"; // Import UserDetail component
 import Alarms from "../pages/alarms";
 import SamplePage from "../pages/SamplePage"; // Import SamplePage component
 import Layout from "../components/Layout"; // Import Layout component
@@ -74,7 +75,7 @@ function AppRouter() {
         {/* Add route for ZustandApi */}
         <Route path="/zcounter" element={<ZcounterPage />} />
         {/* Add route for ZcounterPage */}
-        <Route path="/zustandApi/user/:id" element={<UserDetail />} />
+        <Route path="/zustandApi/user/:id" element={<ZuserDetail />} />
         {/* Add route for ZustandApi UserDetail */}
         <Route path="/bitcoin" element={<BitCoin />} />
         {/* Add route for BitCoin */}
