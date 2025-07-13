@@ -685,7 +685,7 @@ function BitCoin() {
   ];
 
   return (
-    <div className="bitcoin-container">
+    <div className="bitcoin-container" style={{ maxHeight: '100vh', overflowY: 'auto' }}>
       <div className="bitcoin-header">
         <Title level={2}>
           <DollarOutlined style={{ marginRight: '8px', color: '#ff8c00' }} />
