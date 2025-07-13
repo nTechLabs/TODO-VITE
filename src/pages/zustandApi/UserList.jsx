@@ -2,7 +2,6 @@
 import React, { useEffect } from "react";
 import {
   List,
-  Checkbox,
   Button,
   Alert,
   Spin,
@@ -13,6 +12,7 @@ import {
 import { PlusOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import useUserZStore from "../../store/userZstore";
+import UserItem from "./UserItem";
 import "antd/dist/reset.css";
 import "./user-list.css";
 
@@ -69,29 +69,11 @@ const UserList = () => {
       <List
         dataSource={users}
         renderItem={(user) => (
-          <List.Item key={user.id} style={{ cursor: "pointer" }}>
-            <div
-              style={{ display: "flex", alignItems: "center", width: "100%" }}
-              onClick={() => navigate(`/zustandApi/user/${user.id}`)}
-            >
-              {/* 체크박스 컨테이너 */}
-              <div>
-                <Checkbox
-                  checked={checked.includes(user.id)}
-                  onChange={(e) => {
-                    e.stopPropagation();
-                    toggleChecked(user.id);
-                  }}
-                />
-              </div>
-              {/* 사용자 정보 표시 */}
-              <List.Item.Meta
-                title={user.name}
-                description={user.email}
-                style={{ marginLeft: 8 }}
-              />
-            </div>
-          </List.Item>
+          <UserItem
+            user={user}
+            checked={checked}
+            toggleChecked={toggleChecked}
+          />
         )}
       />
       {/* 새 사용자 추가 플로팅 버튼 */}
