@@ -689,7 +689,7 @@ function BitCoin() {
       <div className="bitcoin-header">
         <Title level={2}>
           <DollarOutlined style={{ marginRight: '8px', color: '#ff8c00' }} />
-          Bitcoin & Ethereum Dashboard
+          Bitcoin & Ethereum Dashboard by Lion
         </Title>
         <Space>
           <Select 
