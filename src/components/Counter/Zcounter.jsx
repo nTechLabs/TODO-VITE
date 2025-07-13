@@ -24,7 +24,7 @@ function Zcounter() {
       title="Zustand Counter" 
       className="zcounter-card"
     >
-      <Space direction="vertical" size="middle" style={{ width: '100%' }}>
+      <Space direction="vertical" size="middle" className="zcounter-container">
         {/* 기본 카운터 */}
         <div className="zcounter-display">
           <Title level={2} className="zcounter-number">

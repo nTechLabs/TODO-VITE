@@ -34,20 +34,16 @@ function Counter() {
           
           <Row gutter={[16, 16]}>
             <Col xs={24} lg={16}>
-              <Card title="Redux Toolkit Counter" style={{ textAlign: 'center' }}>
+              <Card title="Redux Toolkit Counter" className="main-counter-card">
                 {/* 현재 카운트 표시 */}
-                <div style={{ marginBottom: '20px' }}>
-                  <Title level={1} style={{ 
-                    fontSize: '48px', 
-                    margin: '20px 0',
-                    color: '#1890ff'
-                  }}>
+                <div className="main-counter-display">
+                  <Title level={1} className="main-counter-number">
                     {count}
                   </Title>
                 </div>
 
                 {/* 기본 증감 버튼 */}
-                <Space size="middle" style={{ marginBottom: '20px' }}>
+                <Space size="middle" className="basic-buttons">
                   <Button
                     type="primary"
                     size="large"
@@ -67,7 +63,7 @@ function Counter() {
                 </Space>
 
                 {/* 커스텀 값 증감 */}
-                <div style={{ marginBottom: '20px' }}>
+                <div className="custom-value-section">
                   <Space align="center">
                     <Text>Custom Value:</Text>
                     <InputNumber 
@@ -75,7 +71,7 @@ function Counter() {
                       onChange={(value) => setCustomValue(value || 1)}
                       min={1}
                       max={100}
-                      style={{ width: 80 }}
+                      className="custom-value-input"
                     />
                     <Button 
                       onClick={() => dispatch(counterSliceActs.down(customValue))}
@@ -135,7 +131,7 @@ function Counter() {
                     Clear
                   </Button>
                 }
-                style={{ height: '400px' }}
+                className="history-card"
               >
                 <List
                   size="small"
@@ -145,7 +141,7 @@ function Counter() {
                       <Text code>{item}</Text>
                     </List.Item>
                   )}
-                  style={{ height: '300px', overflow: 'auto' }}
+                  className="history-list"
                 />
               </Card>
             </Col>
@@ -155,17 +151,12 @@ function Counter() {
         <Divider />
         
         {/* 비교 설명 */}
-        <div>
-          <Title level={3} style={{ textAlign: 'center' }}>상태 관리 라이브러리 비교</Title>
+        <div className="comparison-section">
+          <Title level={3} className="comparison-title">상태 관리 라이브러리 비교</Title>
           <Row gutter={[16, 16]}>
             <Col xs={24} md={8}>
-              <div style={{ 
-                padding: '16px', 
-                background: '#f6ffed', 
-                borderRadius: '8px',
-                border: '1px solid #b7eb8f'
-              }}>
-                <Title level={4} style={{ color: '#52c41a', textAlign: 'center' }}>
+              <div className="comparison-card comparison-card-zustand">
+                <Title level={4} className="comparison-card-title zustand">
                   Zustand ✨
                 </Title>
                 <ul>
@@ -178,13 +169,8 @@ function Counter() {
               </div>
             </Col>
             <Col xs={24} md={8}>
-              <div style={{ 
-                padding: '16px', 
-                background: '#e6f7ff', 
-                borderRadius: '8px',
-                border: '1px solid #91d5ff'
-              }}>
-                <Title level={4} style={{ color: '#1890ff', textAlign: 'center' }}>
+              <div className="comparison-card comparison-card-redux">
+                <Title level={4} className="comparison-card-title redux">
                   Redux Toolkit ⚡
                 </Title>
                 <ul>
@@ -197,13 +183,8 @@ function Counter() {
               </div>
             </Col>
             <Col xs={24} md={8}>
-              <div style={{ 
-                padding: '16px', 
-                background: '#fff7e6', 
-                borderRadius: '8px',
-                border: '1px solid #ffd591'
-              }}>
-                <Title level={4} style={{ color: '#fa8c16', textAlign: 'center' }}>
+              <div className="comparison-card comparison-card-classic">
+                <Title level={4} className="comparison-card-title classic">
                   Classic Redux 🔧
                 </Title>
                 <ul>

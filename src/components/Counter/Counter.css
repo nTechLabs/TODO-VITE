@@ -49,6 +49,94 @@
   margin-bottom: 20px;
 }
 
+/* 메인 Redux 카운터 카드 */
+.main-counter-card {
+  text-align: center;
+}
+
+/* 카운터 숫자 표시 */
+.main-counter-display {
+  margin-bottom: 20px;
+}
+
+.main-counter-number {
+  font-size: 48px;
+  margin: 20px 0;
+  color: #1890ff;
+}
+
+/* 기본 버튼 그룹 */
+.basic-buttons {
+  margin-bottom: 20px;
+}
+
+/* 커스텀 값 입력 영역 */
+.custom-value-section {
+  margin-bottom: 20px;
+}
+
+.custom-value-input {
+  width: 80px;
+}
+
+/* 히스토리 카드 */
+.history-card {
+  height: 400px;
+}
+
+.history-list {
+  height: 300px;
+  overflow: auto;
+}
+
+/* 상태 관리 비교 섹션 */
+.comparison-section {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.comparison-title {
+  text-align: center;
+}
+
+/* 비교 카드들 */
+.comparison-card {
+  padding: 16px;
+  border-radius: 8px;
+  border: 1px solid;
+}
+
+.comparison-card-zustand {
+  background: #f6ffed;
+  border-color: #b7eb8f;
+}
+
+.comparison-card-redux {
+  background: #e6f7ff;
+  border-color: #91d5ff;
+}
+
+.comparison-card-classic {
+  background: #fff7e6;
+  border-color: #ffd591;
+}
+
+.comparison-card-title {
+  text-align: center;
+}
+
+.comparison-card-title.zustand {
+  color: #52c41a;
+}
+
+.comparison-card-title.redux {
+  color: #1890ff;
+}
+
+.comparison-card-title.classic {
+  color: #fa8c16;
+}
+
 .counter-custom-section {
   margin-bottom: 20px;
 }
@@ -104,21 +192,75 @@
   margin: 0 auto;
 }
 
+.zcounter-container {
+  width: 100%;
+}
+
 .zcounter-display {
   text-align: center;
+  margin-bottom: 16px;
 }
 
 .zcounter-number {
+  color: #52c41a;
+  font-size: 48px;
   margin: 20px 0;
 }
 
 .zcounter-button-group {
-  width: 100%;
   justify-content: center;
+  margin-bottom: 16px;
 }
 
 .zcounter-custom-input {
   width: 80px;
+}
+
+/* M2 Money Supply 차트 관련 스타일 */
+.m2-chart-card {
+  flex: 2;
+  min-width: 400px;
+}
+
+.m2-chart-container {
+  height: 300px;
+  width: 100%;
+}
+
+.m2-chart-info {
+  margin-top: 16px;
+  padding: 12px;
+  background: #f0f9ff;
+  border-radius: 6px;
+}
+
+.m2-chart-info-text {
+  font-size: 12px;
+  color: #666;
+}
+
+.m2-status-info {
+  padding: 16px;
+  background: #f6ffed;
+  border-radius: 8px;
+  border: 1px solid #b7eb8f;
+}
+
+.m2-status-title {
+  color: #52c41a;
+  font-weight: bold;
+}
+
+/* Zcounter와 M2 차트 레이아웃 */
+.zcounter-main-container {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.zcounter-counter-card {
+  flex: 1;
+  min-width: 300px;
 }
 
 /* 반응형 디자인 */
