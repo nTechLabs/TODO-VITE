@@ -3,7 +3,7 @@ import { Layout } from "antd";
 import AppRouter from "./router";
 import store from "./store/store";
 import { Provider } from "react-redux";
-import ReactQueryProvider from "./pages/ServerApi/react-query-provider";
+import ReactQueryProvider from "./config/react-query-provider";
 
 function App() {
   return (
