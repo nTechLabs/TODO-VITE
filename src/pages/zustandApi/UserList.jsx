@@ -7,11 +7,12 @@ import {
   Spin,
   Space,
   FloatButton,
-  message,
 } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
-import { useUsersQuery, useDeleteUsersMutation, useCheckedUsers } from "../../hooks/useUserQueries";
+import { useUsersQuery, useDeleteUsersMutation } from "../../hooks/useUserQueries";
+import { useCheckedStore } from "../../store/checkedStore";
+import { useNotificationStore } from "../../store/notificationStore";
 import UserItem from "./UserItem";
 import "antd/dist/reset.css";
 import "./user-list.css";
@@ -26,12 +27,14 @@ import "./user-list.css";
  */
 const UserList = () => {
   const navigate = useNavigate(); // 라우터 네비게이션 훅
-  const [messageApi, contextHolder] = message.useMessage(); // Ant Design 메시지 API
 
   // React Query hooks 사용
   const { data: users = [], isLoading, error } = useUsersQuery();
   const deleteUsersMutation = useDeleteUsersMutation();
-  const { checked, toggleChecked, clearChecked } = useCheckedUsers();
+  
+  // Zustand stores 사용
+  const { checked, toggleChecked, clearChecked } = useCheckedStore();
+  const { success, error: showError } = useNotificationStore();
 
   //** Handler 를 구현하는 영역
   /**
@@ -41,10 +44,10 @@ const UserList = () => {
   const handleDelete = async () => {
     try {
       await deleteUsersMutation.mutateAsync(checked);
-      messageApi.success("삭제되었습니다.");
+      success("삭제되었습니다.");
       clearChecked(); // 체크 상태 초기화
     } catch (error) {
-      messageApi.error("삭제에 실패했습니다.");
+      showError("삭제에 실패했습니다.");
     }
   };
   //** Handler 를 구현하는 영역 **//
@@ -59,7 +62,6 @@ const UserList = () => {
   // Return JSX
   return (
     <div className="userlist-scroll-hide">
-      {contextHolder} {/* 메시지 컨텍스트 홀더 */}
       {/* 사용자 목록 렌더링 */}
       <List
         dataSource={users}
