@@ -62,7 +62,7 @@ const useUserZStore = create(
       //       })();
       //     }, [id]);
       // ⚠️ 주의: getUserById와 같은 async 함수를 selector로 직접 사용하면 무한 렌더링이 발생할 수 있습니다.
-      //   반드시 이벤트 핸들러나 useEffect 등에서 호출하세요.
+      //   반드시 이벤트 핸들러나 useEffect 등에서 호출해야함.
       getUserById: async (id) => {
         try {
           const res = await axios.get(`${USERS_API_URL}/${id}`);

@@ -2,11 +2,12 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Form, Input, Button, Typography, Alert, Space, Card, message, Spin } from "antd";
-import useUserZStore from "../../store/userZstore";
+import { useUserQuery, useAddUserMutation, useUpdateUserMutation } from "../../hooks/useUserQueries";
 import "./user-list.css";
 
 /**
  * 사용자 상세 정보를 표시하고 편집할 수 있는 컴포넌트
+ * - React Query를 사용한 사용자 정보 조회 및 수정
  * - 기존 사용자 정보 수정 (id가 숫자인 경우)
  * - 새 사용자 추가 (id가 'new'인 경우)
  * - 폼 입력값 실시간 유효성 검사
@@ -16,27 +17,11 @@ const UserDetail = () => {
   const { id } = useParams(); // URL 파라미터에서 사용자 ID 추출
   const navigate = useNavigate(); // 라우터 네비게이션 훅
   const isNew = id === "new"; // 새 사용자 추가 모드인지 확인
-  const { getUserById, addUser, updateUser, saveStatus, errorMsg, loading } = useUserZStore();
-
-  const [user, setUser] = useState(null);
-  const [userLoading, setUserLoading] = useState(false);
-  // const user = !isNew ? getUserById(id) : null; // 기존 사용자 정보 가져오기
-  // 상세 진입 시 데이터 보장 (users length 체크 제거)
-  useEffect(() => {
-    if (!isNew) {
-      setUserLoading(true);
-      (async () => {
-        try {
-          const data = await getUserById(id);
-          setUser(data);
-        } catch {
-          setUser(null);
-        } finally {
-          setUserLoading(false);
-        }
-      })();
-    }
-  }, [isNew, getUserById, id]);
+  
+  // React Query hooks 사용
+  const { data: user, isLoading: userLoading } = useUserQuery(isNew ? null : id);
+  const addUserMutation = useAddUserMutation();
+  const updateUserMutation = useUpdateUserMutation();
 
 
   // 폼 초기값 설정 (새 사용자 vs 기존 사용자)
@@ -159,17 +144,17 @@ const UserDetail = () => {
   const handleSave = async () => {
     // 유효성 검사 에러가 있으면 저장하지 않음
     if (emailError || phoneError) return;
-    if (isNew) {
-      await addUser(form); // 새 사용자 추가
-    } else {
-      await updateUser({ ...form, id }); // 기존 사용자 수정
-    }
-    // 저장 결과에 따라 메시지 표시 및 페이지 이동
-    if (saveStatus === "success") {
+    
+    try {
+      if (isNew) {
+        await addUserMutation.mutateAsync(form); // 새 사용자 추가
+      } else {
+        await updateUserMutation.mutateAsync({ ...form, id }); // 기존 사용자 수정
+      }
       messageApi.success("저장되었습니다.");
       navigate("/zustandApi");
-    } else if (saveStatus === "error") {
-      messageApi.error(errorMsg);
+    } catch (error) {
+      messageApi.error("저장에 실패했습니다.");
     }
   };
 
@@ -225,7 +210,7 @@ const UserDetail = () => {
           <Button 
             type="primary" 
             onClick={handleSave} 
-            loading={loading}
+            loading={addUserMutation.isPending || updateUserMutation.isPending}
             disabled={!!emailError || !!phoneError} // 유효성 검사 에러가 있으면 비활성화
           >
             Save
@@ -233,8 +218,13 @@ const UserDetail = () => {
         </Space>
         
         {/* 저장 에러 메시지 표시 */}
-        {saveStatus === "error" && (
-          <Alert type="error" message={errorMsg} showIcon style={{ marginTop: 16 }} />
+        {(addUserMutation.error || updateUserMutation.error) && (
+          <Alert 
+            type="error" 
+            message={addUserMutation.error?.message || updateUserMutation.error?.message} 
+            showIcon 
+            style={{ marginTop: 16 }} 
+          />
         )}
       </Form>
     </Card>
