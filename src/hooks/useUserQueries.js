@@ -8,6 +8,12 @@ import { USERS_API_URL } from "../interface/api";
  * 사용자 목록 조회, 추가, 수정, 삭제 기능을 제공
  */
 
+// Query 설정
+const QUERY_CONFIG = {
+  staleTime: 5 * 60 * 1000, // 5분간 캐시 유지
+  gcTime: 10 * 60 * 1000,   // 10분간 캐시 보관
+};
+
 // QueryKey Factory
 export const userKeys = {
   all: () => ["users"],
@@ -20,14 +26,24 @@ export const useUsersQuery = (filters = {}) => {
   return useQuery({
     queryKey: userKeys.list(filters),
     queryFn: async () => {
-      const response = await fetch(USERS_API_URL);
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
+      try {
+        const response = await axios.get(USERS_API_URL);
+        return response.data;
+      } catch (error) {
+        if (error.response) {
+          // 서버가 응답했지만 에러 상태 코드
+          throw new Error(`사용자 목록 조회 실패: ${error.response.status} - ${error.response.data?.message || error.response.statusText}`);
+        } else if (error.request) {
+          // 요청이 전송되었지만 응답을 받지 못함
+          throw new Error('서버에 연결할 수 없습니다. 네트워크 연결을 확인해주세요.');
+        } else {
+          // 요청 설정 중 오류 발생
+          throw new Error(`요청 중 오류가 발생했습니다: ${error.message}`);
+        }
       }
-      return response.json();
     },
-    staleTime: 5 * 60 * 1000, // 5분간 캐시 유지
-    gcTime: 10 * 60 * 1000, // 10분간 캐시 보관
+    staleTime: QUERY_CONFIG.staleTime,
+    gcTime: QUERY_CONFIG.gcTime,
   });
 };
 
@@ -53,6 +69,8 @@ export const useUserQuery = (id) => {
       }
     },
     enabled: !!id, // id가 있을 때만 쿼리 실행
+    staleTime: QUERY_CONFIG.staleTime,
+    gcTime: QUERY_CONFIG.gcTime,
   });
 };
 
