@@ -36,8 +36,21 @@ export const useUserQuery = (id) => {
   return useQuery({
     queryKey: userKeys.detail(id),
     queryFn: async () => {
-      const response = await axios.get(`${USERS_API_URL}/${id}`);
-      return response.data;
+      try {
+        const response = await axios.get(`${USERS_API_URL}/${id}`);
+        return response.data;
+      } catch (error) {
+        if (error.response) {
+          // 서버가 응답했지만 에러 상태 코드
+          throw new Error(`사용자 조회 실패: ${error.response.status} - ${error.response.data?.message || error.response.statusText}`);
+        } else if (error.request) {
+          // 요청이 전송되었지만 응답을 받지 못함
+          throw new Error('서버에 연결할 수 없습니다. 네트워크 연결을 확인해주세요.');
+        } else {
+          // 요청 설정 중 오류 발생
+          throw new Error(`요청 중 오류가 발생했습니다: ${error.message}`);
+        }
+      }
     },
     enabled: !!id, // id가 있을 때만 쿼리 실행
   });
@@ -49,12 +62,22 @@ export const useDeleteUsersMutation = () => {
 
   return useMutation({
     mutationFn: async (userIds) => {
-      // 체크된 모든 사용자에 대해 병렬로 삭제 요청
-      await Promise.all(
-        userIds.map(async (id) => {
-          await axios.delete(`${USERS_API_URL}/${id}`);
-        })
-      );
+      try {
+        // 체크된 모든 사용자에 대해 병렬로 삭제 요청
+        await Promise.all(
+          userIds.map(async (id) => {
+            await axios.delete(`${USERS_API_URL}/${id}`);
+          })
+        );
+      } catch (error) {
+        if (error.response) {
+          throw new Error(`사용자 삭제 실패: ${error.response.status} - ${error.response.data?.message || error.response.statusText}`);
+        } else if (error.request) {
+          throw new Error('서버에 연결할 수 없습니다. 네트워크 연결을 확인해주세요.');
+        } else {
+          throw new Error(`삭제 요청 중 오류가 발생했습니다: ${error.message}`);
+        }
+      }
     },
     onSuccess: () => {
       // 삭제 성공 시 사용자 목록 쿼리 무효화하여 새로 가져오기
@@ -69,8 +92,18 @@ export const useAddUserMutation = () => {
 
   return useMutation({
     mutationFn: async (user) => {
-      const response = await axios.post(USERS_API_URL, user);
-      return response.data;
+      try {
+        const response = await axios.post(USERS_API_URL, user);
+        return response.data;
+      } catch (error) {
+        if (error.response) {
+          throw new Error(`사용자 추가 실패: ${error.response.status} - ${error.response.data?.message || error.response.statusText}`);
+        } else if (error.request) {
+          throw new Error('서버에 연결할 수 없습니다. 네트워크 연결을 확인해주세요.');
+        } else {
+          throw new Error(`추가 요청 중 오류가 발생했습니다: ${error.message}`);
+        }
+      }
     },
     onSuccess: () => {
       // 추가 성공 시 사용자 목록 쿼리 무효화하여 새로 가져오기
@@ -85,8 +118,18 @@ export const useUpdateUserMutation = () => {
 
   return useMutation({
     mutationFn: async (user) => {
-      const response = await axios.put(`${USERS_API_URL}/${user.id}`, user);
-      return response.data;
+      try {
+        const response = await axios.put(`${USERS_API_URL}/${user.id}`, user);
+        return response.data;
+      } catch (error) {
+        if (error.response) {
+          throw new Error(`사용자 수정 실패: ${error.response.status} - ${error.response.data?.message || error.response.statusText}`);
+        } else if (error.request) {
+          throw new Error('서버에 연결할 수 없습니다. 네트워크 연결을 확인해주세요.');
+        } else {
+          throw new Error(`수정 요청 중 오류가 발생했습니다: ${error.message}`);
+        }
+      }
     },
     onSuccess: (data) => {
       // 수정 성공 시 해당 사용자 쿼리와 사용자 목록 쿼리 무효화
