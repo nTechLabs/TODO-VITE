@@ -2,30 +2,12 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import axios from "axios";
 import { USERS_API_URL } from "../interface/api";
+import { QUERY_CONFIG, MUTATION_CONFIG } from "../config/queryConfig";
 
 /**
  * 사용자 관리를 위한 React Query 커스텀 훅
  * 사용자 목록 조회, 추가, 수정, 삭제 기능을 제공
  */
-
-// Query 설정
-const QUERY_CONFIG = {
-  staleTime: 5 * 60 * 1000,        // 5분간 캐시 유지
-  gcTime: 10 * 60 * 1000,          // 10분간 캐시 보관
-  retry: 3,                        // 실패 시 3번 재시도
-  retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 30000), // 지수 백오프
-  refetchOnWindowFocus: false,     // 윈도우 포커스 시 재요청 비활성화
-  refetchOnReconnect: true,        // 네트워크 재연결 시 재요청
-  refetchOnMount: true,            // 마운트 시 재요청
-  networkMode: 'online',           // 온라인일 때만 쿼리 실행
-};
-
-// Mutation 설정
-const MUTATION_CONFIG = {
-  retry: 2,                        // 실패 시 2번 재시도
-  retryDelay: 1500,               // 재시도 간격 1.5초
-  networkMode: 'online',           // 온라인일 때만 mutation 실행
-};
 
 // QueryKey Factory
 export const userKeys = {
