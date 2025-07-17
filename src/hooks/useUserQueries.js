@@ -10,17 +10,15 @@ import { USERS_API_URL } from "../interface/api";
 
 // QueryKey Factory
 export const userKeys = {
-  all: ["users"],
-  lists: () => [...userKeys.all, "list"],
-  list: (filters) => [...userKeys.lists(), { filters }],
-  details: () => [...userKeys.all, "detail"],
-  detail: (id) => [...userKeys.details(), id],
+  all: () => ["users"],
+  list: (filters = {}) => [...userKeys.all(), "list", filters],
+  detail: (id) => [...userKeys.all(), "detail", id],
 };
 
 // 사용자 목록을 가져오는 Query Hook
-export const useUsersQuery = () => {
+export const useUsersQuery = (filters = {}) => {
   return useQuery({
-    queryKey: userKeys.lists(),
+    queryKey: userKeys.list(filters),
     queryFn: async () => {
       const response = await fetch(USERS_API_URL);
       if (!response.ok) {
@@ -60,7 +58,7 @@ export const useDeleteUsersMutation = () => {
     },
     onSuccess: () => {
       // 삭제 성공 시 사용자 목록 쿼리 무효화하여 새로 가져오기
-      queryClient.invalidateQueries({ queryKey: userKeys.lists() });
+      queryClient.invalidateQueries({ queryKey: userKeys.all() });
     },
   });
 };
@@ -76,7 +74,7 @@ export const useAddUserMutation = () => {
     },
     onSuccess: () => {
       // 추가 성공 시 사용자 목록 쿼리 무효화하여 새로 가져오기
-      queryClient.invalidateQueries({ queryKey: userKeys.lists() });
+      queryClient.invalidateQueries({ queryKey: userKeys.all() });
     },
   });
 };
@@ -93,7 +91,7 @@ export const useUpdateUserMutation = () => {
     onSuccess: (data) => {
       // 수정 성공 시 해당 사용자 쿼리와 사용자 목록 쿼리 무효화
       queryClient.invalidateQueries({ queryKey: userKeys.detail(data.id) });
-      queryClient.invalidateQueries({ queryKey: userKeys.lists() });
+      queryClient.invalidateQueries({ queryKey: userKeys.all() });
     },
   });
 };
