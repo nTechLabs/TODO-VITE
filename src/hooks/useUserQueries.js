@@ -9,6 +9,27 @@ import { QUERY_CONFIG, MUTATION_CONFIG } from "../config/queryConfig";
  * 사용자 목록 조회, 추가, 수정, 삭제 기능을 제공
  */
 
+// 공통 쿼리 옵션을 생성하는 헬퍼 함수
+const createQueryOptions = (additionalOptions = {}) => ({
+  staleTime: QUERY_CONFIG.staleTime,
+  gcTime: QUERY_CONFIG.gcTime,
+  retry: QUERY_CONFIG.retry,
+  retryDelay: QUERY_CONFIG.retryDelay,
+  refetchOnWindowFocus: QUERY_CONFIG.refetchOnWindowFocus,
+  refetchOnReconnect: QUERY_CONFIG.refetchOnReconnect,
+  refetchOnMount: QUERY_CONFIG.refetchOnMount,
+  networkMode: QUERY_CONFIG.networkMode,
+  ...additionalOptions,
+});
+
+// 공통 뮤테이션 옵션을 생성하는 헬퍼 함수
+const createMutationOptions = (additionalOptions = {}) => ({
+  retry: MUTATION_CONFIG.retry,
+  retryDelay: MUTATION_CONFIG.retryDelay,
+  networkMode: MUTATION_CONFIG.networkMode,
+  ...additionalOptions,
+});
+
 // QueryKey Factory
 export const userKeys = {
   all: () => ["users"],
@@ -37,14 +58,7 @@ export const useUsersQuery = (filters = {}) => {
         }
       }
     },
-    staleTime: QUERY_CONFIG.staleTime,
-    gcTime: QUERY_CONFIG.gcTime,
-    retry: QUERY_CONFIG.retry,
-    retryDelay: QUERY_CONFIG.retryDelay,
-    refetchOnWindowFocus: QUERY_CONFIG.refetchOnWindowFocus,
-    refetchOnReconnect: QUERY_CONFIG.refetchOnReconnect,
-    refetchOnMount: QUERY_CONFIG.refetchOnMount,
-    networkMode: QUERY_CONFIG.networkMode,
+    ...createQueryOptions(),
   });
 };
 
@@ -69,15 +83,7 @@ export const useUserQuery = (id) => {
         }
       }
     },
-    enabled: !!id, // id가 있을 때만 쿼리 실행
-    staleTime: QUERY_CONFIG.staleTime,
-    gcTime: QUERY_CONFIG.gcTime,
-    retry: QUERY_CONFIG.retry,
-    retryDelay: QUERY_CONFIG.retryDelay,
-    refetchOnWindowFocus: QUERY_CONFIG.refetchOnWindowFocus,
-    refetchOnReconnect: QUERY_CONFIG.refetchOnReconnect,
-    refetchOnMount: QUERY_CONFIG.refetchOnMount,
-    networkMode: QUERY_CONFIG.networkMode,
+    ...createQueryOptions({ enabled: !!id }), // id가 있을 때만 쿼리 실행
   });
 };
 
@@ -104,13 +110,12 @@ export const useDeleteUsersMutation = () => {
         }
       }
     },
-    retry: MUTATION_CONFIG.retry,
-    retryDelay: MUTATION_CONFIG.retryDelay,
-    networkMode: MUTATION_CONFIG.networkMode,
-    onSuccess: () => {
-      // 삭제 성공 시 사용자 목록 쿼리 무효화하여 새로 가져오기
-      queryClient.invalidateQueries({ queryKey: userKeys.all() });
-    },
+    ...createMutationOptions({
+      onSuccess: () => {
+        // 삭제 성공 시 사용자 목록 쿼리 무효화하여 새로 가져오기
+        queryClient.invalidateQueries({ queryKey: userKeys.all() });
+      },
+    }),
   });
 };
 
