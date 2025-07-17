@@ -8,10 +8,19 @@ import { USERS_API_URL } from "../interface/api";
  * 사용자 목록 조회, 추가, 수정, 삭제 기능을 제공
  */
 
+// QueryKey Factory
+export const userKeys = {
+  all: ["users"],
+  lists: () => [...userKeys.all, "list"],
+  list: (filters) => [...userKeys.lists(), { filters }],
+  details: () => [...userKeys.all, "detail"],
+  detail: (id) => [...userKeys.details(), id],
+};
+
 // 사용자 목록을 가져오는 Query Hook
 export const useUsersQuery = () => {
   return useQuery({
-    queryKey: ["users"],
+    queryKey: userKeys.lists(),
     queryFn: async () => {
       const response = await fetch(USERS_API_URL);
       if (!response.ok) {
@@ -27,7 +36,7 @@ export const useUsersQuery = () => {
 // 특정 사용자를 가져오는 Query Hook
 export const useUserQuery = (id) => {
   return useQuery({
-    queryKey: ["user", id],
+    queryKey: userKeys.detail(id),
     queryFn: async () => {
       const response = await axios.get(`${USERS_API_URL}/${id}`);
       return response.data;
@@ -51,7 +60,7 @@ export const useDeleteUsersMutation = () => {
     },
     onSuccess: () => {
       // 삭제 성공 시 사용자 목록 쿼리 무효화하여 새로 가져오기
-      queryClient.invalidateQueries({ queryKey: ["users"] });
+      queryClient.invalidateQueries({ queryKey: userKeys.lists() });
     },
   });
 };
@@ -67,7 +76,7 @@ export const useAddUserMutation = () => {
     },
     onSuccess: () => {
       // 추가 성공 시 사용자 목록 쿼리 무효화하여 새로 가져오기
-      queryClient.invalidateQueries({ queryKey: ["users"] });
+      queryClient.invalidateQueries({ queryKey: userKeys.lists() });
     },
   });
 };
@@ -83,8 +92,8 @@ export const useUpdateUserMutation = () => {
     },
     onSuccess: (data) => {
       // 수정 성공 시 해당 사용자 쿼리와 사용자 목록 쿼리 무효화
-      queryClient.invalidateQueries({ queryKey: ["user", data.id] });
-      queryClient.invalidateQueries({ queryKey: ["users"] });
+      queryClient.invalidateQueries({ queryKey: userKeys.detail(data.id) });
+      queryClient.invalidateQueries({ queryKey: userKeys.lists() });
     },
   });
 };
