@@ -138,13 +138,12 @@ export const useAddUserMutation = () => {
         }
       }
     },
-    retry: MUTATION_CONFIG.retry,
-    retryDelay: MUTATION_CONFIG.retryDelay,
-    networkMode: MUTATION_CONFIG.networkMode,
-    onSuccess: () => {
-      // 추가 성공 시 사용자 목록 쿼리 무효화하여 새로 가져오기
-      queryClient.invalidateQueries({ queryKey: userKeys.all() });
-    },
+    ...createMutationOptions({
+      onSuccess: () => {
+        // 추가 성공 시 사용자 목록 쿼리 무효화하여 새로 가져오기
+        queryClient.invalidateQueries({ queryKey: userKeys.all() });
+      },
+    }),
   });
 };
 
@@ -167,14 +166,13 @@ export const useUpdateUserMutation = () => {
         }
       }
     },
-    retry: MUTATION_CONFIG.retry,
-    retryDelay: MUTATION_CONFIG.retryDelay,
-    networkMode: MUTATION_CONFIG.networkMode,
-    onSuccess: (data) => {
-      // 수정 성공 시 해당 사용자 쿼리와 사용자 목록 쿼리 무효화
-      queryClient.invalidateQueries({ queryKey: userKeys.detail(data.id) });
-      queryClient.invalidateQueries({ queryKey: userKeys.all() });
-    },
+    ...createMutationOptions({
+      onSuccess: (data) => {
+        // 수정 성공 시 해당 사용자 쿼리와 사용자 목록 쿼리 무효화
+        queryClient.invalidateQueries({ queryKey: userKeys.detail(data.id) });
+        queryClient.invalidateQueries({ queryKey: userKeys.all() });
+      },
+    }),
   });
 };
 
