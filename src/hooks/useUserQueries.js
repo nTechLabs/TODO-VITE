@@ -10,8 +10,21 @@ import { USERS_API_URL } from "../interface/api";
 
 // Query 설정
 const QUERY_CONFIG = {
-  staleTime: 5 * 60 * 1000, // 5분간 캐시 유지
-  gcTime: 10 * 60 * 1000,   // 10분간 캐시 보관
+  staleTime: 5 * 60 * 1000,        // 5분간 캐시 유지
+  gcTime: 10 * 60 * 1000,          // 10분간 캐시 보관
+  retry: 3,                        // 실패 시 3번 재시도
+  retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 30000), // 지수 백오프
+  refetchOnWindowFocus: false,     // 윈도우 포커스 시 재요청 비활성화
+  refetchOnReconnect: true,        // 네트워크 재연결 시 재요청
+  refetchOnMount: true,            // 마운트 시 재요청
+  networkMode: 'online',           // 온라인일 때만 쿼리 실행
+};
+
+// Mutation 설정
+const MUTATION_CONFIG = {
+  retry: 2,                        // 실패 시 2번 재시도
+  retryDelay: 1500,               // 재시도 간격 1.5초
+  networkMode: 'online',           // 온라인일 때만 mutation 실행
 };
 
 // QueryKey Factory
@@ -44,6 +57,12 @@ export const useUsersQuery = (filters = {}) => {
     },
     staleTime: QUERY_CONFIG.staleTime,
     gcTime: QUERY_CONFIG.gcTime,
+    retry: QUERY_CONFIG.retry,
+    retryDelay: QUERY_CONFIG.retryDelay,
+    refetchOnWindowFocus: QUERY_CONFIG.refetchOnWindowFocus,
+    refetchOnReconnect: QUERY_CONFIG.refetchOnReconnect,
+    refetchOnMount: QUERY_CONFIG.refetchOnMount,
+    networkMode: QUERY_CONFIG.networkMode,
   });
 };
 
@@ -71,6 +90,12 @@ export const useUserQuery = (id) => {
     enabled: !!id, // id가 있을 때만 쿼리 실행
     staleTime: QUERY_CONFIG.staleTime,
     gcTime: QUERY_CONFIG.gcTime,
+    retry: QUERY_CONFIG.retry,
+    retryDelay: QUERY_CONFIG.retryDelay,
+    refetchOnWindowFocus: QUERY_CONFIG.refetchOnWindowFocus,
+    refetchOnReconnect: QUERY_CONFIG.refetchOnReconnect,
+    refetchOnMount: QUERY_CONFIG.refetchOnMount,
+    networkMode: QUERY_CONFIG.networkMode,
   });
 };
 
@@ -97,6 +122,9 @@ export const useDeleteUsersMutation = () => {
         }
       }
     },
+    retry: MUTATION_CONFIG.retry,
+    retryDelay: MUTATION_CONFIG.retryDelay,
+    networkMode: MUTATION_CONFIG.networkMode,
     onSuccess: () => {
       // 삭제 성공 시 사용자 목록 쿼리 무효화하여 새로 가져오기
       queryClient.invalidateQueries({ queryKey: userKeys.all() });
@@ -123,6 +151,9 @@ export const useAddUserMutation = () => {
         }
       }
     },
+    retry: MUTATION_CONFIG.retry,
+    retryDelay: MUTATION_CONFIG.retryDelay,
+    networkMode: MUTATION_CONFIG.networkMode,
     onSuccess: () => {
       // 추가 성공 시 사용자 목록 쿼리 무효화하여 새로 가져오기
       queryClient.invalidateQueries({ queryKey: userKeys.all() });
@@ -149,6 +180,9 @@ export const useUpdateUserMutation = () => {
         }
       }
     },
+    retry: MUTATION_CONFIG.retry,
+    retryDelay: MUTATION_CONFIG.retryDelay,
+    networkMode: MUTATION_CONFIG.networkMode,
     onSuccess: (data) => {
       // 수정 성공 시 해당 사용자 쿼리와 사용자 목록 쿼리 무효화
       queryClient.invalidateQueries({ queryKey: userKeys.detail(data.id) });
