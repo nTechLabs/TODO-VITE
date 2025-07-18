@@ -2,7 +2,7 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import axios from "axios";
 import { USERS_API_URL } from "../interface/api";
-import { createQueryOptions, createMutationOptions } from "../config/queryConfig";
+import { createQueryOptions, createMutationOptions } from "../config/reactQueryConfig";
 
 /**
  * 사용자 관리를 위한 React Query 커스텀 훅
