@@ -11,8 +11,8 @@ const LoginForm = () => (
           boxShadow: "0 8px 32px 0 rgba(31, 38, 135, 0.15)",
           padding: 32,
           margin: "0 auto",
-          body: { padding: 0 },
         }}
+        bodyStyle={{ padding: 0 }}
       >
         <div style={{ textAlign: "center", marginBottom: 32 }}>
           <Avatar size={72} icon={<LockOutlined />} style={{ background: "linear-gradient(135deg, #6366f1 0%, #06b6d4 100%)" }} />

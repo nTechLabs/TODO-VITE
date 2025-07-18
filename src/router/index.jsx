@@ -21,10 +21,6 @@ import Home from "../pages/Home"; // Import Home component
 import CardDetail from "../pages/Home/CardDetail"; // Import CardDetail component
 import TodoApi from "../pages/TodoApi"; // Import TodoApi component
 import AlbumApi from "../pages/AlbumApi"; // Import AlbumApi component
-import MSecurity from "../pages/msecurity";
-import VisitReservation from "../pages/msecurity/visit"; // Import VisitReservation component
-import VisitList from "../pages/msecurity/visit/visitList"; // Import VisitList component
-import VisitDetail from "../pages/msecurity/visit/visitDetail"; // Import VisitDetail component
 import ZustandApi from "../pages/zustandApi"; // Import ZustandApi component
 import ZustandUserDetail from "../pages/zustandApi/UserDetail"; // Import ZustandApi UserDetail component
 import BitCoin from "../pages/BitCoin"; // Import BitCoin component
@@ -64,12 +60,6 @@ function AppRouter() {
         {/* Add route for TodoApi */}
         <Route path="/albumapi" element={<AlbumApi />} />
         {/* Add route for AlbumApi */}
-        <Route path="/msecurity" element={<MSecurity />} />
-        <Route path="/msecurity/visit" element={<VisitReservation />} />
-        <Route path="/msecurity/visit/list" element={<VisitList />} />
-        {/* Add route for VisitList */}
-        <Route path="/msecurity/visit/detail/:idx" element={<VisitDetail />} />
-        {/* Add route for VisitDetail */}
         <Route path="/zustandApi" element={<ZustandApi />} />
         {/* Add route for ZustandApi */}
         <Route path="/zustandApi/user/:id" element={<ZuserDetail />} />
