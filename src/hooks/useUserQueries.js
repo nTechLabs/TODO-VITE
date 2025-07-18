@@ -3,6 +3,7 @@ import { useState } from "react";
 import axios from "axios";
 import { USERS_API_URL } from "../interface/api";
 import { createQueryOptions, createMutationOptions } from "../config/reactQueryConfig";
+import { handleAxiosError } from "./handleAxiosError";
 
 /**
  * 사용자 관리를 위한 React Query 커스텀 훅
@@ -25,16 +26,7 @@ export const useUsersQuery = (filters = {}) => {
         const response = await axios.get(USERS_API_URL);
         return response.data;
       } catch (error) {
-        if (error.response) {
-          // 서버가 응답했지만 에러 상태 코드
-          throw new Error(`사용자 목록 조회 실패: ${error.response.status} - ${error.response.data?.message || error.response.statusText}`);
-        } else if (error.request) {
-          // 요청이 전송되었지만 응답을 받지 못함
-          throw new Error('서버에 연결할 수 없습니다. 네트워크 연결을 확인해주세요.');
-        } else {
-          // 요청 설정 중 오류 발생
-          throw new Error(`요청 중 오류가 발생했습니다: ${error.message}`);
-        }
+        handleAxiosError(error, '사용자 목록 조회');
       }
     },
     ...createQueryOptions(),
@@ -50,16 +42,7 @@ export const useUserQuery = (id) => {
         const response = await axios.get(`${USERS_API_URL}/${id}`);
         return response.data;
       } catch (error) {
-        if (error.response) {
-          // 서버가 응답했지만 에러 상태 코드
-          throw new Error(`사용자 조회 실패: ${error.response.status} - ${error.response.data?.message || error.response.statusText}`);
-        } else if (error.request) {
-          // 요청이 전송되었지만 응답을 받지 못함
-          throw new Error('서버에 연결할 수 없습니다. 네트워크 연결을 확인해주세요.');
-        } else {
-          // 요청 설정 중 오류 발생
-          throw new Error(`요청 중 오류가 발생했습니다: ${error.message}`);
-        }
+        handleAxiosError(error, '사용자 조회');
       }
     },
     ...createQueryOptions({ enabled: !!id }), // id가 있을 때만 쿼리 실행
@@ -80,13 +63,7 @@ export const useDeleteUsersMutation = () => {
           })
         );
       } catch (error) {
-        if (error.response) {
-          throw new Error(`사용자 삭제 실패: ${error.response.status} - ${error.response.data?.message || error.response.statusText}`);
-        } else if (error.request) {
-          throw new Error('서버에 연결할 수 없습니다. 네트워크 연결을 확인해주세요.');
-        } else {
-          throw new Error(`삭제 요청 중 오류가 발생했습니다: ${error.message}`);
-        }
+        handleAxiosError(error, '사용자 삭제');
       }
     },
     ...createMutationOptions({
@@ -108,13 +85,7 @@ export const useAddUserMutation = () => {
         const response = await axios.post(USERS_API_URL, user);
         return response.data;
       } catch (error) {
-        if (error.response) {
-          throw new Error(`사용자 추가 실패: ${error.response.status} - ${error.response.data?.message || error.response.statusText}`);
-        } else if (error.request) {
-          throw new Error('서버에 연결할 수 없습니다. 네트워크 연결을 확인해주세요.');
-        } else {
-          throw new Error(`추가 요청 중 오류가 발생했습니다: ${error.message}`);
-        }
+        handleAxiosError(error, '사용자 추가');
       }
     },
     ...createMutationOptions({
@@ -136,13 +107,7 @@ export const useUpdateUserMutation = () => {
         const response = await axios.put(`${USERS_API_URL}/${user.id}`, user);
         return response.data;
       } catch (error) {
-        if (error.response) {
-          throw new Error(`사용자 수정 실패: ${error.response.status} - ${error.response.data?.message || error.response.statusText}`);
-        } else if (error.request) {
-          throw new Error('서버에 연결할 수 없습니다. 네트워크 연결을 확인해주세요.');
-        } else {
-          throw new Error(`수정 요청 중 오류가 발생했습니다: ${error.message}`);
-        }
+        handleAxiosError(error, '사용자 수정');
       }
     },
     ...createMutationOptions({
