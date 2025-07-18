@@ -22,6 +22,27 @@ export const MUTATION_CONFIG = {
   networkMode: 'online',           // 온라인일 때만 mutation 실행
 };
 
+// 공통 쿼리 옵션을 생성하는 헬퍼 함수
+export const createQueryOptions = (additionalOptions = {}) => ({
+  staleTime: QUERY_CONFIG.staleTime,
+  gcTime: QUERY_CONFIG.gcTime,
+  retry: QUERY_CONFIG.retry,
+  retryDelay: QUERY_CONFIG.retryDelay,
+  refetchOnWindowFocus: QUERY_CONFIG.refetchOnWindowFocus,
+  refetchOnReconnect: QUERY_CONFIG.refetchOnReconnect,
+  refetchOnMount: QUERY_CONFIG.refetchOnMount,
+  networkMode: QUERY_CONFIG.networkMode,
+  ...additionalOptions,
+});
+
+// 공통 뮤테이션 옵션을 생성하는 헬퍼 함수
+export const createMutationOptions = (additionalOptions = {}) => ({
+  retry: MUTATION_CONFIG.retry,
+  retryDelay: MUTATION_CONFIG.retryDelay,
+  networkMode: MUTATION_CONFIG.networkMode,
+  ...additionalOptions,
+});
+
 // 환경별 설정 (개발/운영 환경에 따라 다른 설정 가능)
 export const getQueryConfig = (environment = 'production') => {
   const baseConfig = { ...QUERY_CONFIG };

@@ -2,33 +2,12 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import axios from "axios";
 import { USERS_API_URL } from "../interface/api";
-import { QUERY_CONFIG, MUTATION_CONFIG } from "../config/queryConfig";
+import { createQueryOptions, createMutationOptions } from "../config/queryConfig";
 
 /**
  * 사용자 관리를 위한 React Query 커스텀 훅
  * 사용자 목록 조회, 추가, 수정, 삭제 기능을 제공
  */
-
-// 공통 쿼리 옵션을 생성하는 헬퍼 함수
-const createQueryOptions = (additionalOptions = {}) => ({
-  staleTime: QUERY_CONFIG.staleTime,
-  gcTime: QUERY_CONFIG.gcTime,
-  retry: QUERY_CONFIG.retry,
-  retryDelay: QUERY_CONFIG.retryDelay,
-  refetchOnWindowFocus: QUERY_CONFIG.refetchOnWindowFocus,
-  refetchOnReconnect: QUERY_CONFIG.refetchOnReconnect,
-  refetchOnMount: QUERY_CONFIG.refetchOnMount,
-  networkMode: QUERY_CONFIG.networkMode,
-  ...additionalOptions,
-});
-
-// 공통 뮤테이션 옵션을 생성하는 헬퍼 함수
-const createMutationOptions = (additionalOptions = {}) => ({
-  retry: MUTATION_CONFIG.retry,
-  retryDelay: MUTATION_CONFIG.retryDelay,
-  networkMode: MUTATION_CONFIG.networkMode,
-  ...additionalOptions,
-});
 
 // QueryKey Factory
 export const userKeys = {
