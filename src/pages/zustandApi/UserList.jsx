@@ -61,18 +61,21 @@ const UserList = () => {
 
   // Return JSX
   return (
-    <div className="userlist-scroll-hide">
-      {/* 사용자 목록 렌더링 */}
-      <List
-        dataSource={users}
-        renderItem={(user) => (
-          <UserItem
-            user={user}
-            checked={checked}
-            toggleChecked={toggleChecked}
-          />
-        )}
-      />
+    <div className="userlist-container">
+      <div className="userlist-scroll-hide">
+        {/* 사용자 목록 렌더링 */}
+        <List
+          dataSource={users}
+          renderItem={(user) => (
+            <UserItem
+              user={user}
+              checked={checked}
+              toggleChecked={toggleChecked}
+            />
+          )}
+        />
+      </div>
+      
       {/* 새 사용자 추가 플로팅 버튼 */}
       <FloatButton
         icon={<PlusOutlined />}
@@ -80,26 +83,31 @@ const UserList = () => {
         onClick={() => navigate("/zustandApi/user/new")}
         tooltip="Add User"
       />
-      {/* 삭제 버튼 */}
-      <Space direction="horizontal">
-        <Button
-          type="primary"
-          danger
-          disabled={checked.length === 0} // 선택된 사용자가 없으면 비활성화
-          loading={deleteUsersMutation.isPending} // 삭제 중일 때 로딩 표시
-          onClick={handleDelete}
-        >
-          Delete
-        </Button>
-      </Space>
-      {/* 삭제 에러 메시지 표시 */}
-      {deleteUsersMutation.error && (
-        <Alert
-          type="error"
-          message={deleteUsersMutation.error.message}
-          showIcon
-        />
-      )}
+      
+      {/* 삭제 버튼 - 리스트 하단에 고정 */}
+      <div className="delete-button-container">
+        <Space direction="horizontal">
+          <Button
+            type="primary"
+            danger
+            disabled={checked.length === 0} // 선택된 사용자가 없으면 비활성화
+            loading={deleteUsersMutation.isPending} // 삭제 중일 때 로딩 표시
+            onClick={handleDelete}
+          >
+            Delete ({checked.length})
+          </Button>
+        </Space>
+        
+        {/* 삭제 에러 메시지 표시 */}
+        {deleteUsersMutation.error && (
+          <Alert
+            type="error"
+            message={deleteUsersMutation.error.message}
+            showIcon
+            style={{ marginTop: '8px' }}
+          />
+        )}
+      </div>
     </div>
   );
 };

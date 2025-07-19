@@ -1,3 +1,58 @@
+/* UserList 컨테이너 스타일 */
+.userlist-container {
+  position: relative;
+  min-height: 100vh;
+  padding-bottom: 100px; /* Delete button 공간 확보 */
+}
+
+.userlist-scroll-hide {
+  overflow-y: auto;
+  max-height: calc(100vh - 120px); /* Delete button 공간 제외 */
+}
+
+/* UserItem 레이아웃 스타일 */
+.user-list-item {
+  display: flex !important;
+  align-items: center;
+  padding: 12px 16px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.user-list-checkbox {
+  margin-right: 16px;
+  flex-shrink: 0;
+}
+
+.user-list-item-content {
+  flex: 1;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.user-list-item-content:hover {
+  background-color: #f5f5f5;
+}
+
+.user-list-meta {
+  margin: 0;
+}
+
+/* Delete Button 고정 스타일 */
+.delete-button-container {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(8px);
+}
+
 .userDetailPaper {
   padding: 32px;
   max-width: 500px;
