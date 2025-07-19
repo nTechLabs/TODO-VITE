@@ -33,7 +33,12 @@ const UserDetail = () => {
         phone: "",
         website: "",
         company: "",
-        address: "",
+        street: "",
+        suite: "",
+        city: "",
+        zipcode: "",
+        lat: "",
+        lng: "",
       }
     : {
         name: user?.name || "",
@@ -42,7 +47,12 @@ const UserDetail = () => {
         phone: user?.phone || "",
         website: user?.website || "",
         company: user?.company?.name || "",
-        address: user?.address || "",
+        street: user?.address?.street || "",
+        suite: user?.address?.suite || "",
+        city: user?.address?.city || "",
+        zipcode: user?.address?.zipcode || "",
+        lat: user?.address?.geo?.lat || "",
+        lng: user?.address?.geo?.lng || "",
       };
 
   // 컴포넌트 상태 관리
@@ -61,7 +71,12 @@ const UserDetail = () => {
           phone: "",
           website: "",
           company: "",
-          address: "",
+          street: "",
+          suite: "",
+          city: "",
+          zipcode: "",
+          lat: "",
+          lng: "",
         }
       : {
           name: user?.name || "",
@@ -70,7 +85,12 @@ const UserDetail = () => {
           phone: user?.phone || "",
           website: user?.website || "",
           company: user?.company?.name || "",
-          address: user?.address || "",
+          street: user?.address?.street || "",
+          suite: user?.address?.suite || "",
+          city: user?.address?.city || "",
+          zipcode: user?.address?.zipcode || "",
+          lat: user?.address?.geo?.lat || "",
+          lng: user?.address?.geo?.lng || "",
         };
     setForm(newInitialForm);
   }, [id, user, isNew]);
@@ -146,10 +166,32 @@ const UserDetail = () => {
     if (emailError || phoneError) return;
     
     try {
+      // 주소 정보를 객체로 구성
+      const userData = {
+        name: form.name,
+        username: form.username,
+        email: form.email,
+        phone: form.phone,
+        website: form.website,
+        company: {
+          name: form.company,
+        },
+        address: {
+          street: form.street,
+          suite: form.suite,
+          city: form.city,
+          zipcode: form.zipcode,
+          geo: {
+            lat: form.lat,
+            lng: form.lng,
+          },
+        },
+      };
+
       if (isNew) {
-        await addUserMutation.mutateAsync(form); // 새 사용자 추가
+        await addUserMutation.mutateAsync(userData); // 새 사용자 추가
       } else {
-        await updateUserMutation.mutateAsync({ ...form, id }); // 기존 사용자 수정
+        await updateUserMutation.mutateAsync({ ...userData, id }); // 기존 사용자 수정
       }
       messageApi.success("저장되었습니다.");
       navigate("/zustandApi");
@@ -159,13 +201,14 @@ const UserDetail = () => {
   };
 
   return (
-    <Card className="userDetailPaper">
-      {contextHolder} {/* 메시지 컨텍스트 홀더 */}
-      
-      {/* 페이지 제목 */}
-      <Typography.Title level={4} className="userDetailTitle">
-        {isNew ? "Add User" : "Edit User"}
-      </Typography.Title>
+    <div className="userDetailContainer">
+      <Card className="userDetailPaper">
+        {contextHolder} {/* 메시지 컨텍스트 홀더 */}
+        
+        {/* 페이지 제목 */}
+        <Typography.Title level={4} className="userDetailTitle">
+          {isNew ? "Add User" : "Edit User"}
+        </Typography.Title>
       
       {/* 사용자 정보 입력 폼 */}
       <Form layout="vertical">
@@ -199,9 +242,37 @@ const UserDetail = () => {
           <Input name="company" value={form.company} onChange={handleChange} />
         </Form.Item>
         
-        {/* 주소 입력 필드 */}
-        <Form.Item label="Address">
-          <Input name="address" value={form.address} onChange={handleChange} />
+        {/* 주소 입력 필드들 */}
+        <Typography.Title level={5} style={{ marginTop: 24, marginBottom: 16 }}>
+          Address Information
+        </Typography.Title>
+        
+        <Form.Item label="Street">
+          <Input name="street" value={form.street} onChange={handleChange} placeholder="Enter street address" />
+        </Form.Item>
+        
+        <Form.Item label="Suite">
+          <Input name="suite" value={form.suite} onChange={handleChange} placeholder="Enter suite/apartment number" />
+        </Form.Item>
+        
+        <Form.Item label="City">
+          <Input name="city" value={form.city} onChange={handleChange} placeholder="Enter city" />
+        </Form.Item>
+        
+        <Form.Item label="Zipcode">
+          <Input name="zipcode" value={form.zipcode} onChange={handleChange} placeholder="Enter zipcode" />
+        </Form.Item>
+        
+        <Typography.Title level={5} style={{ marginTop: 24, marginBottom: 16 }}>
+          Geographic Coordinates
+        </Typography.Title>
+        
+        <Form.Item label="Latitude">
+          <Input name="lat" value={form.lat} onChange={handleChange} placeholder="Enter latitude" />
+        </Form.Item>
+        
+        <Form.Item label="Longitude">
+          <Input name="lng" value={form.lng} onChange={handleChange} placeholder="Enter longitude" />
         </Form.Item>
         
         {/* 버튼 그룹 */}
@@ -228,6 +299,7 @@ const UserDetail = () => {
         )}
       </Form>
     </Card>
+    </div>
   );
 };
 

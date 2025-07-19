@@ -25,6 +25,12 @@ const UserItem = ({ user, checked, toggleChecked }) => {
               <div>{user.email}</div>
               <div>{user.phone}</div>
               <div>{user.company?.name || user.company || ''}</div>
+              {user.address && (
+                <div style={{ fontSize: '12px', color: '#666', marginTop: '4px' }}>
+                  📍 {user.address.city}, {user.address.street}
+                  {user.address.suite && `, ${user.address.suite}`}
+                </div>
+              )}
             </div>
           }
           className="user-list-meta"
