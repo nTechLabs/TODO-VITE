@@ -80,7 +80,7 @@ const UserList = () => {
       <FloatButton
         icon={<PlusOutlined />}
         type="primary"
-        onClick={() => navigate("/zustandApi/user/new")}
+        onClick={() => navigate("/users/user/new")}
         tooltip="Add User"
       />
       

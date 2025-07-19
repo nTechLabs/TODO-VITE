@@ -13,7 +13,7 @@ import Vite from "../pages/Vite/index"; // Import Vite component
 import Contact from "../pages/Contact";
 import ServerApi from "../pages/ServerApi"; // Import ServerApi component
 import UserDetail from "../pages/ServerApi/UserDetail"; // Import UserDetail component
-import ZuserDetail from "../pages/zustandApi/UserDetail"; // Import UserDetail component
+import ZuserDetail from "../pages/Users/UserDetail"; // Import UserDetail component
 import Alarms from "../pages/alarms";
 import SamplePage from "../pages/SamplePage"; // Import SamplePage component
 import Layout from "../components/Layout"; // Import Layout component
@@ -21,8 +21,8 @@ import Home from "../pages/Home"; // Import Home component
 import CardDetail from "../pages/Home/CardDetail"; // Import CardDetail component
 import TodoApi from "../pages/TodoApi"; // Import TodoApi component
 import AlbumApi from "../pages/AlbumApi"; // Import AlbumApi component
-import ZustandApi from "../pages/zustandApi"; // Import ZustandApi component
-import ZustandUserDetail from "../pages/zustandApi/UserDetail"; // Import ZustandApi UserDetail component
+import UsersApi from "../pages/Users"; // Import UsersApi component
+import UsersUserDetail from "../pages/Users/UserDetail"; // Import UsersApi UserDetail component
 import BitCoin from "../pages/BitCoin"; // Import BitCoin component
 
 function AppRouter() {
@@ -60,10 +60,10 @@ function AppRouter() {
         {/* Add route for TodoApi */}
         <Route path="/albumapi" element={<AlbumApi />} />
         {/* Add route for AlbumApi */}
-        <Route path="/zustandApi" element={<ZustandApi />} />
-        {/* Add route for ZustandApi */}
-        <Route path="/zustandApi/user/:id" element={<ZuserDetail />} />
-        {/* Add route for ZustandApi UserDetail */}
+        <Route path="/users" element={<UsersApi />} />
+        {/* Add route for UsersApi */}
+        <Route path="/users/user/:id" element={<UsersUserDetail />} />
+        {/* Add route for UsersApi UserDetail */}
         <Route path="/bitcoin" element={<BitCoin />} />
         {/* Add route for BitCoin */}
       </Routes>

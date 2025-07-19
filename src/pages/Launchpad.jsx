@@ -22,7 +22,7 @@ function Launchpad() {
     { name: "ToDo", path: "/todoapi", icon: "📝" },
     { name: "Album", path: "/albumapi", icon: "📀" },
     { name: "BitCoin", path: "/bitcoin", icon: "₿" },
-    { name: "ZustandApi", path: "/zustandApi", icon: "🦊" },
+    { name: "Users", path: "/users", icon: "👥" },
   ];
 
   return (

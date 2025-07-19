@@ -16,7 +16,7 @@ const UserItem = ({ user, checked, toggleChecked }) => {
       {/* 사용자 정보 표시 - 클릭하면 상세페이지로 이동 */}
       <div
         className="user-list-item-content"
-        onClick={() => navigate(`/zustandApi/user/${user.id}`)}
+        onClick={() => navigate(`/users/user/${user.id}`)}
       >
         <List.Item.Meta
           title={user.name}

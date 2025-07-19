@@ -20,7 +20,7 @@ src/
 ├─ interface/
 │   └─ api.js              # API 엔드포인트 상수 정의
 ├─ pages/
-│   └─ zustandApi/
+│   └─ Users/
 │        ├─ index.jsx         # 라우팅 및 진입점
 │        ├─ UserList.jsx      # 사용자 목록 페이지 (React Query 사용)
 │        ├─ UserItem.jsx      # 사용자 목록의 각 사용자(행) 컴포넌트
@@ -50,7 +50,7 @@ src/
    npm run dev
    ```
 
-3. 브라우저에서 접속: [http://localhost:5173/zustandApi](http://localhost:5173/zustandApi)
+3. 브라우저에서 접속: [http://localhost:5173/users](http://localhost:5173/users)
 
 ---
 
@@ -113,13 +113,13 @@ export const useAddUserMutation = () => useMutation({
 ### 3. 라우팅 및 페이지 구조(index.jsx)
 
 - React Router `<Routes>`, `<Route>`로 페이지 이동 구성
-- `/zustandApi` : 사용자 목록(UserList)
-- `/zustandApi/user/:id` : 상세/수정/추가(UserDetail)
+- `/users` : 사용자 목록(UserList)
+- `/users/user/:id` : 상세/수정/추가(UserDetail)
 
 ```jsx
 <Routes>
-  <Route path="/zustandApi" element={<UserList />} />
-  <Route path="/zustandApi/user/:id" element={<UserDetail />} />
+  <Route path="/users" element={<UserList />} />
+  <Route path="/users/user/:id" element={<UserDetail />} />
 </Routes>
 ```
 

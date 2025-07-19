@@ -3,10 +3,10 @@ import React from "react";
 import UserList from "./UserList";
 
 /**
- * Zustand API 예제 메인 페이지
+ * Users API 예제 메인 페이지
  * 사용자 목록을 표시하는 컨테이너 컴포넌트
  */
-const ZustandApi = () => {
+const UsersApi = () => {
   return (
     <div>
       {/* 페이지 제목 */}
@@ -17,4 +17,4 @@ const ZustandApi = () => {
   );
 };
 
-export default ZustandApi;
+export default UsersApi;

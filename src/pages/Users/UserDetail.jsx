@@ -160,7 +160,7 @@ const UserDetail = () => {
    */
   const handleCancel = () => {
     if (!isChanged) {
-      navigate("/zustandApi");
+      navigate("/users");
       return;
     }
     setForm(initialForm);
@@ -206,7 +206,7 @@ const UserDetail = () => {
         await updateUserMutation.mutateAsync({ ...userData, id }); // 기존 사용자 수정
       }
       messageApi.success("저장되었습니다.");
-      navigate("/zustandApi");
+      navigate("/users");
     } catch (error) {
       messageApi.error("저장에 실패했습니다.");
     }
