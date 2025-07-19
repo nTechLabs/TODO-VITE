@@ -10,7 +10,7 @@ const ZustandApi = () => {
   return (
     <div>
       {/* 페이지 제목 */}
-      <h2>Users (Zustand Example)</h2>
+      <h2>Users (React-Query + Zustand Example)</h2>
       {/* 사용자 목록 컴포넌트 */}
       <UserList />
     </div>
