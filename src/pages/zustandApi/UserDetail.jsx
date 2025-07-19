@@ -5,6 +5,8 @@ import { Form, Input, Button, Typography, Alert, Space, Card, message, Spin } fr
 import { useUserQuery, useAddUserMutation, useUpdateUserMutation } from "../../hooks/useUserQueries";
 import "./user-list.css";
 
+const { TextArea } = Input;
+
 /**
  * 사용자 상세 정보를 표시하고 편집할 수 있는 컴포넌트
  * - React Query를 사용한 사용자 정보 조회 및 수정
@@ -33,6 +35,8 @@ const UserDetail = () => {
         phone: "",
         website: "",
         company: "",
+        companyCatchPhrase: "",
+        companyBs: "",
         street: "",
         suite: "",
         city: "",
@@ -47,6 +51,8 @@ const UserDetail = () => {
         phone: user?.phone || "",
         website: user?.website || "",
         company: user?.company?.name || "",
+        companyCatchPhrase: user?.company?.catchPhrase || "",
+        companyBs: user?.company?.bs || "",
         street: user?.address?.street || "",
         suite: user?.address?.suite || "",
         city: user?.address?.city || "",
@@ -71,6 +77,8 @@ const UserDetail = () => {
           phone: "",
           website: "",
           company: "",
+          companyCatchPhrase: "",
+          companyBs: "",
           street: "",
           suite: "",
           city: "",
@@ -85,6 +93,8 @@ const UserDetail = () => {
           phone: user?.phone || "",
           website: user?.website || "",
           company: user?.company?.name || "",
+          companyCatchPhrase: user?.company?.catchPhrase || "",
+          companyBs: user?.company?.bs || "",
           street: user?.address?.street || "",
           suite: user?.address?.suite || "",
           city: user?.address?.city || "",
@@ -175,6 +185,8 @@ const UserDetail = () => {
         website: form.website,
         company: {
           name: form.company,
+          catchPhrase: form.companyCatchPhrase,
+          bs: form.companyBs,
         },
         address: {
           street: form.street,
@@ -212,6 +224,13 @@ const UserDetail = () => {
       
       {/* 사용자 정보 입력 폼 */}
       <Form layout="vertical">
+        {/* ID 표시 필드 (수정 모드일 때만) */}
+        {!isNew && (
+          <Form.Item label="ID">
+            <Input value={user?.id || id} disabled style={{ backgroundColor: '#f5f5f5' }} />
+          </Form.Item>
+        )}
+        
         {/* 이름 입력 필드 */}
         <Form.Item label="Name">
           <Input name="name" value={form.name} onChange={handleChange} />
@@ -237,9 +256,33 @@ const UserDetail = () => {
           <Input name="website" value={form.website} onChange={handleChange} />
         </Form.Item>
         
-        {/* 회사 입력 필드 */}
-        <Form.Item label="Company">
-          <Input name="company" value={form.company} onChange={handleChange} />
+        {/* 회사 정보 섹션 */}
+        <Typography.Title level={5} style={{ marginTop: 24, marginBottom: 16 }}>
+          Company Information
+        </Typography.Title>
+        
+        <Form.Item label="Company Name">
+          <Input name="company" value={form.company} onChange={handleChange} placeholder="Enter company name" />
+        </Form.Item>
+        
+        <Form.Item label="Company Catch Phrase">
+          <TextArea 
+            name="companyCatchPhrase" 
+            value={form.companyCatchPhrase} 
+            onChange={handleChange} 
+            placeholder="Enter company catch phrase"
+            rows={2}
+          />
+        </Form.Item>
+        
+        <Form.Item label="Company BS">
+          <TextArea 
+            name="companyBs" 
+            value={form.companyBs} 
+            onChange={handleChange} 
+            placeholder="Enter company business strategy"
+            rows={2}
+          />
         </Form.Item>
         
         {/* 주소 입력 필드들 */}

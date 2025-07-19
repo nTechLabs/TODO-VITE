@@ -24,7 +24,12 @@ const UserItem = ({ user, checked, toggleChecked }) => {
             <div>
               <div>{user.email}</div>
               <div>{user.phone}</div>
-              <div>{user.company?.name || user.company || ''}</div>
+              <div style={{ fontWeight: '500' }}>{user.company?.name || user.company || ''}</div>
+              {user.company?.catchPhrase && (
+                <div style={{ fontSize: '12px', color: '#1890ff', marginTop: '2px', fontStyle: 'italic' }}>
+                  "{user.company.catchPhrase}"
+                </div>
+              )}
               {user.address && (
                 <div style={{ fontSize: '12px', color: '#666', marginTop: '4px' }}>
                   📍 {user.address.city}, {user.address.street}
